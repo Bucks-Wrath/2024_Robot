@@ -117,11 +117,11 @@ public class RobotContainer {
     private void configureButtonBindings() {
         
         /* Driver Buttons */
-        zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroHeading()));  // do i want to zero heading or gyro?
-        intakeButton.whileTrue(new IntakeCommandGroup(swerve));
-        intakeButton.whileFalse(new StopIntakeCommandGroup());
-        shootButton.whileTrue(new RunIntake().alongWith(new RunFeeder()));
-        shootButton.whileFalse(new StopIntake().alongWith(new StopFeeder()));
+        zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroHeading()));    // Resets gyro
+        intakeButton.whileTrue(new IntakeCommandGroup(swerve));             // Runs intake w/ vision
+        intakeButton.whileFalse(new StopIntakeCommandGroup());              // Stop intake w/ vision
+        shootButton.whileTrue(new RunFeeder());                             // Runs shooter feeder
+        shootButton.whileFalse(new StopFeeder());                           // Stops shooter feeder
 
         faceLeftButton.whileTrue(new PIDTurnToAngle(
             swerve, 
@@ -156,13 +156,13 @@ public class RobotContainer {
             360));
         
         /* Operator Buttons */
-        subwooferShotButton.onTrue(new SetShooterVelocity(10, 10));  // need to reassign values
-        podiumShotButton.onTrue(new SetShooterVelocity(80, 60));  // need to find ideal velocity then reassign values
-        ampShotButton.onTrue(new SetShooterPosition(8)); // need to find angle
+        subwooferShotButton.onTrue(new SetShooterVelocity(10, 10));     // need to reassign values
+        podiumShotButton.onTrue(new SetShooterVelocity(80, 60));        // need to find ideal velocity then reassign values
+        ampShotButton.onTrue(new SetShooterPosition(8));        // need to find angle
         reverseAmpShotButton.onTrue(new SetShooterPosition(0)); // need to find angle
 
-        shooterDownButton.onTrue(new SetShooterPosition(0));
-        shootAmpButton.whileTrue(new ReverseFeeder());
+        shooterDownButton.onTrue(new SetShooterPosition(0));    // Brings shooter back to start position
+        shootAmpButton.whileTrue(new ReverseFeeder());                          // Reverses feeder for amp shot
 
         //TODO: Add button bindings for:
         /* Drop intake to floor and Run intake 
