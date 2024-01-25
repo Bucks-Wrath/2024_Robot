@@ -156,10 +156,10 @@ public class RobotContainer {
             360));
         
         /* Operator Buttons */
-        subwooferShotButton.onTrue(new SetShooterVelocity(10, 10));
-        podiumShotButton.onTrue(new SetShooterVelocity(80, 60));
-        ampShotButton.onTrue(new SetShooterPosition(8));
-        reverseAmpShotButton.onTrue(new SetShooterPosition(0));
+        subwooferShotButton.onTrue(new SetShooterVelocity(10, 10));  // need to reassign values
+        podiumShotButton.onTrue(new SetShooterVelocity(80, 60));  // need to find ideal velocity then reassign values
+        ampShotButton.onTrue(new SetShooterPosition(8)); // need to find angle
+        reverseAmpShotButton.onTrue(new SetShooterPosition(0)); // need to find angle
 
         shooterDownButton.onTrue(new SetShooterPosition(0));
         shootAmpButton.whileTrue(new ReverseFeeder());
