@@ -9,27 +9,25 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 
 
-public class Drive2Feet extends Command {    
+public class StopDrivetrain extends Command {    
     private Swerve s_Swerve;    
     private Boolean robotCentricSup;
 
-    public Drive2Feet(Swerve s_Swerve, Boolean robotCentricSup) {
+    public StopDrivetrain(Swerve s_Swerve, Boolean robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
-        addRequirements(RobotContainer.rearLimelight);
-
         this.robotCentricSup = robotCentricSup;
     }
 
     public void initialize() {
- 
+
     }
     
     @Override
     public void execute() {
 
         s_Swerve.drive(
-        new Translation2d(-0.2, 0.0).times(Constants.Swerve.maxSpeed), 
+        new Translation2d(0, 0.0).times(Constants.Swerve.maxSpeed), 
         0 * Constants.Swerve.maxAngularVelocity, 
         !robotCentricSup, 
         true

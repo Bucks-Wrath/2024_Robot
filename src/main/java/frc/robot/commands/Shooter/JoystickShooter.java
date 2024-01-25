@@ -5,7 +5,7 @@ import frc.robot.RobotContainer;
 
 public class JoystickShooter extends Command {
 
-	private int positionIncrement = 10;
+	private int positionIncrement = 1;
     
     public JoystickShooter() {
         addRequirements(RobotContainer.leftShooter);

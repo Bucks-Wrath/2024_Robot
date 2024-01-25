@@ -1,4 +1,4 @@
-package frc.robot.commands.Drivetrain;
+package frc.robot.commands.Shooter;
 
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -18,14 +18,12 @@ public class VisionAlignShoot extends Command {
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private Boolean robotCentricSup;
-    //private double slowSpeed = 0.2;
-    //private double midSpeed = 0.5;
-    //private double elevatorHeight = 0;
 
     private double tx = 0;
     private double ty = 0;
+    private double ta = 0;
 
-    private final PIDController angleController = new PIDController(0.012, 0.2, 0.0002);
+    private final PIDController angleController = new PIDController(0.005, 0, 0);
     private double targetAngle = 0;
 
 
@@ -33,6 +31,9 @@ public class VisionAlignShoot extends Command {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
         addRequirements(RobotContainer.frontLimelight);
+        addRequirements(RobotContainer.leftShooter);
+        addRequirements(RobotContainer.rightShooter);
+        addRequirements(RobotContainer.shooterWrist);
 
         this.translationSup = translationSup;
         this.strafeSup = strafeSup;
@@ -43,37 +44,27 @@ public class VisionAlignShoot extends Command {
     public void initialize() {
         tx = RobotContainer.frontLimelight.getX();
         ty = RobotContainer.frontLimelight.getY();
-        angleController.setTolerance(3);  // needs to be tuned
+        ta = RobotContainer.frontLimelight.getArea();
+        angleController.setTolerance(0.05);  // needs to be tuned
     }
     
     @Override
     public void execute() {
-        //TODO: I'm not sure if I disabled the elevator consideration here correctly.
-        //elevatorHeight = RobotContainer.elevator.getCurrentPosition();
-
         // find target location
         tx = RobotContainer.frontLimelight.getX();
         ty = RobotContainer.frontLimelight.getY();
+        ta = RobotContainer.frontLimelight.getArea();
+
         
         /* Get Values, Deadband*/
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
 
+        // Uses PID to point at target
         double rotationVal = angleController.calculate(tx,targetAngle);
 
-        /*if (elevatorHeight >= 30000) {
-            translationVal = translationVal * slowSpeed;
-            strafeVal = strafeVal * slowSpeed;
-            rotationVal = rotationVal * slowSpeed;
-        }
-
-        else if (elevatorHeight > 5000 && elevatorHeight < 29999) {
-            translationVal = translationVal * midSpeed;
-            strafeVal = strafeVal * midSpeed;
-            rotationVal = rotationVal * midSpeed;
-        }
-
-        else {}*/
+        // Uses ta and ty to set shooter angle
+        double shooterAngle = ta;  // needs math to find number
 
         /* Drive */
         s_Swerve.drive(
@@ -82,5 +73,15 @@ public class VisionAlignShoot extends Command {
             !robotCentricSup, 
             true
         );
+
+        // Sets Shooter angle and speed
+        RobotContainer.leftShooter.setTargetVelocity(80);
+        RobotContainer.rightShooter.setTargetVelocity(60);
+        RobotContainer.shooterWrist.setTargetPosition(shooterAngle);
+
+        // Controls shooter speed and angle
+        RobotContainer.leftShooter.velocityControl();
+        RobotContainer.rightShooter.velocityControl();
+        RobotContainer.shooterWrist.motionMagicControl();
     }
 }

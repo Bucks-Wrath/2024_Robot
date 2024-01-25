@@ -17,8 +17,6 @@ public class PIDTurnToAngle extends Command {
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private Boolean robotCentricSup;
-    private double slowSpeed = 0.3;
-    private double elevatorHeight = 0;
 
     public double rotationVal = 0;
 
@@ -46,24 +44,12 @@ public class PIDTurnToAngle extends Command {
 
     @Override
     public void execute() {
-        //TODO: I'm not sure if I disabled the elevator consideration here correctly.
-        //elevatorHeight = RobotContainer.elevator.getCurrentPosition();
         currentAngle = s_Swerve.getGyroYaw().getDegrees() + 180;
         rotationVal = angleController.calculate(currentAngle, targetAngle);
         
         /* Get Values, Deadband*/
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
-
-        /*if (elevatorHeight >= 30000) {
-            translationVal = translationVal * slowSpeed;
-            strafeVal = strafeVal * slowSpeed;
-        }
-
-        else if (elevatorHeight > 5000 && elevatorHeight < 29999) {
-            translationVal = translationVal * 0.5;
-            strafeVal = strafeVal * 0.5;
-        }*/
 
         /* Drive */
         s_Swerve.drive(

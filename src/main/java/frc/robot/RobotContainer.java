@@ -20,6 +20,7 @@ import frc.robot.commands.Intake.StopIntakeCommandGroup;
 import frc.robot.commands.Shooter.AutoShooter;
 import frc.robot.commands.Shooter.JoystickShooter;
 import frc.robot.commands.Shooter.JoystickShooterWrist;
+import frc.robot.commands.Shooter.ReverseFeeder;
 import frc.robot.commands.Shooter.RunFeeder;
 import frc.robot.commands.Shooter.SetShooterPosition;
 import frc.robot.commands.Shooter.SetShooterVelocity;
@@ -60,8 +61,10 @@ public class RobotContainer {
     /* Operator Buttons */
     private final JoystickButton subwooferShotButton = new JoystickButton(operator, XboxController.Button.kA.value);
     private final JoystickButton podiumShotButton = new JoystickButton(operator, XboxController.Button.kB.value);
-    private final JoystickButton shooterUpButton = new JoystickButton(operator, XboxController.Button.kY.value);
+    private final JoystickButton ampShotButton = new JoystickButton(operator, XboxController.Button.kY.value);
     private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kX.value);
+    private final JoystickButton shootAmpButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
+    private final JoystickButton reverseAmpShotButton = new JoystickButton(operator, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
     private final Swerve swerve = new Swerve();
@@ -88,11 +91,11 @@ public class RobotContainer {
         /* This section is for testing only
         // Shooter and wrists cannot both be controlled at the same time by joysticks */
 
-        //leftShooter.setDefaultCommand(new JoystickShooter());
-        //rightShooter.setDefaultCommand(new JoystickShooter());
+        leftShooter.setDefaultCommand(new JoystickShooter());
+        rightShooter.setDefaultCommand(new JoystickShooter());
         
-        intakeWrist.setDefaultCommand(new JoystickIntakeWrist());
-        shooterWrist.setDefaultCommand(new JoystickShooterWrist());
+        //intakeWrist.setDefaultCommand(new JoystickIntakeWrist());
+        //shooterWrist.setDefaultCommand(new JoystickShooterWrist());
         
         // Sets Default Commands for intake and feeder motors
         intake.setDefaultCommand(new StopIntake());
@@ -155,8 +158,11 @@ public class RobotContainer {
         /* Operator Buttons */
         subwooferShotButton.onTrue(new SetShooterVelocity(10, 10));
         podiumShotButton.onTrue(new SetShooterVelocity(80, 60));
-        shooterUpButton.onTrue(new SetShooterPosition(8));
+        ampShotButton.onTrue(new SetShooterPosition(8));
+        reverseAmpShotButton.onTrue(new SetShooterPosition(0));
+
         shooterDownButton.onTrue(new SetShooterPosition(0));
+        shootAmpButton.whileTrue(new ReverseFeeder());
 
         //TODO: Add button bindings for:
         /* Drop intake to floor and Run intake 
