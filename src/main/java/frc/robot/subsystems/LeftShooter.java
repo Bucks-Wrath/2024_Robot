@@ -32,13 +32,13 @@ public class LeftShooter extends SubsystemBase implements IVelocityControlledSub
 
 	private final static double onTargetThreshold = 1;
 
-	public TalonFX LeftShooterFalcon = new TalonFX(13);
+	public TalonFX LeftShooterFalcon = new TalonFX(13, "canivore");
     public TalonFXConfiguration leftShooterFXConfig = new TalonFXConfiguration();
 
 	public LeftShooter() {
         /** Shooter Motor Configuration */
         /* Motor Inverts and Neutral Mode */
-		leftShooterFXConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+		leftShooterFXConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
         leftShooterFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         /* Current Limiting */
@@ -48,7 +48,7 @@ public class LeftShooter extends SubsystemBase implements IVelocityControlledSub
         leftShooterFXConfig.CurrentLimits.SupplyTimeThreshold = 0.1;
 
         /* PID Config */
-        leftShooterFXConfig.Slot0.kP = 0.2;
+        leftShooterFXConfig.Slot0.kP = 0.1;
         leftShooterFXConfig.Slot0.kI = 0;
         leftShooterFXConfig.Slot0.kD = 0;
 

@@ -1,14 +1,12 @@
-package frc.robot.commands.Intake;
+package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 
-public class JoystickIntakeWrist extends Command {
-
-	private double positionIncrement = 5;
+public class RunFeeder extends Command {
     
-    public JoystickIntakeWrist() {
-        addRequirements(RobotContainer.intakeWrist);
+    public RunFeeder() {
+        addRequirements(RobotContainer.feeder);
     }
 	// Called just before this Command runs the first time
 	public void initialize() {
@@ -17,14 +15,7 @@ public class JoystickIntakeWrist extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	public void execute() {
-
-		// joystick control
-        double signal = RobotContainer.intakeWrist.JoyStickIntakeWrist();
-
-        RobotContainer.intakeWrist.incrementTargetPosition((double) (signal * positionIncrement));
-
-		RobotContainer.intakeWrist.motionMagicControl();
-
+        RobotContainer.feeder.setSpeed(0.7);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -41,4 +32,5 @@ public class JoystickIntakeWrist extends Command {
 	protected void interrupted() {
 	}
 }
+
 

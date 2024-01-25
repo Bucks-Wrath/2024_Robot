@@ -19,27 +19,27 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 	private boolean isHoldingPosition = false;
 
     // Set Different Heights
-	private int homePosition = 0;
-	private int maxUpTravelPosition = 50000;
+	private double homePosition = 0;
+	private double maxUpTravelPosition = 105;
 
-	private int humanPlayerPosition = 23000;
-	private int subwooferShotPosition = 33000;
-	private int podiumShotPosition = 36000;
-	private int frontAmpShotPosition = 39000;
-	private int rearAmpShotPosition = 42000;
+	private double humanPlayerPosition = 100;
+	private double subwooferShotPosition = 90;
+	private double podiumShotPosition = 80;
+	private double frontAmpShotPosition = 70;
+	private double rearAmpShotPosition = 30;
 
-	private int highScorePosition = 15000;
+	private double highScorePosition = 20;
 
-	public int upPositionLimit = maxUpTravelPosition;
-	public int downPositionLimit = 0;
-	private int targetPosition = 0;
+	public double upPositionLimit = maxUpTravelPosition;
+	public double downPositionLimit = 0;
+	private double targetPosition = 0;
     private MotionMagicDutyCycle targetPositionDutyCycle = new MotionMagicDutyCycle(0);
-	private double feedForward = 0.011;
+	private double feedForward = 0.0;
 
-	private final static int onTargetThreshold = 2000;
+	private final static double onTargetThreshold = 1;
 		
-	private TalonFX shooterWristFalcon = new TalonFX(15);
-	private TalonFX shooterWristFalconFollower = new TalonFX(16);
+	private TalonFX shooterWristFalcon = new TalonFX(15, "canivore");
+	private TalonFX shooterWristFalconFollower = new TalonFX(16, "canivore");
 
     private TalonFXConfiguration shooterWristFXConfig = new TalonFXConfiguration();
 
@@ -63,7 +63,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
         shooterWristFXConfig.CurrentLimits.SupplyTimeThreshold = 0.1;
 
         /* PID Config */
-        shooterWristFXConfig.Slot0.kP = 0.8;
+        shooterWristFXConfig.Slot0.kP = 0.05;
         shooterWristFXConfig.Slot0.kI = 0;
         shooterWristFXConfig.Slot0.kD = 0;
 
@@ -75,8 +75,8 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
         shooterWristFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.25;
 
         //Config Acceleration and Velocity
-        shooterWristFXConfig.MotionMagic.withMotionMagicAcceleration(24000);
-        shooterWristFXConfig.MotionMagic.withMotionMagicCruiseVelocity(20000);
+        shooterWristFXConfig.MotionMagic.withMotionMagicAcceleration(100);
+        shooterWristFXConfig.MotionMagic.withMotionMagicCruiseVelocity(100);
 
         // Config Motor
         shooterWristFalcon.getConfigurator().apply(shooterWristFXConfig);
@@ -111,7 +111,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 		return this.targetPosition;
 	}
 
-	public boolean setTargetPosition(int position) {
+	public boolean setTargetPosition(double position) {
 		if (!isValidPosition(position)) {
 			return false;
 		} else {
@@ -120,54 +120,54 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 		}
 	}
 
-	public void forceSetTargetPosition(int position) {
+	public void forceSetTargetPosition(double position) {
 		this.targetPosition = position;
 	}
 
-	public void incrementTargetPosition(int increment) {
-		int currentTargetPosition = this.targetPosition;
-		int newTargetPosition = currentTargetPosition + increment;
+	public void incrementTargetPosition(double increment) {
+		double currentTargetPosition = this.targetPosition;
+		double newTargetPosition = currentTargetPosition + increment;
 		if (isValidPosition(newTargetPosition)) {		// && isWristSafe(newTargetPosition) check for other subsystems
 			this.targetPosition = newTargetPosition;
 		}
 	}
 
-	public boolean isValidPosition(int position) {
+	public boolean isValidPosition(double position) {
 		boolean withinBounds = position <= upPositionLimit && position >= downPositionLimit;
 		return withinBounds;
 	}
 
     // communicate with commands
-	public int getHomePosition() {
+	public double getHomePosition() {
 		return this.homePosition;
 	}
 
-	public int getMaxUpTravelPosition() {
+	public double getMaxUpTravelPosition() {
 		return this.maxUpTravelPosition;
 	}
 
 
-	public int getHumanPlayerPosition() {
+	public double getHumanPlayerPosition() {
 		return this.humanPlayerPosition;
 	}
 
-	public int getPodiumShotPosition() {
+	public double getPodiumShotPosition() {
 		return this.podiumShotPosition;
 	}
 
-	public int getSubwooferShotPosition() {
+	public double getSubwooferShotPosition() {
 		return this.subwooferShotPosition;
 	}
 
-	public int getFrontAmpShotPosition() {
+	public double getFrontAmpShotPosition() {
 		return this.frontAmpShotPosition;
 	}
 
-	public int getRearAmpShotPosiiton() {
+	public double getRearAmpShotPosiiton() {
 		return this.rearAmpShotPosition;
 	}
 
-	public int getHighScorePosition() {
+	public double getHighScorePosition() {
 		return this.highScorePosition;
 	}
 
@@ -187,7 +187,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 
 	public double JoystickShooterWrist(){
 		double value = 0;
-		value = Robot.robotContainer.getOperatorRightStickY();
+		value = -Robot.robotContainer.getOperatorRightStickY();
 		return value;
 	}
 
@@ -227,7 +227,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 	}
 
 	@Override
-	public boolean isInPosition(int targetPosition) {
+	public boolean isInPosition(double targetPosition) {
 		double currentPosition = this.getCurrentPosition();
 		double positionError = Math.abs(currentPosition - targetPosition);
 		if (positionError < onTargetThreshold) {

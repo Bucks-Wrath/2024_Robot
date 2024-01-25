@@ -19,29 +19,22 @@ public class IntakeWrist extends SubsystemBase implements IPositionControlledSub
 	private boolean isHoldingPosition = false;
 
     // Set Different Heights
-	private int homePosition = 0;
-	private int maxUpTravelPosition = 50000;
+	private double homePosition = 0;
+	private double maxUpTravelPosition = 20;
 
-	private int humanPlayerPosition = 23000;
-	private int subwooferShotPosition = 33000;
-	private int podiumShotPosition = 36000;
-	private int frontAmpShotPosition = 39000;
-	private int rearAmpShotPosition = 42000;
-
-	private int highScorePosition = 15000;
-
-	public int upPositionLimit = maxUpTravelPosition;
-	public int downPositionLimit = 0;
-	private int targetPosition = 0;
+	public double upPositionLimit = maxUpTravelPosition;
+	public double downPositionLimit = 0;
+	private double targetPosition = 0;
     private MotionMagicDutyCycle targetPositionDutyCycle = new MotionMagicDutyCycle(0);
-	private double feedForward = 0.011;
+	private double feedForward = 0.0;
 
-	private final static int onTargetThreshold = 2000;
+	private final static double onTargetThreshold = 1;
 		
-	private TalonFX intakeWristFalcon = new TalonFX(17);
-	private TalonFX intakeWristFalconFollower = new TalonFX(18);
+	private TalonFX intakeWristFalcon = new TalonFX(17, "canivore");
+	private TalonFX intakeWristFalconFollower = new TalonFX(18, "canivore");
 
     private TalonFXConfiguration intakeWristFXConfig = new TalonFXConfiguration();
+	
 
 	public IntakeWrist() {
 		// Clear Sticky Faults
@@ -58,25 +51,25 @@ public class IntakeWrist extends SubsystemBase implements IPositionControlledSub
 
         /* Current Limiting */
         intakeWristFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        intakeWristFXConfig.CurrentLimits.SupplyCurrentLimit = 35;
-        intakeWristFXConfig.CurrentLimits.SupplyCurrentThreshold = 60;
+        intakeWristFXConfig.CurrentLimits.SupplyCurrentLimit = 30;
+        intakeWristFXConfig.CurrentLimits.SupplyCurrentThreshold = 40;
         intakeWristFXConfig.CurrentLimits.SupplyTimeThreshold = 0.1;
 
         /* PID Config */
-        intakeWristFXConfig.Slot0.kP = 0.8;
+        intakeWristFXConfig.Slot0.kP = 0.05;
         intakeWristFXConfig.Slot0.kI = 0;
         intakeWristFXConfig.Slot0.kD = 0;
 
         /* Open and Closed Loop Ramping */
-        intakeWristFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.25;
-        intakeWristFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 0.25;
+        intakeWristFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.1;
+        intakeWristFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 0.1;
 
-        intakeWristFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.25;
-        intakeWristFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.25;
+        intakeWristFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.1;
+        intakeWristFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.1;
 
         //Config Acceleration and Velocity
-        intakeWristFXConfig.MotionMagic.withMotionMagicAcceleration(24000);
-        intakeWristFXConfig.MotionMagic.withMotionMagicCruiseVelocity(20000);
+        intakeWristFXConfig.MotionMagic.withMotionMagicAcceleration(200);
+        intakeWristFXConfig.MotionMagic.withMotionMagicCruiseVelocity(200);
 
         // Config Motor
         intakeWristFalcon.getConfigurator().apply(intakeWristFXConfig);
@@ -111,7 +104,7 @@ public class IntakeWrist extends SubsystemBase implements IPositionControlledSub
 		return this.targetPosition;
 	}
 
-	public boolean setTargetPosition(int position) {
+	public boolean setTargetPosition(double position) {
 		if (!isValidPosition(position)) {
 			return false;
 		} else {
@@ -120,55 +113,30 @@ public class IntakeWrist extends SubsystemBase implements IPositionControlledSub
 		}
 	}
 
-	public void forceSetTargetPosition(int position) {
+	public void forceSetTargetPosition(double position) {
 		this.targetPosition = position;
 	}
 
-	public void incrementTargetPosition(int increment) {
-		int currentTargetPosition = this.targetPosition;
-		int newTargetPosition = currentTargetPosition + increment;
+	public void incrementTargetPosition(double increment) {
+		double currentTargetPosition = this.targetPosition;
+		double newTargetPosition = currentTargetPosition + increment;
 		if (isValidPosition(newTargetPosition)) {		// && isWristSafe(newTargetPosition) check for other subsystems
 			this.targetPosition = newTargetPosition;
 		}
 	}
 
-	public boolean isValidPosition(int position) {
+	public boolean isValidPosition(double position) {
 		boolean withinBounds = position <= upPositionLimit && position >= downPositionLimit;
 		return withinBounds;
 	}
 
     // communicate with commands
-	public int getHomePosition() {
+	public double getHomePosition() {
 		return this.homePosition;
 	}
 
-	public int getMaxUpTravelPosition() {
+	public double getMaxUpTravelPosition() {
 		return this.maxUpTravelPosition;
-	}
-
-
-	public int getHumanPlayerPosition() {
-		return this.humanPlayerPosition;
-	}
-
-	public int getPodiumShotPosition() {
-		return this.podiumShotPosition;
-	}
-
-	public int getSubwooferShotPosition() {
-		return this.subwooferShotPosition;
-	}
-
-	public int getFrontAmpShotPosition() {
-		return this.frontAmpShotPosition;
-	}
-
-	public int getRearAmpShotPosiiton() {
-		return this.rearAmpShotPosition;
-	}
-
-	public int getHighScorePosition() {
-		return this.highScorePosition;
 	}
 
 	public double getFeedForward() {
@@ -187,7 +155,7 @@ public class IntakeWrist extends SubsystemBase implements IPositionControlledSub
 
 	public double JoyStickIntakeWrist(){
 		double value = 0;
-		value = Robot.robotContainer.getOperatorLeftStickY();
+		value = -Robot.robotContainer.getOperatorLeftStickY();
 		return value;
 	}
 
@@ -227,7 +195,7 @@ public class IntakeWrist extends SubsystemBase implements IPositionControlledSub
 	}
 
 	@Override
-	public boolean isInPosition(int targetPosition) {
+	public boolean isInPosition(double targetPosition) {
 		double currentPosition = this.getCurrentPosition();
 		double positionError = Math.abs(currentPosition - targetPosition);
 		if (positionError < onTargetThreshold) {

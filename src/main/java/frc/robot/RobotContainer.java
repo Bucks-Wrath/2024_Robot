@@ -11,14 +11,20 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.auto.AutonomousSelector;
 import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
+import frc.robot.commands.Intake.IntakeCommandGroup;
 import frc.robot.commands.Intake.JoystickIntakeWrist;
+import frc.robot.commands.Intake.RunIntake;
+import frc.robot.commands.Intake.SetIntakePosition;
 import frc.robot.commands.Intake.StopIntake;
+import frc.robot.commands.Intake.StopIntakeCommandGroup;
 import frc.robot.commands.Shooter.AutoShooter;
 import frc.robot.commands.Shooter.JoystickShooter;
 import frc.robot.commands.Shooter.JoystickShooterWrist;
+import frc.robot.commands.Shooter.RunFeeder;
+import frc.robot.commands.Shooter.SetShooterPosition;
+import frc.robot.commands.Shooter.SetShooterVelocity;
 import frc.robot.commands.Shooter.StopFeeder;
 import frc.robot.subsystems.*;
-//import frc.robot.auto.AutonomousSelector;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -48,8 +54,14 @@ public class RobotContainer {
     private final JoystickButton faceRightButton = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton faceRearButton = new JoystickButton(driver, XboxController.Button.kA.value);
     private final JoystickButton faceFrontButton = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton intakeButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton shootButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     /* Operator Buttons */
+    private final JoystickButton subwooferShotButton = new JoystickButton(operator, XboxController.Button.kA.value);
+    private final JoystickButton podiumShotButton = new JoystickButton(operator, XboxController.Button.kB.value);
+    private final JoystickButton shooterUpButton = new JoystickButton(operator, XboxController.Button.kY.value);
+    private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kX.value);
 
     /* Subsystems */
     private final Swerve swerve = new Swerve();
@@ -103,6 +115,10 @@ public class RobotContainer {
         
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroHeading()));  // do i want to zero heading or gyro?
+        intakeButton.whileTrue(new IntakeCommandGroup(swerve));
+        intakeButton.whileFalse(new StopIntakeCommandGroup());
+        shootButton.whileTrue(new RunIntake().alongWith(new RunFeeder()));
+        shootButton.whileFalse(new StopIntake().alongWith(new StopFeeder()));
 
         faceLeftButton.whileTrue(new PIDTurnToAngle(
             swerve, 
@@ -137,6 +153,11 @@ public class RobotContainer {
             360));
         
         /* Operator Buttons */
+        subwooferShotButton.onTrue(new SetShooterVelocity(10, 10));
+        podiumShotButton.onTrue(new SetShooterVelocity(80, 60));
+        shooterUpButton.onTrue(new SetShooterPosition(8));
+        shooterDownButton.onTrue(new SetShooterPosition(0));
+
         //TODO: Add button bindings for:
         /* Drop intake to floor and Run intake 
          * Place intake high and Run intake
