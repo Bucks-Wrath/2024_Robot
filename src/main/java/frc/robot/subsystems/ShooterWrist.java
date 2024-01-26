@@ -36,7 +36,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
     private MotionMagicDutyCycle targetPositionDutyCycle = new MotionMagicDutyCycle(0);
 	private double feedForward = 0.0;
 
-	private final static double onTargetThreshold = 1;
+	private final static double onTargetThreshold = 0.1;
 		
 	private TalonFX shooterWristFalcon = new TalonFX(15, "canivore");
 	private TalonFX shooterWristFalconFollower = new TalonFX(16, "canivore");
@@ -63,7 +63,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
         shooterWristFXConfig.CurrentLimits.SupplyTimeThreshold = 0.1;
 
         /* PID Config */
-        shooterWristFXConfig.Slot0.kP = 0.05;
+        shooterWristFXConfig.Slot0.kP = 0.06;
         shooterWristFXConfig.Slot0.kI = 0;
         shooterWristFXConfig.Slot0.kD = 0;
 

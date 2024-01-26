@@ -15,7 +15,7 @@ public class RunIntake extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	public void execute() {
-        RobotContainer.intake.setSpeed(0.7);
+        RobotContainer.intake.setSpeed(1.0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

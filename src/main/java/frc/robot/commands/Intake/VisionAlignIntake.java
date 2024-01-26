@@ -17,7 +17,7 @@ public class VisionAlignIntake extends Command {
     private double ta = 0;
 
     private final PIDController angleController = new PIDController(0.005, 0, 0);
-    private final PIDController slideController = new PIDController(0.02, 0, 0);  // added for better PID tuning
+    private final PIDController slideController = new PIDController(0.005, 0, 0);  // added for better PID tuning
     private double targetAngle = 0;
     private final PIDController distanceController = new PIDController(0.05, 0, 0);
     private double targetArea = 6;  // what is the area when we pick up gp?

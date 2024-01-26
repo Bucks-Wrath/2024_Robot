@@ -23,11 +23,12 @@ public class VisionAlignShoot extends Command {
     private double ty = 0;
     private double ta = 0;
 
-    private final PIDController angleController = new PIDController(0.005, 0, 0);
+    private final PIDController angleController = new PIDController(0.012, 0, 0);  // 0.005
     private double targetAngle = 0;
+    private double shooterAngle = 0;
 
 
-    public VisionAlignShoot(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, Boolean robotCentricSup) {
+    public VisionAlignShoot(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, Boolean robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
         addRequirements(RobotContainer.frontLimelight);
@@ -37,7 +38,6 @@ public class VisionAlignShoot extends Command {
 
         this.translationSup = translationSup;
         this.strafeSup = strafeSup;
-        this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
     }
 
@@ -55,7 +55,6 @@ public class VisionAlignShoot extends Command {
         ty = RobotContainer.frontLimelight.getY();
         ta = RobotContainer.frontLimelight.getArea();
 
-        
         /* Get Values, Deadband*/
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
@@ -64,7 +63,16 @@ public class VisionAlignShoot extends Command {
         double rotationVal = angleController.calculate(tx,targetAngle);
 
         // Uses ta and ty to set shooter angle
-        double shooterAngle = ta;  // needs math to find number
+        if (ta > 0.11) {
+            double input = Math.log(39.609*ta - 4.42716);
+            double logE = Math.log(2.718281828);
+            double output = input / logE;
+            shooterAngle = (6.42789*output) - 1.76625;
+        }
+
+        else {
+            shooterAngle = 0;
+        }
 
         /* Drive */
         s_Swerve.drive(
@@ -75,7 +83,7 @@ public class VisionAlignShoot extends Command {
         );
 
         // Sets Shooter angle and speed
-        RobotContainer.leftShooter.setTargetVelocity(80);
+        RobotContainer.leftShooter.setTargetVelocity(90);
         RobotContainer.rightShooter.setTargetVelocity(60);
         RobotContainer.shooterWrist.setTargetPosition(shooterAngle);
 

@@ -1,5 +1,7 @@
 package frc.robot;
 
+import org.opencv.video.KalmanFilter;
+
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -25,6 +27,7 @@ import frc.robot.commands.Shooter.RunFeeder;
 import frc.robot.commands.Shooter.SetShooterPosition;
 import frc.robot.commands.Shooter.SetShooterVelocity;
 import frc.robot.commands.Shooter.StopFeeder;
+import frc.robot.commands.Shooter.VisionAlignShoot;
 import frc.robot.subsystems.*;
 
 /**
@@ -54,7 +57,8 @@ public class RobotContainer {
     private final JoystickButton faceLeftButton = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton faceRightButton = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton faceRearButton = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final JoystickButton faceFrontButton = new JoystickButton(driver, XboxController.Button.kY.value);
+    //private final JoystickButton faceFrontButton = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton visionAimShooter = new JoystickButton(driver, XboxController.Button.kA.value);
     private final JoystickButton intakeButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton shootButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
@@ -65,6 +69,9 @@ public class RobotContainer {
     private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kX.value);
     private final JoystickButton shootAmpButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
     private final JoystickButton reverseAmpShotButton = new JoystickButton(operator, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton tallShotSubwooferButton = new JoystickButton(operator, XboxController.Button.kLeftStick.value);
+    private final JoystickButton tallShotPodiumButton = new JoystickButton(operator, XboxController.Button.kRightStick.value);
+
 
     /* Subsystems */
     private final Swerve swerve = new Swerve();
@@ -91,8 +98,8 @@ public class RobotContainer {
         /* This section is for testing only
         // Shooter and wrists cannot both be controlled at the same time by joysticks */
 
-        leftShooter.setDefaultCommand(new JoystickShooter());
-        rightShooter.setDefaultCommand(new JoystickShooter());
+        //leftShooter.setDefaultCommand(new JoystickShooter());
+        //rightShooter.setDefaultCommand(new JoystickShooter());
         
         //intakeWrist.setDefaultCommand(new JoystickIntakeWrist());
         //shooterWrist.setDefaultCommand(new JoystickShooterWrist());
@@ -139,14 +146,24 @@ public class RobotContainer {
             robotCentric,
             90));
 
-        faceFrontButton.whileTrue(new PIDTurnToAngle(
+        /*
+            faceFrontButton.whileTrue(new PIDTurnToAngle(
             swerve, 
             () -> -driver.getRawAxis(translationAxis), 
             () -> -driver.getRawAxis(strafeAxis), 
             () -> -driver.getRawAxis(rotationAxis), 
             robotCentric,
             180));
-                
+
+        */
+        
+        visionAimShooter.whileTrue(new VisionAlignShoot(
+            swerve, 
+            () -> -driver.getRawAxis(translationAxis), 
+            () -> -driver.getRawAxis(strafeAxis), 
+            robotCentric
+        ));
+
         faceRearButton.whileTrue(new PIDTurnToAngle(
             swerve, 
             () -> -driver.getRawAxis(translationAxis), 
@@ -156,29 +173,14 @@ public class RobotContainer {
             360));
         
         /* Operator Buttons */
-        subwooferShotButton.onTrue(new SetShooterVelocity(10, 10));     // need to reassign values
-        podiumShotButton.onTrue(new SetShooterVelocity(80, 60));        // need to find ideal velocity then reassign values
-        ampShotButton.onTrue(new SetShooterPosition(8));        // need to find angle
-        reverseAmpShotButton.onTrue(new SetShooterPosition(0)); // need to find angle
-
+        subwooferShotButton.onTrue(new SetShooterVelocity(90, 60).alongWith(new SetShooterPosition(19.6)));
+        podiumShotButton.onTrue(new SetShooterVelocity(90, 60).alongWith(new SetShooterPosition(7)));      // was 7.5
+        ampShotButton.onTrue(new SetShooterVelocity(60,40).alongWith(new SetShooterPosition(102.7)));       
+        reverseAmpShotButton.onTrue(new SetShooterPosition(75.4));
         shooterDownButton.onTrue(new SetShooterPosition(0));    // Brings shooter back to start position
         shootAmpButton.whileTrue(new ReverseFeeder());                          // Reverses feeder for amp shot
-
-        //TODO: Add button bindings for:
-        /* Drop intake to floor and Run intake 
-         * Place intake high and Run intake
-         * Point shooter at Amp
-         * Point shooter serializer at Amp
-         * Eject from serializer to amp
-         * Eject from shooter to amp
-         * Serialize note into shooter (chained with intake?)
-         * Shoot
-         * Point shooter by joystick
-         * Point intake by joystick
-         * Retract intake?
-         * 
-        */
-
+        tallShotPodiumButton.onTrue(new SetShooterVelocity(90, 60).alongWith(new SetShooterPosition(73.6)));
+        tallShotSubwooferButton.onTrue(new SetShooterVelocity(90,60).alongWith(new SetShooterPosition(71.1)));
     }
 
     /* Public access to joystick values */
