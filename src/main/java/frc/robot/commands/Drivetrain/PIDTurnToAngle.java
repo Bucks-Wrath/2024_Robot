@@ -1,6 +1,7 @@
 package frc.robot.commands.Drivetrain;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Swerve;
 
 import java.util.function.DoubleSupplier;
@@ -18,8 +19,10 @@ public class PIDTurnToAngle extends Command {
     private DoubleSupplier rotationSup;
     private Boolean robotCentricSup;
 
-    public double rotationVal = 0;
+    private double slowSpeed = 0.5;
+    private double shooterHeight = 0;
 
+    public double rotationVal = 0;
     public double targetAngle = 0;
     public double currentAngle = 0;
     public double acceptableError = 0;
@@ -44,12 +47,26 @@ public class PIDTurnToAngle extends Command {
 
     @Override
     public void execute() {
+        // Get Shooter Height
+        shooterHeight = RobotContainer.shooterWrist.getCurrentPosition();
+
         currentAngle = s_Swerve.getGyroYaw().getDegrees() + 180;
         rotationVal = angleController.calculate(currentAngle, targetAngle);
         
         /* Get Values, Deadband*/
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+
+        // Make the robot slower if the shooter is up
+        if (shooterHeight > 30){
+            translationVal = translationVal*slowSpeed;
+            strafeVal = strafeVal*slowSpeed;
+            rotationVal = rotationVal*slowSpeed;
+        }
+        
+        else {
+        
+        }
 
         /* Drive */
         s_Swerve.drive(

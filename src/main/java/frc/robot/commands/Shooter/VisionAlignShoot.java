@@ -23,6 +23,9 @@ public class VisionAlignShoot extends Command {
     private double ty = 0;
     private double ta = 0;
 
+    private double slowSpeed = 0.5;
+    private double shooterHeight = 0;
+
     private final PIDController angleController = new PIDController(0.012, 0, 0);  // 0.005
     private double targetAngle = 0;
     private double shooterAngle = 0;
@@ -50,6 +53,9 @@ public class VisionAlignShoot extends Command {
     
     @Override
     public void execute() {
+        // Get Shooter Height
+        shooterHeight = RobotContainer.shooterWrist.getCurrentPosition();
+
         // find target location
         tx = RobotContainer.frontLimelight.getX();
         ty = RobotContainer.frontLimelight.getY();
@@ -72,6 +78,17 @@ public class VisionAlignShoot extends Command {
 
         else {
             shooterAngle = 0;
+        }
+
+        // Make the robot slower if the shooter is up
+        if (shooterHeight > 30){
+            translationVal = translationVal*slowSpeed;
+            strafeVal = strafeVal*slowSpeed;
+            rotationVal = rotationVal*slowSpeed;
+        }
+
+        else {
+
         }
 
         /* Drive */
