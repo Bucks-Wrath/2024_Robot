@@ -1,7 +1,5 @@
 package frc.robot;
 
-import org.opencv.video.KalmanFilter;
-
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -15,8 +13,6 @@ import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
 import frc.robot.commands.Intake.IntakeCommandGroup;
 import frc.robot.commands.Intake.JoystickIntakeWrist;
-import frc.robot.commands.Intake.RunIntake;
-import frc.robot.commands.Intake.SetIntakePosition;
 import frc.robot.commands.Intake.StopIntake;
 import frc.robot.commands.Intake.StopIntakeCommandGroup;
 import frc.robot.commands.Shooter.AutoShooter;
@@ -56,8 +52,8 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kBack.value);
     private final JoystickButton faceLeftButton = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton faceRightButton = new JoystickButton(driver, XboxController.Button.kB.value);
-    private final JoystickButton faceRearButton = new JoystickButton(driver, XboxController.Button.kA.value);
-    //private final JoystickButton faceFrontButton = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton faceRearButton = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton faceFrontButton = new JoystickButton(driver, XboxController.Button.kRightStick.value);
     private final JoystickButton visionAimShooter = new JoystickButton(driver, XboxController.Button.kA.value);
     private final JoystickButton intakeButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton shootButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
@@ -146,16 +142,16 @@ public class RobotContainer {
             robotCentric,
             90));
 
-        /*
-            faceFrontButton.whileTrue(new PIDTurnToAngle(
+        
+        faceFrontButton.whileTrue(new PIDTurnToAngle(
             swerve, 
             () -> -driver.getRawAxis(translationAxis), 
             () -> -driver.getRawAxis(strafeAxis), 
             () -> -driver.getRawAxis(rotationAxis), 
             robotCentric,
-            180));
+            300));
 
-        */
+        
         
         visionAimShooter.whileTrue(new VisionAlignShoot(
             swerve, 

@@ -22,11 +22,12 @@ public class VisionAlignShoot extends Command {
     private double tx = 0;
     private double ty = 0;
     private double ta = 0;
+    private double speed = 0;
 
     private double slowSpeed = 0.5;
     private double shooterHeight = 0;
 
-    private final PIDController angleController = new PIDController(0.012, 0, 0);  // 0.005
+    private final PIDController angleController = new PIDController(0.012, 0, 0);  //0.012
     private double targetAngle = 0;
     private double shooterAngle = 0;
 
@@ -55,9 +56,10 @@ public class VisionAlignShoot extends Command {
     public void execute() {
         // Get Shooter Height
         shooterHeight = RobotContainer.shooterWrist.getCurrentPosition();
+        speed = s_Swerve.ySpeed();
 
         // find target location
-        tx = RobotContainer.frontLimelight.getX();
+        tx = RobotContainer.frontLimelight.getX(); //+ (10*speed);
         ty = RobotContainer.frontLimelight.getY();
         ta = RobotContainer.frontLimelight.getArea();
 
@@ -73,7 +75,7 @@ public class VisionAlignShoot extends Command {
             double input = Math.log(39.609*ta - 4.42716);
             double logE = Math.log(2.718281828);
             double output = input / logE;
-            shooterAngle = (6.42789*output) - 1.76625;
+            shooterAngle = (6.42789*output) - 4; // 1.76625
         }
 
         else {

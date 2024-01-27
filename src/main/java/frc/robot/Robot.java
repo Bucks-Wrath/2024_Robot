@@ -28,17 +28,17 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     ctreConfigs = new CTREConfigs();
 
-    frontLimelight = CameraServer.addAxisCamera("limelight-shooter", "10.63.29.11");
-    RobotContainer.frontLimelight.cameraMode();
-    NetworkTableInstance.getDefault().getTable("limelight-shooter").getEntry("stream").setNumber(2);
-    frontLimelight.setFPS(10);
-    frontLimelight.setResolution(160,120);
+    //frontLimelight = CameraServer.addAxisCamera("limelight-shooter", "10.63.29.11");
+    //RobotContainer.frontLimelight.cameraMode();
+    //NetworkTableInstance.getDefault().getTable("limelight-shooter").getEntry("stream").setNumber(2);
+    //frontLimelight.setFPS(10);
+    //frontLimelight.setResolution(160,120);
 
-    rearLimelight = CameraServer.addAxisCamera("limelight-intake", "10.63.29.12");
-    RobotContainer.rearLimelight.cameraMode();
-    NetworkTableInstance.getDefault().getTable("limelight-intake").getEntry("stream").setNumber(2);
-    rearLimelight.setFPS(10);
-    rearLimelight.setResolution(160,120);
+    //rearLimelight = CameraServer.addAxisCamera("limelight-intake", "10.63.29.12");
+    //RobotContainer.rearLimelight.cameraMode();
+    //NetworkTableInstance.getDefault().getTable("limelight-intake").getEntry("stream").setNumber(2);
+    //rearLimelight.setFPS(10);
+    //rearLimelight.setResolution(160,120);
 
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
@@ -66,6 +66,7 @@ public class Robot extends TimedRobot {
     RobotContainer.frontLimelight.updateDashboard();
     RobotContainer.rearLimelight.updateDashboard();
     RobotContainer.feeder.updateDashboard();
+    RobotContainer.intake.updateDashboard();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

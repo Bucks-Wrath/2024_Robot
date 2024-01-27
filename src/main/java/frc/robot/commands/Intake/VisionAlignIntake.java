@@ -16,11 +16,11 @@ public class VisionAlignIntake extends Command {
     private double tx = 0;
     private double ta = 0;
 
-    private final PIDController angleController = new PIDController(0.005, 0, 0);
-    private final PIDController slideController = new PIDController(0.005, 0, 0);  // added for better PID tuning
+    private final PIDController angleController = new PIDController(0.007, 0, 0);
+    private final PIDController slideController = new PIDController(0.007, 0, 0);  // added for better PID tuning
     private double targetAngle = 0;
-    private final PIDController distanceController = new PIDController(0.05, 0, 0);
-    private double targetArea = 6;  // what is the area when we pick up gp?
+    private final PIDController distanceController = new PIDController(0.1, 0, 0); // was 0.05
+    private double targetArea = 7;  // what is the area when we pick up gp?
 
     public VisionAlignIntake(Swerve s_Swerve, Boolean robotCentricSup) {
         this.s_Swerve = s_Swerve;
@@ -49,7 +49,7 @@ public class VisionAlignIntake extends Command {
         double translationVal = -distanceController.calculate(ta,targetArea);
 
         /* Drive */
-        if (ta < 4) {
+        if (ta < 5) {
             s_Swerve.drive(
             new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
             rotationVal * Constants.Swerve.maxAngularVelocity, 
@@ -65,7 +65,7 @@ public class VisionAlignIntake extends Command {
     }
 
     public boolean isFinished() {
-		return ta > 4;
+		return ta > 5;
 	}
 
 	// Called once after isFinished returns true

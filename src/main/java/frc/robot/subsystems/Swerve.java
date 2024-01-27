@@ -140,6 +140,11 @@ public class Swerve extends SubsystemBase {
         return Constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());
     }
 
+    public double ySpeed() {
+        double speed = getSpeeds().vyMetersPerSecond;
+        return speed;
+    }
+
     public Rotation2d getHeading(){
         return getPose().getRotation();
     }
@@ -179,7 +184,8 @@ public class Swerve extends SubsystemBase {
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond); 
+            SmartDashboard.putNumber("YSPEED", ySpeed());
         }
     }
 }

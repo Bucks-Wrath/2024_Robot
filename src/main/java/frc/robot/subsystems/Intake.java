@@ -18,7 +18,7 @@ public class Intake extends SubsystemBase {
         /** Shooter Motor Configuration */
         /* Motor Inverts and Neutral Mode */
 		IntakeFXConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-        IntakeFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+        IntakeFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         /* Current Limiting */
         IntakeFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
