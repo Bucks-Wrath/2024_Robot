@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.Shooter;
+import frc.robot.Constants.Shooter.ShooterPose;
 import frc.robot.auto.AutonomousSelector;
 import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
@@ -24,6 +26,7 @@ import frc.robot.commands.Shooter.SetShooterPosition;
 import frc.robot.commands.Shooter.SetShooterVelocity;
 import frc.robot.commands.Shooter.StopFeeder;
 import frc.robot.commands.Shooter.VisionAlignShoot;
+import frc.robot.commands.Shooter.CommandGroups.ShootFrom;
 import frc.robot.subsystems.*;
 
 /**
@@ -169,14 +172,14 @@ public class RobotContainer {
             Constants.FieldAngle.Rear));
         
         /* Operator Buttons */
-        subwooferShotButton.onTrue(new SetShooterVelocity(90, 60).alongWith(new SetShooterPosition(19.6)));
-        podiumShotButton.onTrue(new SetShooterVelocity(90, 60).alongWith(new SetShooterPosition(7)));      // was 7.5
-        ampShotButton.onTrue(new SetShooterVelocity(60,40).alongWith(new SetShooterPosition(102.7)));       
-        reverseAmpShotButton.onTrue(new SetShooterPosition(75.4));
-        shooterDownButton.onTrue(new SetShooterPosition(0));    // Brings shooter back to start position
+        subwooferShotButton.onTrue(new ShootFrom(ShooterPose.Subwoofer));
+        podiumShotButton.onTrue(new ShootFrom(ShooterPose.Podium));
+        ampShotButton.onTrue(new ShootFrom(ShooterPose.Amp));
+        reverseAmpShotButton.onTrue(new SetShooterPosition(Shooter.ReverseAmpPosition));
+        shooterDownButton.onTrue(new SetShooterPosition(Shooter.DownPosition));    // Brings shooter back to start position
         shootAmpButton.whileTrue(new ReverseFeeder());                          // Reverses feeder for amp shot
-        tallShotPodiumButton.onTrue(new SetShooterVelocity(90, 60).alongWith(new SetShooterPosition(73.6)));
-        tallShotSubwooferButton.onTrue(new SetShooterVelocity(90,60).alongWith(new SetShooterPosition(71.1)));
+        tallShotPodiumButton.onTrue(new ShootFrom(ShooterPose.PodiumTall));
+        tallShotSubwooferButton.onTrue(new ShootFrom(ShooterPose.SubwooferTall));
     }
 
     /* Public access to joystick values */

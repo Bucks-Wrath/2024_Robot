@@ -28,7 +28,7 @@ public final class Constants {
         public static final double SourceRed = 300;
         public static final double SourceBlue = 60;
 
-        public static double getSourceAngle() {
+        public static final double getSourceAngle() {
             var allianceColor = DriverStation.getAlliance();
             return allianceColor.isPresent() ? 
                 allianceColor.get()==Alliance.Red ?
@@ -36,6 +36,63 @@ public final class Constants {
                     : Constants.FieldAngle.SourceBlue
                 :0.0;
         }
+    }
+
+    /// Shooter Position and Velocity Settings
+    public static final class Shooter {
+        public static final double DownPosition = 0;
+        public static final double ReverseAmpPosition = 75.4
+        ;
+        public static final class DefaultShotVelocity {
+            public static final double VelocityLeft = 90;
+            public static final double VelocityRight = 60; 
+        }
+
+        public static abstract class ShooterPose {
+            protected double VelocityLeft;
+            protected double VelocityRight;
+            protected double Position;
+            public double getVelocityLeft() { return VelocityLeft; }
+            public double getVelocityRight() { return VelocityRight; }
+            public double getPosition() { return Position; }
+
+            public static final ShooterPose Subwoofer  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 19.6;
+                }
+            };
+            public static final ShooterPose Podium = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 7;
+                }
+            };
+            public static final ShooterPose Amp = new ShooterPose() {
+                {
+                    VelocityLeft = 60;
+                    VelocityRight = 40;
+                    Position = 102.7;
+                }
+            };
+            public static final ShooterPose SubwooferTall = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 71.1;
+                }
+            };
+            public static final ShooterPose PodiumTall = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 73.6;
+                }
+            };
+        };
+
     }
 
     public static final class Swerve {
