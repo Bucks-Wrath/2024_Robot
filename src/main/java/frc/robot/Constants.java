@@ -12,11 +12,31 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
     public static final double stickDeadband = 0.1;
+
+    public static final class FieldAngle {
+        public static final double Left = 270;
+        public static final double Right = 90;
+        public static final double Front = 180;
+        public static final double Rear = 360;
+        public static final double SourceRed = 300;
+        public static final double SourceBlue = 60;
+
+        public static double getSourceAngle() {
+            var allianceColor = DriverStation.getAlliance();
+            return allianceColor.isPresent() ? 
+                allianceColor.get()==Alliance.Red ?
+                    Constants.FieldAngle.SourceRed
+                    : Constants.FieldAngle.SourceBlue
+                :0.0;
+        }
+    }
 
     public static final class Swerve {
         public static final int pigeonID = 12;

@@ -132,7 +132,7 @@ public class RobotContainer {
             () -> -driver.getRawAxis(strafeAxis), 
             () -> -driver.getRawAxis(rotationAxis), 
             robotCentric,
-            270));
+            Constants.FieldAngle.Left));
 
         faceRightButton.whileTrue(new PIDTurnToAngle(
             swerve, 
@@ -140,7 +140,7 @@ public class RobotContainer {
             () -> -driver.getRawAxis(strafeAxis), 
             () -> -driver.getRawAxis(rotationAxis), 
             robotCentric,
-            90));
+            Constants.FieldAngle.Right));
 
         
         faceFrontButton.whileTrue(new PIDTurnToAngle(
@@ -149,9 +149,9 @@ public class RobotContainer {
             () -> -driver.getRawAxis(strafeAxis), 
             () -> -driver.getRawAxis(rotationAxis), 
             robotCentric,
-            300));
-
-        
+            //This is a temporary direction for testing out aliging with the source (as oriented from the Red Alliance)
+            //We probably want to tie the source angle to a different button
+            Constants.FieldAngle.getSourceAngle())); 
         
         visionAimShooter.whileTrue(new VisionAlignShoot(
             swerve, 
@@ -166,7 +166,7 @@ public class RobotContainer {
             () -> -driver.getRawAxis(strafeAxis), 
             () -> -driver.getRawAxis(rotationAxis), 
             robotCentric,
-            360));
+            Constants.FieldAngle.Rear));
         
         /* Operator Buttons */
         subwooferShotButton.onTrue(new SetShooterVelocity(90, 60).alongWith(new SetShooterPosition(19.6)));
