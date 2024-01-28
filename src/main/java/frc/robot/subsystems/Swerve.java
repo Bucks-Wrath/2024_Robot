@@ -140,8 +140,13 @@ public class Swerve extends SubsystemBase {
         return Constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());
     }
 
+    public ChassisSpeeds getFieldRelativeSpeeds() {
+        ChassisSpeeds botSpeeds = getSpeeds();
+        return ChassisSpeeds.fromFieldRelativeSpeeds(botSpeeds, getHeading().unaryMinus());
+    }
+
     public double ySpeed() {
-        double speed = getSpeeds().vyMetersPerSecond;
+        double speed = getFieldRelativeSpeeds().vyMetersPerSecond;
         return speed;
     }
 
