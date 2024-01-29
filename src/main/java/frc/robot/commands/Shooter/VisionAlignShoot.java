@@ -2,6 +2,7 @@ package frc.robot.commands.Shooter;
 
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.Shooter;
 import frc.robot.subsystems.Swerve;
 
 import java.util.function.DoubleSupplier;
@@ -102,8 +103,8 @@ public class VisionAlignShoot extends Command {
         );
 
         // Sets Shooter angle and speed
-        RobotContainer.leftShooter.setTargetVelocity(90);
-        RobotContainer.rightShooter.setTargetVelocity(60);
+        RobotContainer.leftShooter.setTargetVelocity(Shooter.DefaultShotVelocity.VelocityLeft);
+        RobotContainer.rightShooter.setTargetVelocity(Shooter.DefaultShotVelocity.VelocityRight);
         RobotContainer.shooterWrist.setTargetPosition(shooterAngle);
 
         // Controls shooter speed and angle
