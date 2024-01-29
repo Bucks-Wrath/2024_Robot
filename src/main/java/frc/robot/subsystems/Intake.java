@@ -9,12 +9,13 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.DeviceIds;
 
 public class Intake extends SubsystemBase {
 
-	private TalonFX IntakeFalcon = new TalonFX(19, "canivore");
+	private TalonFX IntakeFalcon = new TalonFX(DeviceIds.Intake.LeadMotorId, "canivore");
     private TalonFXConfiguration IntakeFXConfig = new TalonFXConfiguration();
-    private TalonFX IntakeFalconFollower = new TalonFX(18, "canivore");
+    private TalonFX IntakeFalconFollower = new TalonFX(DeviceIds.Intake.FollowerMotorId, "canivore");
 
 
 	public Intake() {
@@ -24,7 +25,7 @@ public class Intake extends SubsystemBase {
         IntakeFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         // Set Followers
-		IntakeFalconFollower.setControl(new Follower(19, true));
+		IntakeFalconFollower.setControl(new Follower(IntakeFalcon.getDeviceID(), true));
 
         /* Current Limiting */
         IntakeFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;

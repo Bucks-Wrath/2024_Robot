@@ -9,12 +9,13 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.DeviceIds;
 
 public class Feeder extends SubsystemBase {
 
-	public TalonFX FeederFalcon = new TalonFX(20, "canivore");
+	public TalonFX FeederFalcon = new TalonFX(DeviceIds.Feeder.MotorId, "canivore");
     public TalonFXConfiguration FeederFXConfig = new TalonFXConfiguration();
-    private DigitalInput input = new DigitalInput(0);
+    private DigitalInput input = new DigitalInput(DeviceIds.Feeder.BeamBreakChannel);
 
 
 	public Feeder() {

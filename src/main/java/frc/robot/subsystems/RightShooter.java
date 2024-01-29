@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.DeviceIds;
 import frc.robot.Robot;
 import frc.lib.models.*;
 
@@ -33,7 +34,7 @@ public class RightShooter extends SubsystemBase implements IVelocityControlledSu
 
 	private final static double onTargetThreshold = 1;
 
-	public TalonFX RightShooterFalcon = new TalonFX(14, "canivore");
+	public TalonFX RightShooterFalcon = new TalonFX(DeviceIds.Shooter.RightMotorId, "canivore");
     public TalonFXConfiguration RightShooterFXConfig = new TalonFXConfiguration();
 
 	public RightShooter() {

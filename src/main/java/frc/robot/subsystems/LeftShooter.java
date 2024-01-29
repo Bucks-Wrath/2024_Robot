@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.DeviceIds;
 import frc.robot.Robot;
 import frc.lib.models.*;
 
@@ -32,7 +33,7 @@ public class LeftShooter extends SubsystemBase implements IVelocityControlledSub
 
 	private final static double onTargetThreshold = 1;
 
-	public TalonFX LeftShooterFalcon = new TalonFX(13, "canivore");
+	public TalonFX LeftShooterFalcon = new TalonFX(DeviceIds.Shooter.LeftMotorId, "canivore");
     public TalonFXConfiguration leftShooterFXConfig = new TalonFXConfiguration();
 
 	public LeftShooter() {

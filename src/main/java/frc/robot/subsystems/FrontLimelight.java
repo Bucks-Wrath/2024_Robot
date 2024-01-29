@@ -5,6 +5,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.DeviceIds;
 
 public class FrontLimelight extends SubsystemBase {
 
@@ -21,7 +22,7 @@ public class FrontLimelight extends SubsystemBase {
 
    public FrontLimelight() {
       Inst = NetworkTableInstance.getDefault();
-      table = Inst.getTable("limelight-shooter");
+      table = Inst.getTable(DeviceIds.Limelight.FrontTableName);
       prelimta = table.getEntry("ta");
       prelimtx = table.getEntry("tx");
       prelimty = table.getEntry("ty");

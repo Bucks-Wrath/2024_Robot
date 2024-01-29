@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.lib.models.*;
+import frc.robot.DeviceIds;
 import frc.robot.Robot;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -38,8 +39,8 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 
 	private final static double onTargetThreshold = 0.1;
 		
-	private TalonFX shooterWristFalcon = new TalonFX(15, "canivore");
-	private TalonFX shooterWristFalconFollower = new TalonFX(16, "canivore");
+	private TalonFX shooterWristFalcon = new TalonFX(DeviceIds.Shooter.WristLeadMotorId, "canivore");
+	private TalonFX shooterWristFalconFollower = new TalonFX(DeviceIds.Shooter.WristFollowerMotorId, "canivore");
 
     private TalonFXConfiguration shooterWristFXConfig = new TalonFXConfiguration();
 
