@@ -72,6 +72,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+    RobotContainer.candleSubsystem.setAnimate("Rainbow");
   }
 
   @Override
@@ -80,6 +81,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    RobotContainer.candleSubsystem.setAnimate("Orange");
 
     m_autonomousCommand = robotContainer.getAutonomousCommand();
 

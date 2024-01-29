@@ -94,6 +94,15 @@ public class VisionAlignShoot extends Command {
 
         }
 
+        if (tx >= -0.5 && tx <= 0.5) {
+            RobotContainer.candleSubsystem.setAnimate("Rainbow");
+        }
+
+        else {
+            RobotContainer.candleSubsystem.setAnimate("Orange");
+
+        }
+
         /* Drive */
         s_Swerve.drive(
             new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 

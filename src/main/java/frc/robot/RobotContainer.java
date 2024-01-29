@@ -17,6 +17,7 @@ import frc.robot.commands.Intake.IntakeCommandGroup;
 import frc.robot.commands.Intake.JoystickIntakeWrist;
 import frc.robot.commands.Intake.StopIntake;
 import frc.robot.commands.Intake.StopIntakeCommandGroup;
+import frc.robot.commands.LEDs.SetNeedNote;
 import frc.robot.commands.Shooter.AutoShooter;
 import frc.robot.commands.Shooter.JoystickShooter;
 import frc.robot.commands.Shooter.JoystickShooterWrist;
@@ -102,7 +103,7 @@ public class RobotContainer {
         //rightShooter.setDefaultCommand(new JoystickShooter());
         
         //intakeWrist.setDefaultCommand(new JoystickIntakeWrist());
-        //shooterWrist.setDefaultCommand(new JoystickShooterWrist());
+        shooterWrist.setDefaultCommand(new JoystickShooterWrist());
         
         // Sets Default Commands for intake and feeder motors
         intake.setDefaultCommand(new StopIntake());
@@ -172,7 +173,7 @@ public class RobotContainer {
             robotCentric,
             //This is a temporary direction for testing out aliging with the source (as oriented from the Red Alliance)
             //We probably want to tie the source angle to a different button
-            Constants.FieldAngle.getSourceAngle())); 
+            Constants.FieldAngle.getSourceAngle()).alongWith(new SetNeedNote())); 
         
         /* Operator Buttons */
         subwooferShotButton.onTrue(new ShootFrom(ShooterPose.Subwoofer));

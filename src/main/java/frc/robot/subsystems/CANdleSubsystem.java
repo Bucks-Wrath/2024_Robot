@@ -45,17 +45,14 @@ public class CANdleSubsystem extends SubsystemBase {
     public void setAnimate(String color){
         this.color = color;
         switch(color) {
-            case "Yellow":
-                m_toAnimate = new SingleFadeAnimation(255, 255, 0, 0, 0.7, LedCount);
+            case "Orange":
+                m_toAnimate = new SingleFadeAnimation(255, 165, 0, 0, 0.7, LedCount);
                 break;
             case "Purple":
                 m_toAnimate = new SingleFadeAnimation(128, 0, 128, 0, 0.7, LedCount);
                 break;
-            case "Strobe Yellow":
-                m_toAnimate = new StrobeAnimation(255, 255, 0, 0, 0.4, LedCount);
-                break;
-            case "Strobe Purple":
-                m_toAnimate = new StrobeAnimation(128, 0, 128, 0, 0.4, LedCount);
+            case "Strobe Orange":
+                m_toAnimate = new StrobeAnimation(255, 165, 0, 0, 0.4, LedCount);
                 break;
             case "Rainbow":
                 m_toAnimate = new RainbowAnimation(1.0, 0.7, LedCount);

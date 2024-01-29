@@ -10,7 +10,7 @@ public class SetOnTarget extends Command {
     }
 
     public void initialize() {
-        RobotContainer.candleSubsystem.setAnimate("Yellow");
+        RobotContainer.candleSubsystem.setAnimate("Rainbow");
     }
 
     public void execute() {

@@ -10,7 +10,7 @@ public class SetNeedNote extends Command {
     }
 
     public void initialize() {
-        RobotContainer.candleSubsystem.setAnimate("Yellow");
+        RobotContainer.candleSubsystem.setAnimate("Strobe Orange");
     }
 
     public void execute() {
