@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -11,14 +12,19 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
 
-	public TalonFX IntakeFalcon = new TalonFX(19, "canivore");
-    public TalonFXConfiguration IntakeFXConfig = new TalonFXConfiguration();
+	private TalonFX IntakeFalcon = new TalonFX(19, "canivore");
+    private TalonFXConfiguration IntakeFXConfig = new TalonFXConfiguration();
+    private TalonFX IntakeFalconFollower = new TalonFX(18, "canivore");
+
 
 	public Intake() {
         /** Shooter Motor Configuration */
         /* Motor Inverts and Neutral Mode */
 		IntakeFXConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
         IntakeFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+
+        // Set Followers
+		IntakeFalconFollower.setControl(new Follower(19, true));
 
         /* Current Limiting */
         IntakeFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
@@ -41,6 +47,7 @@ public class Intake extends SubsystemBase {
         // Config Motor
         IntakeFalcon.getConfigurator().apply(IntakeFXConfig);
         IntakeFalcon.getConfigurator().setPosition(0.0);
+        IntakeFalconFollower.getConfigurator().setPosition(0.0);
 	}
 
 	public void setSpeed(double speed) {
@@ -54,6 +61,7 @@ public class Intake extends SubsystemBase {
 	public void resetShooterEncoder() {
         try {
 			IntakeFalcon.getConfigurator().setPosition(0.0);
+            IntakeFalconFollower.getConfigurator().setPosition(0.0);
         }
         catch (Exception e) {
             DriverStation.reportError("Shooter.resetShooterEncoders exception.  You're Screwed! : " + e.toString(), false);
