@@ -55,7 +55,7 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kBack.value);
     private final JoystickButton faceLeftButton = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton faceRightButton = new JoystickButton(driver, XboxController.Button.kB.value);
-    private final JoystickButton faceRearButton = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton faceSourceButton = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton faceFrontButton = new JoystickButton(driver, XboxController.Button.kRightStick.value);
     private final JoystickButton visionAimShooter = new JoystickButton(driver, XboxController.Button.kA.value);
     private final JoystickButton intakeButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
@@ -82,6 +82,7 @@ public class RobotContainer {
     public static Feeder feeder = new Feeder();
     public static FrontLimelight frontLimelight = new FrontLimelight();
     public static RearLimelight rearLimelight = new RearLimelight();
+    public static CANdleSubsystem candleSubsystem = new CANdleSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -154,7 +155,7 @@ public class RobotContainer {
             robotCentric,
             //This is a temporary direction for testing out aliging with the source (as oriented from the Red Alliance)
             //We probably want to tie the source angle to a different button
-            Constants.FieldAngle.getSourceAngle())); 
+            Constants.FieldAngle.Front));
         
         visionAimShooter.whileTrue(new VisionAlignShoot(
             swerve, 
@@ -163,13 +164,15 @@ public class RobotContainer {
             robotCentric
         ));
 
-        faceRearButton.whileTrue(new PIDTurnToAngle(
+        faceSourceButton.whileTrue(new PIDTurnToAngle(
             swerve, 
             () -> -driver.getRawAxis(translationAxis), 
             () -> -driver.getRawAxis(strafeAxis), 
             () -> -driver.getRawAxis(rotationAxis), 
             robotCentric,
-            Constants.FieldAngle.Rear));
+            //This is a temporary direction for testing out aliging with the source (as oriented from the Red Alliance)
+            //We probably want to tie the source angle to a different button
+            Constants.FieldAngle.getSourceAngle())); 
         
         /* Operator Buttons */
         subwooferShotButton.onTrue(new ShootFrom(ShooterPose.Subwoofer));

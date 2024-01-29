@@ -76,7 +76,7 @@ public class VisionAlignShoot extends Command {
             double input = Math.log(39.609*ta - 4.42716);
             double logE = Math.log(2.718281828);
             double output = input / logE;
-            shooterAngle = (6.42789*output) - 4; // 1.76625
+            shooterAngle = (6.42789*output) - 1.766625; // 1.76625
         }
 
         else {
