@@ -1,6 +1,7 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class RunFeeder extends Command {
@@ -19,11 +20,11 @@ public class RunFeeder extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	public void execute() {
 		if (shooterAngle <= 76.5 && shooterAngle >= 74.5) {
-			RobotContainer.feeder.setSpeed(-1);
+			RobotContainer.feeder.setSpeed(Constants.Feeder.RearEjectSpeed);
 		}
 		
 		else {
-			RobotContainer.feeder.setSpeed(1);
+			RobotContainer.feeder.setSpeed(Constants.Feeder.FeedShooterSpeed);
 
 		}
 	}

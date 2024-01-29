@@ -95,6 +95,12 @@ public final class Constants {
 
     }
 
+    public static final class Feeder {
+        public static final double IntakeSpeed = 0.6;
+        public static final double FeedShooterSpeed = 1.0;
+        public static final double RearEjectSpeed = -1.0;
+    }
+
     public static final class Swerve {
         public static final int pigeonID = 12;
 
