@@ -3,9 +3,9 @@ package frc.robot.commands.LEDs;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 
-public class SetDefault extends Command {
+public class SetDefaultPurple extends Command {
     
-    public SetDefault() {
+    public SetDefaultPurple() {
         addRequirements(RobotContainer.candleSubsystem);
     }
 

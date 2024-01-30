@@ -67,7 +67,6 @@ public class RobotContainer {
     private final JoystickButton podiumShotButton = new JoystickButton(operator, XboxController.Button.kB.value);
     private final JoystickButton ampShotButton = new JoystickButton(operator, XboxController.Button.kY.value);
     private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kX.value);
-    private final JoystickButton shootAmpButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
     private final JoystickButton reverseAmpShotButton = new JoystickButton(operator, XboxController.Button.kLeftBumper.value);
     private final JoystickButton tallShotSubwooferButton = new JoystickButton(operator, XboxController.Button.kLeftStick.value);
     private final JoystickButton tallShotPodiumButton = new JoystickButton(operator, XboxController.Button.kRightStick.value);
@@ -181,7 +180,6 @@ public class RobotContainer {
         ampShotButton.onTrue(new ShootFrom(ShooterPose.Amp));
         reverseAmpShotButton.onTrue(new SetShooterPosition(Shooter.ReverseAmpPosition));
         shooterDownButton.onTrue(new SetShooterPosition(Shooter.DownPosition));    // Brings shooter back to start position
-        shootAmpButton.whileTrue(new ReverseFeeder());                          // Reverses feeder for amp shot
         tallShotPodiumButton.onTrue(new ShootFrom(ShooterPose.PodiumTall));
         tallShotSubwooferButton.onTrue(new ShootFrom(ShooterPose.SubwooferTall));
     }
