@@ -84,6 +84,15 @@ public class VisionAlignShoot extends Command {
         // average data from both equations
         shooterAngle = (aShooterAngle + yShooterAngle) / 2;
 
+        // disallow any negative values
+        if (shooterAngle <= 0) {
+            shooterAngle = 0;
+        }
+
+        else{
+
+        }
+
         // calculate target error
         double targetError = Math.abs(targetAngle - tx);
 
