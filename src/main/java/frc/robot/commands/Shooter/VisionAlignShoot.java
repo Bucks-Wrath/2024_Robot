@@ -23,13 +23,15 @@ public class VisionAlignShoot extends Command {
     private double tx = 0;
     private double ty = 0;
     private double ta = 0;
-    private double speed = 0;
+    private double ySpeed = 0;
 
     private double slowSpeed = 0.5;
     private double shooterHeight = 0;
 
     private final PIDController angleController = new PIDController(0.012, 0, 0);  //0.012
     private double targetAngle = 0;
+    private double yShooterAngle = 0;
+    private double aShooterAngle = 0;
     private double shooterAngle = 0;
 
 
@@ -55,12 +57,14 @@ public class VisionAlignShoot extends Command {
     
     @Override
     public void execute() {
-        // Get Shooter Height
-        shooterHeight = RobotContainer.shooterWrist.getCurrentPosition();
-        speed = s_Swerve.ySpeed();
+        // Get y translation value
+        ySpeed = s_Swerve.ySpeed();
+
+        // adjust target x based on translation
+        targetAngle = 0 + ySpeed;  // needs to be tuned
 
         // find target location
-        tx = RobotContainer.frontLimelight.getX(); //+ (10*speed);
+        tx = RobotContainer.frontLimelight.getX();
         ty = RobotContainer.frontLimelight.getY();
         ta = RobotContainer.frontLimelight.getArea();
 
@@ -71,36 +75,25 @@ public class VisionAlignShoot extends Command {
         // Uses PID to point at target
         double rotationVal = angleController.calculate(tx,targetAngle);
 
-        // Uses ta and ty to set shooter angle
-        if (ta > 0.11) {
-            double input = Math.log(39.609*ta - 4.42716);
-            double logE = Math.log(2.718281828);
-            double output = input / logE;
-            shooterAngle = (6.42789*output) - 1.766625; // 1.76625
-        }
+        // Uses ta to set shooter angle
+        aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (2.82088);
 
-        else {
-            shooterAngle = 0;
-        }
+        // use ty to calculate shooter angle
+        yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (18.3463);
 
-        // Make the robot slower if the shooter is up
-        if (shooterHeight > 30){
-            translationVal = translationVal*slowSpeed;
-            strafeVal = strafeVal*slowSpeed;
-            rotationVal = rotationVal*slowSpeed;
-        }
+        // average data from both equations
+        shooterAngle = (aShooterAngle + yShooterAngle) / 2;
 
-        else {
+        // calculate target error
+        double targetError = Math.abs(targetAngle - tx);
 
-        }
-
-        if (tx >= -0.5 && tx <= 0.5) {
+        // signal to driver that we are ready to shoot
+        if (targetError < 1 && RobotContainer.shooterWrist.isInPosition(shooterAngle)) {
             RobotContainer.candleSubsystem.setAnimate("Rainbow");
         }
 
         else {
             RobotContainer.candleSubsystem.setAnimate("Orange");
-
         }
 
         /* Drive */
