@@ -76,9 +76,11 @@ public class VisionAlignShoot extends Command {
         double rotationVal = angleController.calculate(tx,targetAngle);
 
         // Uses ta to set shooter angle
+        // Caleb Numbers, just for comparison: -17.1136, 41.1436, -2.7548
         aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (2.82088);
 
         // use ty to calculate shooter angle
+        // Caleb Numbers, just for comparison: -.0091, 0.7406, 18.3463
         yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (18.3463);
 
         // average data from both equations
