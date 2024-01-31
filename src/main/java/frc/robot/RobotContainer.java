@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.Shooter;
 import frc.robot.Constants.Shooter.ShooterPose;
@@ -14,7 +15,6 @@ import frc.robot.auto.AutonomousSelector;
 import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
 import frc.robot.commands.Intake.IntakeCommandGroup;
-import frc.robot.commands.Intake.JoystickIntakeWrist;
 import frc.robot.commands.Intake.StopIntake;
 import frc.robot.commands.Intake.StopIntakeCommandGroup;
 import frc.robot.commands.LEDs.SetNeedNote;
@@ -43,6 +43,8 @@ public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(0);
     private final Joystick operator = new Joystick(1);
+    private final CommandXboxController DriverController = new CommandXboxController(0);
+
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -76,7 +78,6 @@ public class RobotContainer {
     private final Swerve swerve = new Swerve();
     public static LeftShooter leftShooter = new LeftShooter();
     public static RightShooter rightShooter = new RightShooter();
-    public static IntakeWrist intakeWrist = new IntakeWrist();
     public static ShooterWrist shooterWrist = new ShooterWrist();
     public static Intake intake = new Intake();
     public static Feeder feeder = new Feeder();
@@ -158,6 +159,13 @@ public class RobotContainer {
             Constants.FieldAngle.Front));
         
         visionAimShooter.whileTrue(new VisionAlignShoot(
+            swerve, 
+            () -> -driver.getRawAxis(translationAxis), 
+            () -> -driver.getRawAxis(strafeAxis), 
+            robotCentric
+        ));
+
+        DriverController.leftTrigger().whileTrue(new VisionAlignShoot(
             swerve, 
             () -> -driver.getRawAxis(translationAxis), 
             () -> -driver.getRawAxis(strafeAxis), 

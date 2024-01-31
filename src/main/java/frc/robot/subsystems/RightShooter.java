@@ -32,7 +32,7 @@ public class RightShooter extends SubsystemBase implements IVelocityControlledSu
     public double targetVelocity = 0;
 	private double arbitraryFeedForward = 0.0;
 
-	private final static double onTargetThreshold = 1;
+	private final static double onTargetThreshold = 0.5;
 
 	public TalonFX RightShooterFalcon = new TalonFX(DeviceIds.Shooter.RightMotorId, "canivore");
     public TalonFXConfiguration RightShooterFXConfig = new TalonFXConfiguration();
@@ -50,7 +50,7 @@ public class RightShooter extends SubsystemBase implements IVelocityControlledSu
         RightShooterFXConfig.CurrentLimits.SupplyTimeThreshold = 0.1;
 
         /* PID Config */
-        RightShooterFXConfig.Slot0.kP = 0.35;
+        RightShooterFXConfig.Slot0.kP = 1.25;
         RightShooterFXConfig.Slot0.kI = 0;
         RightShooterFXConfig.Slot0.kD = 0;
 

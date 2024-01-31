@@ -10,8 +10,8 @@ public class IntakeCommandGroup extends SequentialCommandGroup {
     
     public IntakeCommandGroup(Swerve s_Swerve) {
         this.s_Swerve = s_Swerve;
-        addCommands(new IntakeRunFeeder().raceWith(new RunIntake()));  // use for testing
-        //addCommands(new IntakeRunFeeder().raceWith(new VisionIntakeCommandGroup(s_Swerve).alongWith(new RunIntake())));  
+        //addCommands(new IntakeRunFeeder().raceWith(new RunIntake()));  // use for testing
+        addCommands(new IntakeRunFeeder().raceWith(new VisionIntakeCommandGroup(s_Swerve).alongWith(new RunIntake())));  
     }
 
 }

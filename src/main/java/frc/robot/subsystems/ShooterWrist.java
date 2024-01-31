@@ -61,10 +61,10 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
         shooterWristFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
         shooterWristFXConfig.CurrentLimits.SupplyCurrentLimit = 35;
         shooterWristFXConfig.CurrentLimits.SupplyCurrentThreshold = 60;
-        shooterWristFXConfig.CurrentLimits.SupplyTimeThreshold = 0.1;
+        shooterWristFXConfig.CurrentLimits.SupplyTimeThreshold = 0.05;
 
         /* PID Config */
-        shooterWristFXConfig.Slot0.kP = 0.06;
+        shooterWristFXConfig.Slot0.kP = 0.4;
         shooterWristFXConfig.Slot0.kI = 0;
         shooterWristFXConfig.Slot0.kD = 0;
 

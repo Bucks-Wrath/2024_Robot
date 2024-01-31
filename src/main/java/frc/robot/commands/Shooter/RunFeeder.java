@@ -21,11 +21,12 @@ public class RunFeeder extends Command {
 	public void execute() {
 		if (shooterAngle <= 76.5 && shooterAngle >= 74.5) {
 			RobotContainer.feeder.setSpeed(Constants.Feeder.RearEjectSpeed);
+			RobotContainer.candleSubsystem.setAnimate("Purple");
 		}
 		
 		else {
 			RobotContainer.feeder.setSpeed(Constants.Feeder.FeedShooterSpeed);
-
+			RobotContainer.candleSubsystem.setAnimate("Purple");
 		}
 	}
 
@@ -36,13 +37,11 @@ public class RunFeeder extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		RobotContainer.candleSubsystem.setAnimate("Purple");
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		end();
 	}
 }
 

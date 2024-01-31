@@ -20,15 +20,16 @@ public class VisionAlignShoot extends Command {
     private DoubleSupplier rotationSup;
     private Boolean robotCentricSup;
 
-    private double tx = 0;
-    private double ty = 0;
-    private double ta = 0;
-    private double ySpeed = 0;
+    private double tx;
+    private double ty;
+    private double ta;
+    private double ySpeed;
+    private double rotationVal;  // removed ititial value to see if it smooths movement
 
     private double slowSpeed = 0.5;
     private double shooterHeight = 0;
 
-    private final PIDController angleController = new PIDController(0.012, 0, 0);  //0.012
+    private final PIDController angleController = new PIDController(0.01, 0, 0);  //0.012
     private double targetAngle = 0;
     private double yShooterAngle = 0;
     private double aShooterAngle = 0;
@@ -58,7 +59,7 @@ public class VisionAlignShoot extends Command {
     @Override
     public void execute() {
         // Get y translation value
-        ySpeed = s_Swerve.ySpeed();
+        ySpeed = s_Swerve.ySpeed()*6;
 
         // adjust target x based on translation
         targetAngle = 0 + ySpeed;  // needs to be tuned
@@ -71,17 +72,17 @@ public class VisionAlignShoot extends Command {
         /* Get Values, Deadband*/
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
-
+ 
         // Uses PID to point at target
-        double rotationVal = angleController.calculate(tx,targetAngle);
+        rotationVal = angleController.calculate(tx,targetAngle);
 
         // Uses ta to set shooter angle
         // Caleb Numbers, just for comparison: -17.1136, 41.1436, -2.7548
-        aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (2.82088);
+        aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (2.82088);  // was 2.82088
 
         // use ty to calculate shooter angle
         // Caleb Numbers, just for comparison: -.0091, 0.7406, 18.3463
-        yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (18.3463);
+        yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (18.3463); // was 18.3463
 
         // average data from both equations
         shooterAngle = (aShooterAngle + yShooterAngle) / 2;
@@ -118,11 +119,18 @@ public class VisionAlignShoot extends Command {
         // Sets Shooter angle and speed
         RobotContainer.leftShooter.setTargetVelocity(Shooter.DefaultShotVelocity.VelocityLeft);
         RobotContainer.rightShooter.setTargetVelocity(Shooter.DefaultShotVelocity.VelocityRight);
-        RobotContainer.shooterWrist.setTargetPosition(shooterAngle);
 
         // Controls shooter speed and angle
         RobotContainer.leftShooter.velocityControl();
         RobotContainer.rightShooter.velocityControl();
-        RobotContainer.shooterWrist.motionMagicControl();
+
+        if (ta > 0) { // only set shooter if has target
+            RobotContainer.shooterWrist.setTargetPosition(shooterAngle);
+            RobotContainer.shooterWrist.motionMagicControl();
+        }
+
+        else {
+
+        }
     }
 }

@@ -13,8 +13,8 @@ public class VisionAlignIntake extends Command {
     private Swerve s_Swerve;    
     private Boolean robotCentricSup;
 
-    private double tx = 0;
-    private double ta = 0;
+    private double tx;
+    private double ta;  // removed initial value
 
     private final PIDController angleController = new PIDController(0.007, 0, 0);
     private final PIDController slideController = new PIDController(0.007, 0, 0);  // added for better PID tuning
@@ -44,20 +44,26 @@ public class VisionAlignIntake extends Command {
         tx = RobotContainer.rearLimelight.getX();
         ta = RobotContainer.rearLimelight.getArea();
 
-        double rotationVal = angleController.calculate(tx,targetAngle);
-        double strafeVal = -slideController.calculate(tx,targetAngle);
-        double translationVal = -distanceController.calculate(ta,targetArea);
+        if (ta > 0) {
+            double rotationVal = angleController.calculate(tx,targetAngle);
+            double strafeVal = -slideController.calculate(tx,targetAngle);
+            double translationVal = -distanceController.calculate(ta,targetArea);
 
-        /* Drive */
-        if (ta < 5) {
-            s_Swerve.drive(
-            new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
-            rotationVal * Constants.Swerve.maxAngularVelocity, 
-            !robotCentricSup, 
-            true
-            );  
-        }
+            /* Drive */
+            if (ta < 4) {
+                s_Swerve.drive(
+                new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
+                rotationVal * Constants.Swerve.maxAngularVelocity, 
+                !robotCentricSup, 
+                true
+                );  
+            }
         
+            else {
+
+            }
+        }
+
         else {
 
         }
@@ -65,7 +71,7 @@ public class VisionAlignIntake extends Command {
     }
 
     public boolean isFinished() {
-		return ta > 5;
+		return ta > 4;
 	}
 
 	// Called once after isFinished returns true
@@ -76,5 +82,6 @@ public class VisionAlignIntake extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+        
 	}
 }

@@ -25,8 +25,8 @@ public final class Constants {
         public static final double Right = 90;
         public static final double Front = 180;
         public static final double Rear = 360;
-        public static final double SourceRed = 300;
-        public static final double SourceBlue = 60;
+        public static final double SourceRed = 60;
+        public static final double SourceBlue = 300;
 
         public static final double getSourceAngle() {
             var allianceColor = DriverStation.getAlliance();
@@ -96,7 +96,7 @@ public final class Constants {
     }
 
     public static final class Feeder {
-        public static final double IntakeSpeed = 0.6;
+        public static final double IntakeSpeed = 0.7;
         public static final double FeedShooterSpeed = 1.0;
         public static final double RearEjectSpeed = -1.0;
     }
@@ -137,14 +137,14 @@ public final class Constants {
         public static final double angleCurrentThresholdTime = 0.1;
         public static final boolean angleEnableCurrentLimit = true;
 
-        public static final int driveCurrentLimit = 35;
-        public static final int driveCurrentThreshold = 60;
+        public static final int driveCurrentLimit = 25;
+        public static final int driveCurrentThreshold = 40;
         public static final double driveCurrentThresholdTime = 0.1;
         public static final boolean driveEnableCurrentLimit = true;
 
         /* These values are used by the drive falcon to ramp in open loop and closed loop driving.
          * We found a small open loop ramp (0.25) helps with tread wear, tipping, etc */
-        public static final double openLoopRamp = 0.25;
+        public static final double openLoopRamp = 0.3;
         public static final double closedLoopRamp = 0.0;
 
         /* Angle Motor PID Values */
