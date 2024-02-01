@@ -21,6 +21,7 @@ import frc.robot.commands.Intake.StopIntake;
 import frc.robot.commands.Intake.StopIntakeCommandGroup;
 import frc.robot.commands.LEDs.SetNeedNote;
 import frc.robot.commands.Shooter.AutoShooter;
+import frc.robot.commands.Shooter.AutoVisionShoot;
 import frc.robot.commands.Shooter.JoystickShooter;
 import frc.robot.commands.Shooter.JoystickShooterWrist;
 import frc.robot.commands.Shooter.ReverseFeeder;
@@ -121,7 +122,9 @@ public class RobotContainer {
         NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer));
         NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
         NamedCommands.registerCommand("AmpShot", new ShootFrom(ShooterPose.Amp));
-        NamedCommands.registerCommand("ShooterDown", new SetShooterPosition(Shooter.DownPosition)); 
+        NamedCommands.registerCommand("ShooterDown", new SetShooterPosition(Shooter.DownPosition));        
+        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot()); 
+ 
 
         /* Configure the button bindings */
         configureButtonBindings();
