@@ -29,8 +29,8 @@ public class Intake extends SubsystemBase {
 
         /* Current Limiting */
         IntakeFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        IntakeFXConfig.CurrentLimits.SupplyCurrentLimit = 5;
-        IntakeFXConfig.CurrentLimits.SupplyCurrentThreshold = 10;
+        IntakeFXConfig.CurrentLimits.SupplyCurrentLimit = 10;
+        IntakeFXConfig.CurrentLimits.SupplyCurrentThreshold = 20;
         IntakeFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
 
         /* PID Config */

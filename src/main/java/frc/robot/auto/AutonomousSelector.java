@@ -16,7 +16,7 @@ public class AutonomousSelector {
         ShuffleboardTab autoTab = Shuffleboard.getTab("Auto settings");
 
         autonomousModeChooser = new SendableChooser<>();
-        autonomousModeChooser.addOption("1 Cone Auto", AutonomousMode.One_Cone_Auto);
+        autonomousModeChooser.addOption("4 Note Auto", AutonomousMode.One_Cone_Auto);
         autoTab.add("Mode", autonomousModeChooser);
         
     }
@@ -26,9 +26,9 @@ public class AutonomousSelector {
 
         switch (mode) {
             case One_Cone_Auto:
-                return new PathPlannerAuto("DefaultAuto");
+                return new PathPlannerAuto("4 Note Auto");
             default:
-                return new PathPlannerAuto("DefaultAuto");
+                return new PathPlannerAuto("4 Note Auto");
         }
     }
 

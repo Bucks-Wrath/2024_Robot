@@ -16,6 +16,7 @@ import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
 import frc.robot.commands.Intake.IntakeCommandGroup;
 import frc.robot.commands.Intake.ManualIntakeCommandGroup;
+import frc.robot.commands.Intake.RunIntake;
 import frc.robot.commands.Intake.StopIntake;
 import frc.robot.commands.Intake.StopIntakeCommandGroup;
 import frc.robot.commands.LEDs.SetNeedNote;
@@ -112,6 +113,8 @@ public class RobotContainer {
 
         /* Command registration for PathPlanner */     
         NamedCommands.registerCommand("IntakeCommandGroup", new IntakeCommandGroup(swerve));
+        NamedCommands.registerCommand("ManualIntakeCommandGroup", new ManualIntakeCommandGroup());
+        NamedCommands.registerCommand("RunIntake", new RunIntake());
         NamedCommands.registerCommand("StopIntakeCommandGroup", new StopIntakeCommandGroup());
         NamedCommands.registerCommand("RunFeeder", new RunFeeder());
         NamedCommands.registerCommand("StopFeeder", new StopFeeder());
@@ -192,7 +195,7 @@ public class RobotContainer {
         tallShotSubwooferButton.onTrue(new ShootFrom(ShooterPose.SubwooferTall));
         OperatorController.leftTrigger().onTrue(new ShootFrom(ShooterPose.ClimbReady));
         OperatorController.rightTrigger().onTrue(new ShootFrom(ShooterPose.Climb));
-        manualIntakeButton.whileTrue(new ManualIntakeCommandGroup(swerve));
+        manualIntakeButton.whileTrue(new ManualIntakeCommandGroup());
         manualIntakeButton.onFalse(new StopIntakeCommandGroup());
     }
 
