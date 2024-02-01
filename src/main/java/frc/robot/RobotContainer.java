@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.Shooter;
 import frc.robot.Constants.Shooter.ShooterPose;
+import frc.robot.auto.AutoZero;
 import frc.robot.auto.AutonomousSelector;
 import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
@@ -123,7 +124,9 @@ public class RobotContainer {
         NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
         NamedCommands.registerCommand("AmpShot", new ShootFrom(ShooterPose.Amp));
         NamedCommands.registerCommand("ShooterDown", new SetShooterPosition(Shooter.DownPosition));        
-        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot()); 
+        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot());        
+        NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
+ 
  
 
         /* Configure the button bindings */
