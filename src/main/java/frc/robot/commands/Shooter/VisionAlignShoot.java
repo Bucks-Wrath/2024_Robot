@@ -24,7 +24,8 @@ public class VisionAlignShoot extends Command {
     private double ty;
     private double ta;
     private double ySpeed;
-    private double rotationVal;  // removed ititial value to see if it smooths movement
+    private double xSpeed;
+    private double rotationVal;
 
     private double slowSpeed = 0.5;
     private double shooterHeight = 0;
@@ -59,7 +60,8 @@ public class VisionAlignShoot extends Command {
     @Override
     public void execute() {
         // Get y translation value
-        ySpeed = s_Swerve.ySpeed()*6;
+        ySpeed = s_Swerve.ySpeed()*7;
+        xSpeed = s_Swerve.xSpeed();  // does this need to be larger
 
         // adjust target x based on translation
         targetAngle = 0 + ySpeed;  // needs to be tuned
@@ -78,14 +80,14 @@ public class VisionAlignShoot extends Command {
 
         // Uses ta to set shooter angle
         // Caleb Numbers, just for comparison: -17.1136, 41.1436, -2.7548
-        aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (2.82088);  // was 2.82088
+        aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (2.82088);
 
         // use ty to calculate shooter angle
         // Caleb Numbers, just for comparison: -.0091, 0.7406, 18.3463
-        yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (18.3463); // was 18.3463
+        yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (18.3463);
 
         // average data from both equations
-        shooterAngle = (aShooterAngle + yShooterAngle) / 2;
+        shooterAngle = ((aShooterAngle + yShooterAngle) / 2) - xSpeed;  // is this going the right way and is it the right value
 
         // disallow any negative values
         if (shooterAngle <= 0) {

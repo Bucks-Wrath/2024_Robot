@@ -41,11 +41,20 @@ public final class Constants {
     /// Shooter Position and Velocity Settings
     public static final class Shooter {
         public static final double DownPosition = 0;
-        public static final double ReverseAmpPosition = 75.4
-        ;
+
         public static final class DefaultShotVelocity {
             public static final double VelocityLeft = 90;
             public static final double VelocityRight = 60; 
+        }
+
+        public static final class SlowShotVelocity {
+            public static final double VelocityLeft = 20;
+            public static final double VelocityRight = 20; 
+        }
+
+        public static final class StopShotVelocity {
+            public static final double VelocityLeft = 0;
+            public static final double VelocityRight = 0; 
         }
 
         public static abstract class ShooterPose {
@@ -74,7 +83,7 @@ public final class Constants {
                 {
                     VelocityLeft = 60;
                     VelocityRight = 40;
-                    Position = 102.7;
+                    Position = 75.5;
                 }
             };
             public static final ShooterPose SubwooferTall = new ShooterPose() {
@@ -89,6 +98,28 @@ public final class Constants {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
                     Position = 73.6;
+                }
+            };
+            public static final ShooterPose Climb  = new ShooterPose() {
+                {
+                    VelocityLeft = StopShotVelocity.VelocityLeft;
+                    VelocityRight = StopShotVelocity.VelocityRight;
+                    Position = 25.5;  // needs to be found
+                }
+            };
+            public static final ShooterPose ClimbReady  = new ShooterPose() {
+                {
+                    VelocityLeft = StopShotVelocity.VelocityLeft;
+                    VelocityRight = StopShotVelocity.VelocityRight;
+                    Position = 90;
+                }
+            };
+
+            public static final ShooterPose Home = new ShooterPose() {
+                {
+                    VelocityLeft = SlowShotVelocity.VelocityLeft;
+                    VelocityRight = SlowShotVelocity.VelocityRight;
+                    Position = 0.0;
                 }
             };
         };
@@ -139,12 +170,12 @@ public final class Constants {
 
         public static final int driveCurrentLimit = 25;
         public static final int driveCurrentThreshold = 40;
-        public static final double driveCurrentThresholdTime = 0.1;
+        public static final double driveCurrentThresholdTime = 0.01;
         public static final boolean driveEnableCurrentLimit = true;
 
         /* These values are used by the drive falcon to ramp in open loop and closed loop driving.
          * We found a small open loop ramp (0.25) helps with tread wear, tipping, etc */
-        public static final double openLoopRamp = 0.3;
+        public static final double openLoopRamp = 0.35;
         public static final double closedLoopRamp = 0.0;
 
         /* Angle Motor PID Values */
@@ -179,7 +210,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(106.96);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(105.73236);  //106.96
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -189,7 +220,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 0;
             public static final int canCoderID = 8;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(3.08+180);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(1.40616+180);  // 3.08
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -199,7 +230,7 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 10;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-124.28);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-125.68356);  //-124.28
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -209,7 +240,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 11;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-71.89-180);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-73.91582 - 180); //-71.89
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -222,7 +253,7 @@ public final class Constants {
         public static final Translation2d brModuleOffset = new Translation2d(-0.4, -0.4);
 
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-            new PIDConstants(5.0, 0, 0), // Translation constants 
+            new PIDConstants(2.2, 0, 0), // Translation constants 
             new PIDConstants(5.0, 0, 0), // Rotation constants 
             maxModuleSpeed, 
             flModuleOffset.getNorm(), // Drive base radius (distance from center to furthest module) 

@@ -146,8 +146,13 @@ public class Swerve extends SubsystemBase {
     }
 
     public double ySpeed() {
-        double speed = getFieldRelativeSpeeds().vyMetersPerSecond;
-        return speed;
+        double yspeed = getFieldRelativeSpeeds().vyMetersPerSecond;
+        return yspeed;
+    }
+
+    public double xSpeed() {
+        double xspeed = getFieldRelativeSpeeds().vxMetersPerSecond;
+        return xspeed;
     }
 
     public Rotation2d getHeading(){
@@ -191,6 +196,7 @@ public class Swerve extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond); 
             SmartDashboard.putNumber("YSPEED", ySpeed());
+            SmartDashboard.putNumber("XSPEED", xSpeed());
         }
     }
 }

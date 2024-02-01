@@ -15,6 +15,7 @@ import frc.robot.auto.AutonomousSelector;
 import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
 import frc.robot.commands.Intake.IntakeCommandGroup;
+import frc.robot.commands.Intake.ManualIntakeCommandGroup;
 import frc.robot.commands.Intake.StopIntake;
 import frc.robot.commands.Intake.StopIntakeCommandGroup;
 import frc.robot.commands.LEDs.SetNeedNote;
@@ -44,6 +45,8 @@ public class RobotContainer {
     private final Joystick driver = new Joystick(0);
     private final Joystick operator = new Joystick(1);
     private final CommandXboxController DriverController = new CommandXboxController(0);
+    private final CommandXboxController OperatorController = new CommandXboxController(1);
+
 
 
     /* Drive Controls */
@@ -59,19 +62,18 @@ public class RobotContainer {
     private final JoystickButton faceLeftButton = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton faceRightButton = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton faceSourceButton = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton faceFrontButton = new JoystickButton(driver, XboxController.Button.kRightStick.value);
-    private final JoystickButton visionAimShooter = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton faceFrontButton = new JoystickButton(driver, XboxController.Button.kA.value);
     private final JoystickButton intakeButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton shootButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     /* Operator Buttons */
-    private final JoystickButton subwooferShotButton = new JoystickButton(operator, XboxController.Button.kA.value);
+    private final JoystickButton subwooferShotButton = new JoystickButton(operator, XboxController.Button.kX.value);
     private final JoystickButton podiumShotButton = new JoystickButton(operator, XboxController.Button.kB.value);
     private final JoystickButton ampShotButton = new JoystickButton(operator, XboxController.Button.kY.value);
-    private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kX.value);
-    private final JoystickButton reverseAmpShotButton = new JoystickButton(operator, XboxController.Button.kLeftBumper.value);
-    private final JoystickButton tallShotSubwooferButton = new JoystickButton(operator, XboxController.Button.kLeftStick.value);
-    private final JoystickButton tallShotPodiumButton = new JoystickButton(operator, XboxController.Button.kRightStick.value);
+    private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kA.value);
+    private final JoystickButton tallShotSubwooferButton = new JoystickButton(operator, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton tallShotPodiumButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
+    private final JoystickButton manualIntakeButton = new JoystickButton(operator, XboxController.Button.kStart.value);
 
 
     /* Subsystems */
@@ -102,7 +104,6 @@ public class RobotContainer {
         //leftShooter.setDefaultCommand(new JoystickShooter());
         //rightShooter.setDefaultCommand(new JoystickShooter());
         
-        //intakeWrist.setDefaultCommand(new JoystickIntakeWrist());
         shooterWrist.setDefaultCommand(new JoystickShooterWrist());
         
         // Sets Default Commands for intake and feeder motors
@@ -110,7 +111,14 @@ public class RobotContainer {
         feeder.setDefaultCommand(new StopFeeder());
 
         /* Command registration for PathPlanner */     
-        NamedCommands.registerCommand("BothShootersAuto",new AutoShooter());
+        NamedCommands.registerCommand("IntakeCommandGroup", new IntakeCommandGroup(swerve));
+        NamedCommands.registerCommand("StopIntakeCommandGroup", new StopIntakeCommandGroup());
+        NamedCommands.registerCommand("RunFeeder", new RunFeeder());
+        NamedCommands.registerCommand("StopFeeder", new StopFeeder());
+        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer));
+        NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
+        NamedCommands.registerCommand("AmpShot", new ShootFrom(ShooterPose.Amp));
+        NamedCommands.registerCommand("ShooterDown", new SetShooterPosition(Shooter.DownPosition)); 
 
         /* Configure the button bindings */
         configureButtonBindings();
@@ -128,7 +136,7 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroHeading()));    // Resets gyro
         intakeButton.whileTrue(new IntakeCommandGroup(swerve));             // Runs intake w/ vision
         intakeButton.whileFalse(new StopIntakeCommandGroup());              // Stop intake w/ vision
-        shootButton.whileTrue(new RunFeeder());                             // Runs shooter feeder
+        shootButton.whileTrue(new RunFeeder());                          // Runs shooter feeder
         shootButton.whileFalse(new StopFeeder());                           // Stops shooter feeder
 
         faceLeftButton.whileTrue(new PIDTurnToAngle(
@@ -157,13 +165,6 @@ public class RobotContainer {
             //This is a temporary direction for testing out aliging with the source (as oriented from the Red Alliance)
             //We probably want to tie the source angle to a different button
             Constants.FieldAngle.Front));
-        
-        visionAimShooter.whileTrue(new VisionAlignShoot(
-            swerve, 
-            () -> -driver.getRawAxis(translationAxis), 
-            () -> -driver.getRawAxis(strafeAxis), 
-            robotCentric
-        ));
 
         DriverController.leftTrigger().whileTrue(new VisionAlignShoot(
             swerve, 
@@ -186,10 +187,13 @@ public class RobotContainer {
         subwooferShotButton.onTrue(new ShootFrom(ShooterPose.Subwoofer));
         podiumShotButton.onTrue(new ShootFrom(ShooterPose.Podium));
         ampShotButton.onTrue(new ShootFrom(ShooterPose.Amp));
-        reverseAmpShotButton.onTrue(new SetShooterPosition(Shooter.ReverseAmpPosition));
-        shooterDownButton.onTrue(new SetShooterPosition(Shooter.DownPosition));    // Brings shooter back to start position
+        shooterDownButton.onTrue(new ShootFrom(ShooterPose.Home));    // Brings shooter back to start position and slows
         tallShotPodiumButton.onTrue(new ShootFrom(ShooterPose.PodiumTall));
         tallShotSubwooferButton.onTrue(new ShootFrom(ShooterPose.SubwooferTall));
+        OperatorController.leftTrigger().onTrue(new ShootFrom(ShooterPose.ClimbReady));
+        OperatorController.rightTrigger().onTrue(new ShootFrom(ShooterPose.Climb));
+        manualIntakeButton.whileTrue(new ManualIntakeCommandGroup(swerve));
+        manualIntakeButton.onFalse(new StopIntakeCommandGroup());
     }
 
     /* Public access to joystick values */

@@ -6,7 +6,7 @@ import frc.robot.commands.Shooter.StopFeeder;
 public class StopIntakeCommandGroup extends SequentialCommandGroup {
     
     public StopIntakeCommandGroup() {
-        addCommands(new StopIntake().alongWith(new StopFeeder()));
+        addCommands(new ReverseIntake().withTimeout(1.0).andThen(new StopIntake().alongWith(new StopFeeder())));
     }
 
 }

@@ -45,9 +45,9 @@ public class RightShooter extends SubsystemBase implements IVelocityControlledSu
 
         /* Current Limiting */
         RightShooterFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        RightShooterFXConfig.CurrentLimits.SupplyCurrentLimit = 35;
-        RightShooterFXConfig.CurrentLimits.SupplyCurrentThreshold = 60;
-        RightShooterFXConfig.CurrentLimits.SupplyTimeThreshold = 0.1;
+        RightShooterFXConfig.CurrentLimits.SupplyCurrentLimit = 10;
+        RightShooterFXConfig.CurrentLimits.SupplyCurrentThreshold = 20;
+        RightShooterFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
 
         /* PID Config */
         RightShooterFXConfig.Slot0.kP = 1.25;

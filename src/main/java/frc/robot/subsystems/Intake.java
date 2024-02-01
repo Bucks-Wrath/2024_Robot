@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-//import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -15,7 +15,7 @@ public class Intake extends SubsystemBase {
 
 	private TalonFX IntakeFalcon = new TalonFX(DeviceIds.Intake.LeadMotorId, "canivore");
     private TalonFXConfiguration IntakeFXConfig = new TalonFXConfiguration();
-    //private TalonFX IntakeFalconFollower = new TalonFX(DeviceIds.Intake.FollowerMotorId, "canivore");
+    private TalonFX IntakeFalconFollower = new TalonFX(DeviceIds.Intake.FollowerMotorId, "canivore");
 
 
 	public Intake() {
@@ -25,13 +25,13 @@ public class Intake extends SubsystemBase {
         IntakeFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         // Set Followers
-		//IntakeFalconFollower.setControl(new Follower(IntakeFalcon.getDeviceID(), true));
+		IntakeFalconFollower.setControl(new Follower(IntakeFalcon.getDeviceID(), true));
 
         /* Current Limiting */
         IntakeFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        IntakeFXConfig.CurrentLimits.SupplyCurrentLimit = 20;
-        IntakeFXConfig.CurrentLimits.SupplyCurrentThreshold = 40;
-        IntakeFXConfig.CurrentLimits.SupplyTimeThreshold = 0.08;
+        IntakeFXConfig.CurrentLimits.SupplyCurrentLimit = 5;
+        IntakeFXConfig.CurrentLimits.SupplyCurrentThreshold = 10;
+        IntakeFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
 
         /* PID Config */
         IntakeFXConfig.Slot0.kP = 0.2;
@@ -48,7 +48,7 @@ public class Intake extends SubsystemBase {
         // Config Motor
         IntakeFalcon.getConfigurator().apply(IntakeFXConfig);
         IntakeFalcon.getConfigurator().setPosition(0.0);
-        //IntakeFalconFollower.getConfigurator().setPosition(0.0);
+        IntakeFalconFollower.getConfigurator().setPosition(0.0);
 	}
 
 	public void setSpeed(double speed) {
@@ -59,14 +59,14 @@ public class Intake extends SubsystemBase {
 		return this.IntakeFalcon.getSupplyCurrent().getValueAsDouble();
 	}
 
-    //public double getCurrentDrawFollower() {
-	//	return this.IntakeFalconFollower.getSupplyCurrent().getValueAsDouble();
-	//}
+    public double getCurrentDrawFollower() {
+		return this.IntakeFalconFollower.getSupplyCurrent().getValueAsDouble();
+	}
 
 	public void resetShooterEncoder() {
         try {
 			IntakeFalcon.getConfigurator().setPosition(0.0);
-            //IntakeFalconFollower.getConfigurator().setPosition(0.0);
+            IntakeFalconFollower.getConfigurator().setPosition(0.0);
         }
         catch (Exception e) {
             DriverStation.reportError("Shooter.resetShooterEncoders exception.  You're Screwed! : " + e.toString(), false);
@@ -75,7 +75,7 @@ public class Intake extends SubsystemBase {
 
 	public void updateDashboard() {
 		SmartDashboard.putNumber("Intake Current", this.getCurrentDrawLeader());
-        //SmartDashboard.putNumber("Intake Follower Current", this.getCurrentDrawFollower());
+        SmartDashboard.putNumber("Intake Follower Current", this.getCurrentDrawFollower());
 
 	}
 }

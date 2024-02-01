@@ -8,7 +8,7 @@ public final class DeviceIds {
 
     public static final class Intake {
         public static final int LeadMotorId = 19;
-        //public static final int FollowerMotorId = 18;
+        public static final int FollowerMotorId = 18;
     }
 
     public static final class Shooter {

@@ -6,11 +6,14 @@ import frc.robot.DeviceIds;
 import com.ctre.phoenix.led.*;
 import com.ctre.phoenix.led.CANdle.LEDStripType;
 import com.ctre.phoenix.led.CANdle.VBatOutputMode;
+import com.ctre.phoenix.led.ColorFlowAnimation.Direction;
+import com.ctre.phoenix.led.LarsonAnimation.BounceMode;
+import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
 
 public class CANdleSubsystem extends SubsystemBase {
 
     private final CANdle m_candle = new CANdle(DeviceIds.CANdle.CANdleId);
-    private final int LedCount = 400;
+    private final int LedCount = 152;
     public String color;
 
 
@@ -56,6 +59,6 @@ public class CANdleSubsystem extends SubsystemBase {
                 break;
             case "Rainbow":
                 m_toAnimate = new RainbowAnimation(1.0, 0.7, LedCount);
-        }   
+            }   
     }
 }
