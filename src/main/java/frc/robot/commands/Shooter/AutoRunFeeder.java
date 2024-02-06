@@ -1,15 +1,13 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class AutoShooter extends Command {
-
-	private int positionIncrement = 10;
+public class AutoRunFeeder extends Command {
     
-    public AutoShooter() {
-        addRequirements(RobotContainer.leftShooter);
-        addRequirements(RobotContainer.rightShooter);
+    public AutoRunFeeder() {
+        addRequirements(RobotContainer.feeder);
     }
 	// Called just before this Command runs the first time
 	public void initialize() {
@@ -18,17 +16,7 @@ public class AutoShooter extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	public void execute() {
-
-		// joystick control
-        double leftSignal = 0.5;
-        double rightSignal = 0.5;
-
-        RobotContainer.leftShooter.setTargetVelocity((int) (leftSignal * positionIncrement));
-        RobotContainer.rightShooter.setTargetVelocity((int) (rightSignal * positionIncrement));
-
-		RobotContainer.leftShooter.velocityControl();
-        RobotContainer.rightShooter.velocityControl();
-
+		RobotContainer.feeder.setSpeed(Constants.Feeder.IntakeSpeed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -45,3 +33,5 @@ public class AutoShooter extends Command {
 	protected void interrupted() {
 	}
 }
+
+

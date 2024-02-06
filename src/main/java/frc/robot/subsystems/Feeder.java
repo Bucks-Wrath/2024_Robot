@@ -16,6 +16,7 @@ public class Feeder extends SubsystemBase {
 	public TalonFX FeederFalcon = new TalonFX(DeviceIds.Feeder.MotorId, "canivore");
     public TalonFXConfiguration FeederFXConfig = new TalonFXConfiguration();
     private DigitalInput input = new DigitalInput(DeviceIds.Feeder.BeamBreakChannel);
+    private DigitalInput input2 = new DigitalInput(DeviceIds.Feeder.BeamBreakChannel2);
 
 
 	public Feeder() {
@@ -26,8 +27,8 @@ public class Feeder extends SubsystemBase {
 
         /* Current Limiting */
         FeederFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        FeederFXConfig.CurrentLimits.SupplyCurrentLimit = 5;
-        FeederFXConfig.CurrentLimits.SupplyCurrentThreshold = 10;
+        FeederFXConfig.CurrentLimits.SupplyCurrentLimit = 20;
+        FeederFXConfig.CurrentLimits.SupplyCurrentThreshold = 30;
         FeederFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
 
         /* PID Config */
@@ -51,6 +52,10 @@ public class Feeder extends SubsystemBase {
         return input.get();
     }
 
+    public boolean readInput2() {
+        return input2.get();
+    }
+
 	public void setSpeed(double speed) {
         this.FeederFalcon.set(speed);
 	}
@@ -71,5 +76,7 @@ public class Feeder extends SubsystemBase {
 	public void updateDashboard() {
 		SmartDashboard.putNumber("Feeder Current", this.getCurrentDraw());
         SmartDashboard.putBoolean("IR Break Beam", this.readInput());
+        SmartDashboard.putBoolean("IR Break Beam 2", this.readInput2());
+
 	}
 }

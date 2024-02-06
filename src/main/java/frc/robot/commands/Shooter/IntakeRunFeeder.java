@@ -7,6 +7,7 @@ import frc.robot.RobotContainer;
 public class IntakeRunFeeder extends Command {
 
 	public boolean beamBreak;
+	public boolean beamBreak2;
     
     public IntakeRunFeeder() {
         addRequirements(RobotContainer.feeder);
@@ -20,9 +21,10 @@ public class IntakeRunFeeder extends Command {
 	public void execute() {
 		//read sensor
 		beamBreak = RobotContainer.feeder.readInput();
+		beamBreak2 = RobotContainer.feeder.readInput2();
 		
 		//stop feeder if beam broken
-		if (beamBreak == false) {
+		if (beamBreak == false || beamBreak2 == false) {
 			RobotContainer.feeder.setSpeed(0.0);
 			RobotContainer.candleSubsystem.setAnimate("Orange");
 		}
@@ -35,16 +37,18 @@ public class IntakeRunFeeder extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	public boolean isFinished() {
-		return beamBreak == false;
+		return beamBreak == false || beamBreak2 == false;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
+		RobotContainer.feeder.setSpeed(0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		end();
 	}
 }
 

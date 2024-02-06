@@ -29,7 +29,7 @@ public class Drive2Feet extends Command {
     public void execute() {
 
         s_Swerve.drive(
-        new Translation2d(-0.1, 0.0).times(Constants.Swerve.maxSpeed), 
+        new Translation2d(-0.05, 0.0).times(Constants.Swerve.maxSpeed), 
         0 * Constants.Swerve.maxAngularVelocity, 
         !robotCentricSup, 
         true

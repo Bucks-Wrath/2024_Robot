@@ -2,6 +2,7 @@ package frc.robot.commands.Intake;
 
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.commands.Drivetrain.StopDrivetrain;
 import frc.robot.subsystems.Swerve;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -14,13 +15,15 @@ public class VisionAlignIntake extends Command {
     private Boolean robotCentricSup;
 
     private double tx;
+    private double ty;
     private double ta;  // removed initial value
 
     private final PIDController angleController = new PIDController(0.007, 0, 0);
     private final PIDController slideController = new PIDController(0.007, 0, 0);  // added for better PID tuning
     private double targetAngle = 0;
-    private final PIDController distanceController = new PIDController(0.1, 0, 0); // was 0.05
-    private double targetArea = 7;  // what is the area when we pick up gp?
+    private final PIDController distanceController = new PIDController(0.019, 0, 0); // was 0.1
+    private double targetArea = 14;  // what is the area when we pick up gp?
+    private double targetTy = -9.6;
 
     public VisionAlignIntake(Swerve s_Swerve, Boolean robotCentricSup) {
         this.s_Swerve = s_Swerve;
@@ -32,6 +35,7 @@ public class VisionAlignIntake extends Command {
     public void initialize() {
         tx = RobotContainer.rearLimelight.getX();
         ta = RobotContainer.rearLimelight.getArea();
+        ty = RobotContainer.rearLimelight.getY();
 
         angleController.setTolerance(0.05);  // needs to be checked
         slideController.setTolerance(0.05);
@@ -43,14 +47,16 @@ public class VisionAlignIntake extends Command {
         // Find target location
         tx = RobotContainer.rearLimelight.getX();
         ta = RobotContainer.rearLimelight.getArea();
+        ty = RobotContainer.rearLimelight.getY();
+
 
         if (ta > 0) {
             double rotationVal = angleController.calculate(tx,targetAngle);
             double strafeVal = -slideController.calculate(tx,targetAngle);
-            double translationVal = -distanceController.calculate(ta,targetArea);
+            double translationVal = distanceController.calculate(ty,targetTy);
 
             /* Drive */
-            if (ta < 4) {
+            if (ty > -9.6) { // ta < 11
                 s_Swerve.drive(
                 new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
                 rotationVal * Constants.Swerve.maxAngularVelocity, 
@@ -71,17 +77,17 @@ public class VisionAlignIntake extends Command {
     }
 
     public boolean isFinished() {
-		return ta > 4;
+		return ty < -9.6;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-        
+        new StopDrivetrain(s_Swerve, true);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-        
+        end();
 	}
 }

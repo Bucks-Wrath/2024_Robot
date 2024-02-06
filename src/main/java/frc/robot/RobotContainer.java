@@ -21,7 +21,8 @@ import frc.robot.commands.Intake.RunIntake;
 import frc.robot.commands.Intake.StopIntake;
 import frc.robot.commands.Intake.StopIntakeCommandGroup;
 import frc.robot.commands.LEDs.SetNeedNote;
-import frc.robot.commands.Shooter.AutoShooter;
+import frc.robot.commands.Shooter.AutoRunFeeder;
+import frc.robot.commands.Shooter.AutoVisionAlignShoot;
 import frc.robot.commands.Shooter.AutoVisionShoot;
 import frc.robot.commands.Shooter.JoystickShooter;
 import frc.robot.commands.Shooter.JoystickShooterWrist;
@@ -119,13 +120,17 @@ public class RobotContainer {
         NamedCommands.registerCommand("RunIntake", new RunIntake());
         NamedCommands.registerCommand("StopIntakeCommandGroup", new StopIntakeCommandGroup());
         NamedCommands.registerCommand("RunFeeder", new RunFeeder());
-        NamedCommands.registerCommand("StopFeeder", new StopFeeder());
-        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer));
+        NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
+        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(1));
         NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
         NamedCommands.registerCommand("AmpShot", new ShootFrom(ShooterPose.Amp));
         NamedCommands.registerCommand("ShooterDown", new SetShooterPosition(Shooter.DownPosition));        
         NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot());        
         NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
+        NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.Home));
+
+        NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
+        NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(1));
  
  
 

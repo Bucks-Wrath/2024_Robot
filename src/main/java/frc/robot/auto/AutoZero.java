@@ -17,7 +17,7 @@ public class AutoZero extends Command {
     }
 
     public void execute() {
-
+        s_swerve.autoZeroGyro();
     }
 
     public boolean isFinished() {

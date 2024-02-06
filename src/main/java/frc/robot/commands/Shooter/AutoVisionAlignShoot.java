@@ -7,16 +7,13 @@ import frc.robot.subsystems.Swerve;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 
 
-public class VisionAlignShoot extends Command {    
+public class AutoVisionAlignShoot extends Command {    
     private Swerve s_Swerve;    
-    private DoubleSupplier translationSup;
-    private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private Boolean robotCentricSup;
 
@@ -27,9 +24,6 @@ public class VisionAlignShoot extends Command {
     private double xSpeed;
     private double rotationVal;
 
-    private double slowSpeed = 0.5;
-    private double shooterHeight = 0;
-
     private final PIDController angleController = new PIDController(0.01, 0, 0);  //0.012
     private double targetAngle = 0;
     private double yShooterAngle = 0;
@@ -37,7 +31,7 @@ public class VisionAlignShoot extends Command {
     private double shooterAngle = 0;
 
 
-    public VisionAlignShoot(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, Boolean robotCentricSup) {
+    public AutoVisionAlignShoot(Swerve s_Swerve, Boolean robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
         addRequirements(RobotContainer.frontLimelight);
@@ -45,8 +39,6 @@ public class VisionAlignShoot extends Command {
         addRequirements(RobotContainer.rightShooter);
         addRequirements(RobotContainer.shooterWrist);
 
-        this.translationSup = translationSup;
-        this.strafeSup = strafeSup;
         this.robotCentricSup = robotCentricSup;
     }
 
@@ -70,10 +62,6 @@ public class VisionAlignShoot extends Command {
         tx = RobotContainer.frontLimelight.getX();
         ty = RobotContainer.frontLimelight.getY();
         ta = RobotContainer.frontLimelight.getArea();
-
-        /* Get Values, Deadband*/
-        double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
-        double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
  
         // Uses PID to point at target
         rotationVal = angleController.calculate(tx,targetAngle);
@@ -112,7 +100,7 @@ public class VisionAlignShoot extends Command {
 
         /* Drive */
         s_Swerve.drive(
-            new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
+            new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
             rotationVal * Constants.Swerve.maxAngularVelocity, 
             !robotCentricSup, 
             true

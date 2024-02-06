@@ -30,7 +30,7 @@ public class Intake extends SubsystemBase {
         /* Current Limiting */
         IntakeFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
         IntakeFXConfig.CurrentLimits.SupplyCurrentLimit = 20;
-        IntakeFXConfig.CurrentLimits.SupplyCurrentThreshold = 40;
+        IntakeFXConfig.CurrentLimits.SupplyCurrentThreshold = 30;
         IntakeFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
 
         /* PID Config */
@@ -39,11 +39,11 @@ public class Intake extends SubsystemBase {
         IntakeFXConfig.Slot0.kD = 0;
 
         /* Open and Closed Loop Ramping */
-        IntakeFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.25;
-        IntakeFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 0.25;
+        IntakeFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.1;
+        IntakeFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 0.1;
 
-        IntakeFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.25;
-        IntakeFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.25;
+        IntakeFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.1;
+        IntakeFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.1;
 
         // Config Motor
         IntakeFalcon.getConfigurator().apply(IntakeFXConfig);

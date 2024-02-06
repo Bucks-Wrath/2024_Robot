@@ -53,6 +53,62 @@
               }
             ]
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "StopFeeder"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeCommandGroup"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "StopFeeder"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Return Midfield Note"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoShoot"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoVisionAlignShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "RunFeeder"
+          }
         }
       ]
     }

@@ -10,7 +10,7 @@ public class VisionIntakeCommandGroup extends SequentialCommandGroup {
     
     public VisionIntakeCommandGroup(Swerve s_Swerve) {
         this.s_Swerve = s_Swerve;
-        addCommands(new VisionAlignIntake(s_Swerve, true).andThen(new Drive2Feet(s_Swerve, true).withTimeout(0.5)));
+        addCommands(new VisionAlignIntake(s_Swerve, true).andThen(new Drive2Feet(s_Swerve, true).withTimeout(1)));
     }
 
 }
