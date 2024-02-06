@@ -16,7 +16,7 @@ public class AutonomousSelector {
         ShuffleboardTab autoTab = Shuffleboard.getTab("Auto settings");
 
         autonomousModeChooser = new SendableChooser<>();
-        autonomousModeChooser.addOption("4 Note Slow", AutonomousMode.Four_Note_Slow);
+        autonomousModeChooser.addOption("5 Note Auto", AutonomousMode.Five_Note_Auto);
         autoTab.add("Mode", autonomousModeChooser);
         
     }
@@ -25,10 +25,10 @@ public class AutonomousSelector {
         AutonomousMode mode = autonomousModeChooser.getSelected();
 
         switch (mode) {
-            case Four_Note_Slow:
-                return new PathPlannerAuto("4 Note Slow");
+            case Five_Note_Auto:
+                return new PathPlannerAuto("5 Note Auto");
             default:
-                return new PathPlannerAuto("4 Note Slow");
+                return new PathPlannerAuto("5 Note Auto");
         }
     }
 
@@ -37,7 +37,7 @@ public class AutonomousSelector {
     }
 
     private enum AutonomousMode {
-        Four_Note_Slow,
+        Five_Note_Auto,
 
     }
 
