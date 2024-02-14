@@ -30,7 +30,7 @@ public class VisionAlignShoot extends Command {
     private double slowSpeed = 0.5;
     private double shooterHeight = 0;
 
-    private final PIDController angleController = new PIDController(0.01, 0, 0);  //0.012
+    private final PIDController angleController = new PIDController(0.005, 0, 0);  //0.012
     private double targetAngle = 0;
     private double yShooterAngle = 0;
     private double aShooterAngle = 0;
@@ -60,11 +60,11 @@ public class VisionAlignShoot extends Command {
     @Override
     public void execute() {
         // Get y translation value
-        ySpeed = s_Swerve.ySpeed()*7;
-        xSpeed = s_Swerve.xSpeed();  // does this need to be larger
+        ySpeed = s_Swerve.ySpeed()*9;
+        xSpeed = s_Swerve.xSpeed()*1.75;  // does this need to be larger
 
         // adjust target x based on translation
-        targetAngle = 0 + ySpeed;  // needs to be tuned
+        targetAngle = 0 - ySpeed;  // needs to be tuned
 
         // find target location
         tx = RobotContainer.frontLimelight.getX();
@@ -72,22 +72,22 @@ public class VisionAlignShoot extends Command {
         ta = RobotContainer.frontLimelight.getArea();
 
         /* Get Values, Deadband*/
-        double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
-        double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+        double translationVal = -MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+        double strafeVal = -MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
  
         // Uses PID to point at target
         rotationVal = angleController.calculate(tx,targetAngle);
 
         // Uses ta to set shooter angle
         // Caleb Numbers, just for comparison: -17.1136, 41.1436, -2.7548
-        aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (2.82088);
+        aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (4); // - 2.82088
 
         // use ty to calculate shooter angle
         // Caleb Numbers, just for comparison: -.0091, 0.7406, 18.3463
-        yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (18.3463);
+        yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (17);  // 18.3463
 
         // average data from both equations
-        shooterAngle = ((aShooterAngle + yShooterAngle) / 2) - xSpeed;  // is this going the right way and is it the right value
+        shooterAngle = ((aShooterAngle + yShooterAngle) / 2) + xSpeed;  // is this going the right way and is it the right value
 
         // disallow any negative values
         if (shooterAngle <= 0) {

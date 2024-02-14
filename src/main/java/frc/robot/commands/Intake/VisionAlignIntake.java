@@ -18,12 +18,12 @@ public class VisionAlignIntake extends Command {
     private double ty;
     private double ta;  // removed initial value
 
-    private final PIDController angleController = new PIDController(0.007, 0, 0);
+    private final PIDController angleController = new PIDController(0.005, 0, 0);
     private final PIDController slideController = new PIDController(0.007, 0, 0);  // added for better PID tuning
     private double targetAngle = 0;
     private final PIDController distanceController = new PIDController(0.019, 0, 0); // was 0.1
     private double targetArea = 14;  // what is the area when we pick up gp?
-    private double targetTy = -9.6;
+    private double targetTy = -8;
 
     public VisionAlignIntake(Swerve s_Swerve, Boolean robotCentricSup) {
         this.s_Swerve = s_Swerve;
@@ -50,13 +50,13 @@ public class VisionAlignIntake extends Command {
         ty = RobotContainer.rearLimelight.getY();
 
 
-        if (ta > 0) {
+        if (ta > 1 && ta < 20) {
             double rotationVal = angleController.calculate(tx,targetAngle);
             double strafeVal = -slideController.calculate(tx,targetAngle);
             double translationVal = distanceController.calculate(ty,targetTy);
 
             /* Drive */
-            if (ty > -9.6) { // ta < 11
+            if (ty > -4.5) { // ta < 11
                 s_Swerve.drive(
                 new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
                 rotationVal * Constants.Swerve.maxAngularVelocity, 
@@ -77,7 +77,7 @@ public class VisionAlignIntake extends Command {
     }
 
     public boolean isFinished() {
-		return ty < -9.6;
+		return ty < -4.5;
 	}
 
 	// Called once after isFinished returns true

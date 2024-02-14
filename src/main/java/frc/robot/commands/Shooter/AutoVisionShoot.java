@@ -1,6 +1,7 @@
 package frc.robot.commands.Shooter;
 
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Swerve;
 import frc.robot.Constants.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -10,13 +11,17 @@ public class AutoVisionShoot extends Command {
     private double ta;
     private double ySpeed;
     private double xSpeed;
+    private Swerve s_Swerve;    
+
 
     private double yShooterAngle = 0;
     private double aShooterAngle = 0;
     private double shooterAngle = 0;
 
 
-    public AutoVisionShoot() {
+    public AutoVisionShoot(Swerve s_Swerve) {
+        this.s_Swerve = s_Swerve;
+
         addRequirements(RobotContainer.frontLimelight);
         addRequirements(RobotContainer.leftShooter);
         addRequirements(RobotContainer.rightShooter);
@@ -34,13 +39,16 @@ public class AutoVisionShoot extends Command {
         ty = RobotContainer.frontLimelight.getY();
         ta = RobotContainer.frontLimelight.getArea();
 
+        xSpeed = s_Swerve.xSpeed()*1.75;  // does this need to be larger
+
+
         // Uses ta to set shooter angle
         // Caleb Numbers, just for comparison: -17.1136, 41.1436, -2.7548
-        aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (2.82088);
+        aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (3.8); // - 2.82088
 
         // use ty to calculate shooter angle
         // Caleb Numbers, just for comparison: -.0091, 0.7406, 18.3463
-        yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (18.3463);
+        yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (16);  // 18.3463
 
         // average data from both equations
         shooterAngle = ((aShooterAngle + yShooterAngle) / 2) - xSpeed;  // is this going the right way and is it the right value

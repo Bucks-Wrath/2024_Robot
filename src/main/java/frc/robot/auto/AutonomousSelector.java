@@ -17,6 +17,9 @@ public class AutonomousSelector {
 
         autonomousModeChooser = new SendableChooser<>();
         autonomousModeChooser.addOption("5 Note Auto", AutonomousMode.Five_Note_Auto);
+        autonomousModeChooser.addOption("Long Side Auto", AutonomousMode.Long_Side_Auto);
+        autonomousModeChooser.addOption("Short Side Auto", AutonomousMode.Short_Side_Auto);
+        
         autoTab.add("Mode", autonomousModeChooser);
         
     }
@@ -27,6 +30,10 @@ public class AutonomousSelector {
         switch (mode) {
             case Five_Note_Auto:
                 return new PathPlannerAuto("5 Note Auto");
+            case Long_Side_Auto:
+                return new PathPlannerAuto("Long Side Auto");
+            case Short_Side_Auto:
+                return new PathPlannerAuto("Short Side Auto");
             default:
                 return new PathPlannerAuto("5 Note Auto");
         }
@@ -38,7 +45,8 @@ public class AutonomousSelector {
 
     private enum AutonomousMode {
         Five_Note_Auto,
-
+        Long_Side_Auto,
+        Short_Side_Auto
     }
 
 }

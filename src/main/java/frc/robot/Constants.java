@@ -48,8 +48,8 @@ public final class Constants {
         }
 
         public static final class SlowShotVelocity {
-            public static final double VelocityLeft = 20;
-            public static final double VelocityRight = 20; 
+            public static final double VelocityLeft = 40;
+            public static final double VelocityRight = 30; 
         }
 
         public static final class StopShotVelocity {
@@ -81,8 +81,8 @@ public final class Constants {
             };
             public static final ShooterPose Amp = new ShooterPose() {
                 {
-                    VelocityLeft = 60;
-                    VelocityRight = 40;
+                    VelocityLeft = SlowShotVelocity.VelocityLeft;
+                    VelocityRight = SlowShotVelocity.VelocityRight;
                     Position = 75.5;
                 }
             };
@@ -111,7 +111,7 @@ public final class Constants {
                 {
                     VelocityLeft = StopShotVelocity.VelocityLeft;
                     VelocityRight = StopShotVelocity.VelocityRight;
-                    Position = 90;
+                    Position = 99.5;
                 }
             };
 
@@ -136,7 +136,8 @@ public final class Constants {
         public static final int pigeonID = 12;
 
         public static final COTSTalonFXSwerveConstants chosenModule = 
-        COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);
+        COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);    // eggo
+        //COTSTalonFXSwerveConstants.SDS.MK4i.KrakenX60(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);      // dial
 
         /* Drivetrain Constants */
         public static final double trackWidth = Units.inchesToMeters(20.75);
@@ -210,7 +211,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(105.73236);  //106.96
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(105.73236);  //105.73236 eggo -115.137-180 dial
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -220,7 +221,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 0;
             public static final int canCoderID = 8;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(1.40616+180);  // 3.08
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(1.40616 + 180);  // 1.40616 + 180 eggo 74.443 dial
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -230,7 +231,7 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 10;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-125.68356);  //-124.28
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-125.68356);  //-125.68356 eggo 35.244+180 dial
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -240,7 +241,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 11;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-73.91582 - 180); //-71.89
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-73.91582 - 180); //-73.91582 - 180 eggo 170.895 dial
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -253,7 +254,7 @@ public final class Constants {
         public static final Translation2d brModuleOffset = new Translation2d(-0.4, -0.4);
 
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-            new PIDConstants(2.2, 0, 0), // Translation constants 
+            new PIDConstants(2, 0, 0), // Translation constants 
             new PIDConstants(5.0, 0, 0), // Rotation constants 
             maxModuleSpeed, 
             flModuleOffset.getNorm(), // Drive base radius (distance from center to furthest module) 

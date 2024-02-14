@@ -14,6 +14,8 @@ public class SetDefaultPurple extends Command {
     }
 
     public void execute() {
+        RobotContainer.candleSubsystem.setAnimate("Purple");
+
         
     }
 

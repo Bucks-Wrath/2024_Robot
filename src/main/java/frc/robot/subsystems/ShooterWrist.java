@@ -21,15 +21,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 
     // Set Different Heights
 	private double homePosition = 0;
-	private double maxUpTravelPosition = 105;
-
-	private double humanPlayerPosition = 100;
-	private double subwooferShotPosition = 90;
-	private double podiumShotPosition = 80;
-	private double frontAmpShotPosition = 70;
-	private double rearAmpShotPosition = 30;
-
-	private double highScorePosition = 20;
+	private double maxUpTravelPosition = 100;
 
 	public double upPositionLimit = maxUpTravelPosition;
 	public double downPositionLimit = 0;
@@ -145,31 +137,6 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 
 	public double getMaxUpTravelPosition() {
 		return this.maxUpTravelPosition;
-	}
-
-
-	public double getHumanPlayerPosition() {
-		return this.humanPlayerPosition;
-	}
-
-	public double getPodiumShotPosition() {
-		return this.podiumShotPosition;
-	}
-
-	public double getSubwooferShotPosition() {
-		return this.subwooferShotPosition;
-	}
-
-	public double getFrontAmpShotPosition() {
-		return this.frontAmpShotPosition;
-	}
-
-	public double getRearAmpShotPosiiton() {
-		return this.rearAmpShotPosition;
-	}
-
-	public double getHighScorePosition() {
-		return this.highScorePosition;
 	}
 
 	public double getFeedForward() {

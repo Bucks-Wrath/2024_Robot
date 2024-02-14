@@ -4,7 +4,6 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Swerve;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -29,7 +28,7 @@ public class Drive2Feet extends Command {
     public void execute() {
 
         s_Swerve.drive(
-        new Translation2d(-0.05, 0.0).times(Constants.Swerve.maxSpeed), 
+        new Translation2d(-0.1, 0.0).times(Constants.Swerve.maxSpeed), 
         0 * Constants.Swerve.maxAngularVelocity, 
         !robotCentricSup, 
         true

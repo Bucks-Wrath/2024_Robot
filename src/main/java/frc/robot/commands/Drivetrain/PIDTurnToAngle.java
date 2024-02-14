@@ -54,8 +54,8 @@ public class PIDTurnToAngle extends Command {
         rotationVal = angleController.calculate(currentAngle, targetAngle);
         
         /* Get Values, Deadband*/
-        double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
-        double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+        double translationVal = -MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+        double strafeVal = -MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
 
         // Make the robot slower if the shooter is up
         if (shooterHeight > 30){

@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants.Shooter;
 import frc.robot.Constants.Shooter.ShooterPose;
 import frc.robot.auto.AutoZero;
 import frc.robot.auto.AutonomousSelector;
@@ -26,10 +25,7 @@ import frc.robot.commands.Shooter.AutoVisionAlignShoot;
 import frc.robot.commands.Shooter.AutoVisionShoot;
 import frc.robot.commands.Shooter.JoystickShooter;
 import frc.robot.commands.Shooter.JoystickShooterWrist;
-import frc.robot.commands.Shooter.ReverseFeeder;
 import frc.robot.commands.Shooter.RunFeeder;
-import frc.robot.commands.Shooter.SetShooterPosition;
-import frc.robot.commands.Shooter.SetShooterVelocity;
 import frc.robot.commands.Shooter.StopFeeder;
 import frc.robot.commands.Shooter.VisionAlignShoot;
 import frc.robot.commands.Shooter.CommandGroups.ShootFrom;
@@ -120,20 +116,16 @@ public class RobotContainer {
         NamedCommands.registerCommand("RunIntake", new RunIntake());
         NamedCommands.registerCommand("StopIntakeCommandGroup", new StopIntakeCommandGroup());
         NamedCommands.registerCommand("RunFeeder", new RunFeeder());
+        NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.5));
         NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
         NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(1));
         NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
-        NamedCommands.registerCommand("AmpShot", new ShootFrom(ShooterPose.Amp));
-        NamedCommands.registerCommand("ShooterDown", new SetShooterPosition(Shooter.DownPosition));        
-        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot());        
+        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));        
         NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
         NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.Home));
-
         NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
         NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(1));
  
- 
-
         /* Configure the button bindings */
         configureButtonBindings();
     }
@@ -150,8 +142,10 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroHeading()));    // Resets gyro
         intakeButton.whileTrue(new IntakeCommandGroup(swerve));             // Runs intake w/ vision
         intakeButton.whileFalse(new StopIntakeCommandGroup());              // Stop intake w/ vision
-        shootButton.whileTrue(new RunFeeder());                          // Runs shooter feeder
+        shootButton.whileTrue(new RunFeeder());  
         shootButton.whileFalse(new StopFeeder());                           // Stops shooter feeder
+        DriverController.rightTrigger().onTrue(new ManualIntakeCommandGroup());
+
 
         faceLeftButton.whileTrue(new PIDTurnToAngle(
             swerve, 
