@@ -3,7 +3,7 @@
   "startingPose": {
     "position": {
       "x": 0.55,
-      "y": 7.2
+      "y": 7.0
     },
     "rotation": 180.0
   },
@@ -24,7 +24,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "PodiumShot"
+                  "name": "AutoShoot"
                 }
               },
               {
@@ -34,7 +34,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.0
+                        "waitTime": 1.5
                       }
                     },
                     {
@@ -132,7 +132,13 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "named",
+          "data": {
+            "name": "StopFeeder"
+          }
+        },
+        {
+          "type": "race",
           "data": {
             "commands": [
               {
@@ -142,9 +148,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "ManualIntakeCommandGroup"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoHomeState"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ManualIntakeCommandGroup"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -188,7 +207,7 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
@@ -198,9 +217,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "ManualIntakeCommandGroup"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoHomeState"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ManualIntakeCommandGroup"
+                      }
+                    }
+                  ]
                 }
               }
             ]

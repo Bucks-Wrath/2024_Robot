@@ -24,7 +24,7 @@ public class IntakeRunFeeder extends Command {
 		beamBreak2 = RobotContainer.feeder.readInput2();
 		
 		//stop feeder if beam broken
-		if (beamBreak == false || beamBreak2 == false) {
+		if (beamBreak == false){//} || beamBreak2 == false) {
 			RobotContainer.feeder.setSpeed(0.0);
 			RobotContainer.candleSubsystem.setAnimate("Orange");
 			this.end();
@@ -38,7 +38,7 @@ public class IntakeRunFeeder extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	public boolean isFinished() {
-		return beamBreak2 == false || beamBreak == false;
+		return beamBreak == false;// || beamBreak2 == false;
 	}
 
 	// Called once after isFinished returns true

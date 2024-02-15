@@ -16,11 +16,11 @@
     },
     {
       "anchor": {
-        "x": 8.288393068014207,
+        "x": 8.7,
         "y": 7.43
       },
       "prevControl": {
-        "x": 7.288393068014207,
+        "x": 7.699999999999999,
         "y": 7.43
       },
       "nextControl": null,
@@ -40,7 +40,7 @@
   "goalEndState": {
     "velocity": 0,
     "rotation": 180.0,
-    "rotateFast": false
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "Short Side 4 Note",

@@ -25,6 +25,7 @@ import frc.robot.commands.Shooter.AutoVisionAlignShoot;
 import frc.robot.commands.Shooter.AutoVisionShoot;
 import frc.robot.commands.Shooter.JoystickShooter;
 import frc.robot.commands.Shooter.JoystickShooterWrist;
+import frc.robot.commands.Shooter.ReverseFeeder;
 import frc.robot.commands.Shooter.RunFeeder;
 import frc.robot.commands.Shooter.StopFeeder;
 import frc.robot.commands.Shooter.VisionAlignShoot;
@@ -195,7 +196,7 @@ public class RobotContainer {
         subwooferShotButton.onTrue(new ShootFrom(ShooterPose.Subwoofer));
         podiumShotButton.onTrue(new ShootFrom(ShooterPose.Podium));
         ampShotButton.onTrue(new ShootFrom(ShooterPose.Amp));
-        shooterDownButton.onTrue(new ShootFrom(ShooterPose.Home));    // Brings shooter back to start position and slows
+        shooterDownButton.onTrue(new ShootFrom(ShooterPose.Home).alongWith(new ReverseFeeder()).withTimeout(1.5));    // Brings shooter back to start position and slows
         tallShotPodiumButton.onTrue(new ShootFrom(ShooterPose.PodiumTall));
         tallShotSubwooferButton.onTrue(new ShootFrom(ShooterPose.SubwooferTall));
         OperatorController.leftTrigger().onTrue(new ShootFrom(ShooterPose.ClimbReady));

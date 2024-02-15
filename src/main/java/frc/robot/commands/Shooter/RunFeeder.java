@@ -19,7 +19,7 @@ public class RunFeeder extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	public void execute() {
-		if (shooterAngle <= 76.5 && shooterAngle >= 74.5) {
+		if (shooterAngle <= 77 && shooterAngle >= 74) {
 			RobotContainer.feeder.setSpeed(Constants.Feeder.RearEjectSpeed);
 			RobotContainer.candleSubsystem.setAnimate("Purple");
 		}
