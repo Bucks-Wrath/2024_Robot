@@ -1,10 +1,14 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -40,7 +44,7 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
     /* Autonomous Selector */
-    private final AutonomousSelector autonomousSelector = new AutonomousSelector();
+    //private final AutonomousSelector autonomousSelector = new AutonomousSelector();
     
     /* Controllers */
     private final Joystick driver = new Joystick(0);
@@ -88,8 +92,19 @@ public class RobotContainer {
     public static RearLimelight rearLimelight = new RearLimelight();
     public static CANdleSubsystem candleSubsystem = new CANdleSubsystem();
 
+    /* Auto */
+    private SendableChooser<Command> m_autoChooser = new SendableChooser<>();
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+        /* Auto (we'll see if this is faster!)*/
+        ShuffleboardTab autoTab = Shuffleboard.getTab("Auto settings");
+        m_autoChooser.addOption("5 Note Auto", new PathPlannerAuto("5 Note Auto"));
+        m_autoChooser.addOption("Long Side Auto", new PathPlannerAuto("Long Side Auto"));
+        m_autoChooser.addOption("Short Side Auto", new PathPlannerAuto("Short Side Auto"));
+        m_autoChooser.addOption("Center Auto", new PathPlannerAuto("Center Auto"));
+        autoTab.add("Mode", m_autoChooser);
+        
         swerve.setDefaultCommand(
             new TeleopSwerve(
                 swerve, 
@@ -232,6 +247,7 @@ public class RobotContainer {
 
     /* Runs the Autonomous Selector*/
     public Command getAutonomousCommand() {
-        return autonomousSelector.getCommand(swerve);
+        return m_autoChooser.getSelected();
+        //return autonomousSelector.getCommand(swerve);
     }
 }
