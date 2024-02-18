@@ -73,7 +73,7 @@ public class RobotContainer {
     private final JoystickButton ampShotButton = new JoystickButton(operator, XboxController.Button.kY.value);
     private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kA.value);
     private final JoystickButton tallShotSubwooferButton = new JoystickButton(operator, XboxController.Button.kLeftBumper.value);
-    private final JoystickButton tallShotPodiumButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
+    private final JoystickButton trapShotButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
     private final JoystickButton manualIntakeButton = new JoystickButton(operator, XboxController.Button.kStart.value);
 
 
@@ -198,7 +198,7 @@ public class RobotContainer {
         podiumShotButton.onTrue(new ShootFrom(ShooterPose.Podium));
         ampShotButton.onTrue(new ShootFrom(ShooterPose.Amp));
         shooterDownButton.onTrue(new ShootFrom(ShooterPose.Home).alongWith(new ReverseFeeder()).withTimeout(1.5));    // Brings shooter back to start position and slows
-        tallShotPodiumButton.onTrue(new ShootFrom(ShooterPose.PodiumTall));
+        trapShotButton.onTrue(new ShootFrom(ShooterPose.TrapShot));
         tallShotSubwooferButton.onTrue(new ShootFrom(ShooterPose.SubwooferTall));
         OperatorController.leftTrigger().onTrue(new ShootFrom(ShooterPose.ClimbReady));
         OperatorController.rightTrigger().onTrue(new ShootFrom(ShooterPose.Climb));

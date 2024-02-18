@@ -47,9 +47,14 @@ public final class Constants {
             public static final double VelocityRight = 60; 
         }
 
-        public static final class SlowShotVelocity {
+        public static final class TrapShotVelocity {
             public static final double VelocityLeft = 25;
             public static final double VelocityRight = 25; 
+        }
+
+        public static final class SlowShotVelocity {
+            public static final double VelocityLeft = 60;
+            public static final double VelocityRight = 40; 
         }
 
         public static final class StopShotVelocity {
@@ -86,14 +91,14 @@ public final class Constants {
                     Position = 75.5;
                 }
             };
-            public static final ShooterPose SubwooferTall = new ShooterPose() {
+            public static final ShooterPose TrapShot = new ShooterPose() {
                 {
-                    VelocityLeft = SlowShotVelocity.VelocityLeft;
-                    VelocityRight = SlowShotVelocity.VelocityRight;
+                    VelocityLeft = TrapShotVelocity.VelocityLeft;
+                    VelocityRight = TrapShotVelocity.VelocityRight;
                     Position = 61.1;
                 }
             };
-            public static final ShooterPose PodiumTall = new ShooterPose() {
+            public static final ShooterPose SubwooferTall = new ShooterPose() {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
