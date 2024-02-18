@@ -119,13 +119,14 @@ public class RobotContainer {
         NamedCommands.registerCommand("RunFeeder", new RunFeeder());
         NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.5));
         NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
-        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(1));
+        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(.75));
         NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
-        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));        
+        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));   
+        NamedCommands.registerCommand("AutoShotPose", new ShootFrom(ShooterPose.AutoShotPose));        
         NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
         NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.Home));
         NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
-        NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(1));
+        NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.5));
  
         /* Configure the button bindings */
         configureButtonBindings();

@@ -1,5 +1,7 @@
 package frc.robot;
 
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.AxisCamera;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -16,9 +18,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
   private Command m_autonomousCommand;
-  public static AxisCamera frontLimelight;
-  public static AxisCamera rearLimelight;
   public static RobotContainer robotContainer;
+  //public AxisCamera rearLimelight;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -103,8 +104,6 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    //m_robotContainer.elevator.resetElevatorEncoder();
-    //m_robotContainer.wrist.resetWristEncoder();
   }
 
   /** This function is called periodically during operator control. */

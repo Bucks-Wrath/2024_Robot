@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.05,
-        "y": 2.57
+        "x": 8.78,
+        "y": 4.11
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.24554273669951,
-        "y": 3.424528428004225
+        "x": 6.175487614133124,
+        "y": 3.4517332192559125
       },
       "isLocked": false,
       "linkedName": null
@@ -45,7 +45,7 @@
   "reversed": false,
   "folder": "Long Side 4.5 Note",
   "previewStartingState": {
-    "rotation": 148.0,
+    "rotation": 180.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

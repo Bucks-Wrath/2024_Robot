@@ -48,8 +48,8 @@ public final class Constants {
         }
 
         public static final class SlowShotVelocity {
-            public static final double VelocityLeft = 40;
-            public static final double VelocityRight = 30; 
+            public static final double VelocityLeft = 25;
+            public static final double VelocityRight = 25; 
         }
 
         public static final class StopShotVelocity {
@@ -88,9 +88,9 @@ public final class Constants {
             };
             public static final ShooterPose SubwooferTall = new ShooterPose() {
                 {
-                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
-                    VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 71.1;
+                    VelocityLeft = SlowShotVelocity.VelocityLeft;
+                    VelocityRight = SlowShotVelocity.VelocityRight;
+                    Position = 61.1;
                 }
             };
             public static final ShooterPose PodiumTall = new ShooterPose() {
@@ -120,6 +120,14 @@ public final class Constants {
                     VelocityLeft = SlowShotVelocity.VelocityLeft;
                     VelocityRight = SlowShotVelocity.VelocityRight;
                     Position = 0.0;
+                }
+            };
+
+            public static final ShooterPose AutoShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 3.8;
                 }
             };
         };
@@ -169,7 +177,7 @@ public final class Constants {
         public static final double angleCurrentThresholdTime = 0.1;
         public static final boolean angleEnableCurrentLimit = true;
 
-        public static final int driveCurrentLimit = 25;
+        public static final int driveCurrentLimit = 30;
         public static final int driveCurrentThreshold = 40;
         public static final double driveCurrentThresholdTime = 0.01;
         public static final boolean driveEnableCurrentLimit = true;
@@ -254,7 +262,7 @@ public final class Constants {
         public static final Translation2d brModuleOffset = new Translation2d(-0.4, -0.4);
 
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-            new PIDConstants(2.3, 0, 0), // Translation constants 
+            new PIDConstants(2.9, 0, 0), // Translation constants 
             new PIDConstants(5.0, 0, 0), // Rotation constants 
             maxModuleSpeed, 
             flModuleOffset.getNorm(), // Drive base radius (distance from center to furthest module) 
@@ -264,7 +272,7 @@ public final class Constants {
 
     public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
         public static final double kMaxSpeedMetersPerSecond = 5.2;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 8;
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
     

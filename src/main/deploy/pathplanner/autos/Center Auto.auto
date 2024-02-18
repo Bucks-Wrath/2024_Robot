@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.55,
-      "y": 7.0
+      "x": 1.4,
+      "y": 5.55
     },
     "rotation": 180.0
   },
@@ -12,19 +12,25 @@
     "data": {
       "commands": [
         {
-          "type": "race",
+          "type": "named",
+          "data": {
+            "name": "SubwooferShot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side 4 Note Pt 1"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AutoShoot"
+                  "pathName": "Center Auto Pt 1"
                 }
               },
               {
@@ -32,9 +38,9 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "wait",
+                      "type": "named",
                       "data": {
-                        "waitTime": 1.5
+                        "name": "StopFeeder"
                       }
                     },
                     {
@@ -44,13 +50,13 @@
                           {
                             "type": "named",
                             "data": {
-                              "name": "RunIntake"
+                              "name": "AutoHomeState"
                             }
                           },
                           {
                             "type": "named",
                             "data": {
-                              "name": "RunFeeder"
+                              "name": "ManualIntakeCommandGroup"
                             }
                           }
                         ]
@@ -63,13 +69,70 @@
           }
         },
         {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoShoot"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Center Auto Pt 2"
+                }
+              },
+              {
+                "type": "parallel",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "RunFeeder"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "RunIntake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoShoot"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side 4 Note Pt 2"
+                  "pathName": "Center Auto Pt 3"
                 }
               },
               {
@@ -101,13 +164,13 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side 4 Note Pt 3"
+                  "pathName": "Center Auto Pt 4"
                 }
               },
               {
@@ -145,7 +208,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side 4 Note Pt 4"
+                  "pathName": "Center Auto Pt 5"
                 }
               },
               {
@@ -177,13 +240,13 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side 4 Note Pt 5"
+                  "pathName": "CenterAuto Pt 6"
                 }
               },
               {
@@ -221,7 +284,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side 4 Note Pt 6"
+                  "pathName": "Center Auto Pt 7"
                 }
               },
               {
@@ -229,21 +292,28 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "sequential",
                       "data": {
-                        "name": "StopFeeder"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "AutoHomeState"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ManualIntakeCommandGroup"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "StopFeeder"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "AutoHomeState"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "ManualIntakeCommandGroup"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -253,13 +323,13 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side 4 Note Pt 7"
+                  "pathName": "Center Auto Pt 8"
                 }
               },
               {

@@ -3,25 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.29,
-        "y": 7.34
+        "x": 8.78,
+        "y": 7.52
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.463245725438819,
-        "y": 7.095994411988824
+        "x": 7.281630142544722,
+        "y": 7.398155479208991
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.8,
-        "y": 6.6
+        "x": 5.97929009811508,
+        "y": 6.858213644870939
       },
       "prevControl": {
-        "x": 5.752167693809072,
-        "y": 6.844843121265189
+        "x": 6.287689426899427,
+        "y": 6.946327738809324
+      },
+      "nextControl": {
+        "x": 5.627588422641306,
+        "y": 6.757727451878432
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.85,
+        "y": 6.25
+      },
+      "prevControl": {
+        "x": 4.980663700146722,
+        "y": 6.564499998409658
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,19 +45,7 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "Shot Zone",
-      "minWaypointRelativePos": 0.95,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 5.0,
-        "maxAcceleration": 1.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.2,
@@ -55,7 +59,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Short Side 4.5 Note",
+  "folder": "Center Auto",
   "previewStartingState": {
     "rotation": 180.0,
     "velocity": 0

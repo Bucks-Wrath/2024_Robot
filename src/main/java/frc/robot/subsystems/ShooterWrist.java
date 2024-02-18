@@ -68,8 +68,8 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
         shooterWristFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.25;
 
         //Config Acceleration and Velocity
-        shooterWristFXConfig.MotionMagic.withMotionMagicAcceleration(100);
-        shooterWristFXConfig.MotionMagic.withMotionMagicCruiseVelocity(100);
+        shooterWristFXConfig.MotionMagic.withMotionMagicAcceleration(150);
+        shooterWristFXConfig.MotionMagic.withMotionMagicCruiseVelocity(150);
 
         // Config Motor
         shooterWristFalcon.getConfigurator().apply(shooterWristFXConfig);

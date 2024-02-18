@@ -16,11 +16,11 @@
     },
     {
       "anchor": {
-        "x": 7.9891964634143235,
+        "x": 8.769011046794024,
         "y": 7.41
       },
       "prevControl": {
-        "x": 7.1702402101172,
+        "x": 7.9500547934969,
         "y": 7.4001330571816935
       },
       "nextControl": null,
@@ -52,7 +52,7 @@
   "folder": "5 Note Auto",
   "previewStartingState": {
     "rotation": 180.0,
-    "velocity": 1.0
+    "velocity": 3.0
   },
   "useDefaultConstraints": false
 }

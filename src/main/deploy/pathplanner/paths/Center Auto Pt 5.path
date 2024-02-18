@@ -3,32 +3,38 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.289990426134699,
-        "y": 2.4371348742697485
+        "x": 3.85,
+        "y": 6.25
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.382231687540299,
-        "y": 3.1771555850804014
+        "x": 5.670890769330734,
+        "y": 6.916956374163195
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.293878587757177,
-        "y": 4.943338348215159
+        "x": 8.878352571519958,
+        "y": 5.74182983123801
       },
       "prevControl": {
-        "x": 5.241105097594812,
-        "y": 4.509192864539576
+        "x": 7.116070692752265,
+        "y": 6.5348566766834715
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": 157.84795733780027,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -39,13 +45,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 172.26344881837795,
-    "rotateFast": false
+    "rotation": 162.0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": "Long Side 4 Note",
+  "folder": "Center Auto",
   "previewStartingState": {
-    "rotation": 132.82525588538988,
+    "rotation": -165.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

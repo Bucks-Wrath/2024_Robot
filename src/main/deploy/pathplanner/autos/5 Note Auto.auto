@@ -65,9 +65,28 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "IntakeCommandGroup"
+                  "pathName": "MidfieldGrab"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoHomeState"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ManualIntakeCommandGroup"
+                      }
+                    }
+                  ]
                 }
               }
             ]
