@@ -123,7 +123,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "AutoShotPose"
+                        "name": "ShortAutoShotPose"
                       }
                     }
                   ]
@@ -199,7 +199,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "AutoShotPose"
+                        "name": "ShortAutoShotPose"
                       }
                     }
                   ]
@@ -275,7 +275,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "AutoShotPose"
+                        "name": "ShortAutoShotPose"
                       }
                     }
                   ]

@@ -128,7 +128,15 @@ public final class Constants {
                 }
             };
 
-            public static final ShooterPose AutoShotPose  = new ShooterPose() {
+            public static final ShooterPose ShortAutoShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 4.2;
+                }
+            };
+
+            public static final ShooterPose CenterAutoShotPose  = new ShooterPose() {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;

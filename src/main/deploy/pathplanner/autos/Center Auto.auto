@@ -164,7 +164,7 @@
           }
         },
         {
-          "type": "race",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -186,7 +186,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "AutoShotPose"
+                        "name": "CenterAutoShotPose"
                       }
                     }
                   ]
@@ -240,7 +240,7 @@
           }
         },
         {
-          "type": "race",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -262,7 +262,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "AutoShotPose"
+                        "name": "CenterAutoShotPose"
                       }
                     }
                   ]
@@ -323,7 +323,7 @@
           }
         },
         {
-          "type": "race",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -345,7 +345,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "AutoShotPose"
+                        "name": "CenterAutoShotPose"
                       }
                     }
                   ]
