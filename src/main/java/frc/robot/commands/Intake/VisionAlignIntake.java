@@ -16,13 +16,12 @@ public class VisionAlignIntake extends Command {
 
     private double tx;
     private double ty;
-    private double ta;  // removed initial value
+    private double ta;
 
     private final PIDController angleController = new PIDController(0.005, 0, 0);
     private final PIDController slideController = new PIDController(0.007, 0, 0);  // added for better PID tuning
     private double targetAngle = 0;
     private final PIDController distanceController = new PIDController(0.025, 0, 0); // was 0.1
-    private double targetArea = 14;  // what is the area when we pick up gp?
     private double targetTy = -10;
 
     public VisionAlignIntake(Swerve s_Swerve, Boolean robotCentricSup) {
@@ -56,7 +55,7 @@ public class VisionAlignIntake extends Command {
             double translationVal = distanceController.calculate(ty,targetTy);
 
             /* Drive */
-            if (ty > -8) { // ta < 11
+            if (ty > -8) {
                 s_Swerve.drive(
                 new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
                 rotationVal * Constants.Swerve.maxAngularVelocity, 
