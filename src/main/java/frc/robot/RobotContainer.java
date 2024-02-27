@@ -5,6 +5,7 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -97,6 +98,9 @@ public class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+
+        registerNamedCommands();
+        
         /* Auto (we'll see if this is faster!)*/
         ShuffleboardTab autoTab = Shuffleboard.getTab("Auto settings");
         m_autoChooser.addOption("5 Note Auto", new PathPlannerAuto("5 Note Auto"));
@@ -104,6 +108,8 @@ public class RobotContainer {
         m_autoChooser.addOption("Short Side Auto", new PathPlannerAuto("Short Side Auto"));
         m_autoChooser.addOption("Center Auto", new PathPlannerAuto("Center Auto"));
         autoTab.add("Mode", m_autoChooser);
+
+
         
         swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -126,24 +132,6 @@ public class RobotContainer {
         intake.setDefaultCommand(new StopIntake());
         feeder.setDefaultCommand(new StopFeeder());
 
-        /* Command registration for PathPlanner */     
-        NamedCommands.registerCommand("IntakeCommandGroup", new IntakeCommandGroup(swerve));
-        NamedCommands.registerCommand("ManualIntakeCommandGroup", new ManualIntakeCommandGroup());
-        NamedCommands.registerCommand("RunIntake", new RunIntake());
-        NamedCommands.registerCommand("StopIntakeCommandGroup", new StopIntakeCommandGroup());
-        NamedCommands.registerCommand("RunFeeder", new RunFeeder());
-        NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.5));
-        NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
-        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(.75));
-        NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
-        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));   
-        NamedCommands.registerCommand("CenterAutoShotPose", new ShootFrom(ShooterPose.CenterAutoShotPose)); 
-        NamedCommands.registerCommand("ShortAutoShotPose", new ShootFrom(ShooterPose.ShortAutoShotPose));        
-        NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
-        NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.Home));
-        NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
-        NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.5));
- 
         /* Configure the button bindings */
         configureButtonBindings();
     }
@@ -227,6 +215,31 @@ public class RobotContainer {
         return driver;
     }
 
+    /**
+     * Register Named Commands for PathPlanner. Must be done before AutoBuilder chooser initialization. 
+     */
+    public void registerNamedCommands() {
+        /* Command registration for PathPlanner */     
+        NamedCommands.registerCommand("IntakeCommandGroup", new IntakeCommandGroup(swerve));
+        NamedCommands.registerCommand("ManualIntakeCommandGroup", new ManualIntakeCommandGroup());
+        NamedCommands.registerCommand("RunIntake", new RunIntake());
+        NamedCommands.registerCommand("StopIntakeCommandGroup", new StopIntakeCommandGroup());
+        NamedCommands.registerCommand("RunFeeder", new RunFeeder());
+        NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.5));
+        NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
+        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(.75));
+        NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
+        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));   
+        NamedCommands.registerCommand("CenterAutoShotPose", new ShootFrom(ShooterPose.CenterAutoShotPose)); 
+        NamedCommands.registerCommand("ShortAutoShotPose", new ShootFrom(ShooterPose.ShortAutoShotPose));        
+        NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
+        NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.Home));
+        NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
+        NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.5));
+ 
+        NamedCommands.registerCommand("PrintTimestamp", new InstantCommand(() -> System.out.println(Timer.getFPGATimestamp())));
+    }
+
     public Joystick getOperator() {
         return operator;
     }
@@ -247,6 +260,7 @@ public class RobotContainer {
 
     /* Runs the Autonomous Selector*/
     public Command getAutonomousCommand() {
+        System.out.println("Auto Command Requested at " + Timer.getFPGATimestamp());
         return m_autoChooser.getSelected();
         //return autonomousSelector.getCommand(swerve);
     }
