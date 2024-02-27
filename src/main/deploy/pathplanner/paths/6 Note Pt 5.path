@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.866658417077518,
-        "y": 5.624888286813611
+        "x": 4.33,
+        "y": 7.05
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.650466355063765,
-        "y": 6.139431082280968
+        "x": 5.33,
+        "y": 7.05
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.103751779543502,
-        "y": 6.827417706190619
+        "x": 9.227349993161525,
+        "y": 5.476153259998827
       },
       "prevControl": {
-        "x": 6.525341895191635,
-        "y": 6.792285196553275
+        "x": 8.911607823215645,
+        "y": 5.288681346593461
       },
       "nextControl": {
-        "x": 5.621517261879069,
-        "y": 6.867603915995989
+        "x": 9.523487129943742,
+        "y": 5.651984684963269
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.85,
-        "y": 6.25
+        "x": 8.556397882026534,
+        "y": 6.946327738809324
       },
       "prevControl": {
-        "x": 4.701252107232904,
-        "y": 6.535320448151328
+        "x": 9.4040031135154,
+        "y": 7.254830813479585
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,8 +46,13 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1,
-      "rotationDegrees": -162.9509690278903,
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": 158.66122845880915,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 0.85,
+      "rotationDegrees": 165.0,
       "rotateFast": false
     }
   ],
@@ -60,15 +65,15 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0.0,
-    "rotation": -165.0,
+    "velocity": 3.0,
+    "rotation": -160.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Short Side V1",
+  "folder": "Center 6",
   "previewStartingState": {
-    "rotation": 160.0,
-    "velocity": 0
+    "rotation": 165.0,
+    "velocity": 3.0
   },
   "useDefaultConstraints": true
 }

@@ -14,12 +14,6 @@
         {
           "type": "named",
           "data": {
-            "name": "AutoZero"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "SubwooferShot"
           }
         },
@@ -55,12 +49,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "StopFeeder"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -74,6 +62,12 @@
                 "type": "sequential",
                 "data": {
                   "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "StopFeeder"
+                      }
+                    },
                     {
                       "type": "named",
                       "data": {
@@ -93,12 +87,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "StopFeeder"
-          }
-        },
-        {
           "type": "race",
           "data": {
             "commands": [
@@ -109,18 +97,25 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "AutoShoot"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "StopFeeder"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoShoot"
+                      }
+                    }
+                  ]
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutoVisionAlignShoot"
           }
         },
         {

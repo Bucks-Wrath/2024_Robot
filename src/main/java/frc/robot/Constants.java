@@ -81,7 +81,7 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 7;
+                    Position = 76.2;
                 }
             };
             public static final ShooterPose Amp = new ShooterPose() {
@@ -190,8 +190,8 @@ public final class Constants {
         public static final double angleCurrentThresholdTime = 0.1;
         public static final boolean angleEnableCurrentLimit = true;
 
-        public static final int driveCurrentLimit = 30;
-        public static final int driveCurrentThreshold = 40;
+        public static final int driveCurrentLimit = 40;
+        public static final int driveCurrentThreshold = 60;
         public static final double driveCurrentThresholdTime = 0.01;
         public static final boolean driveEnableCurrentLimit = true;
 
@@ -283,7 +283,7 @@ public final class Constants {
             );
     }
 
-    public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
+    /*public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
         public static final double kMaxSpeedMetersPerSecond = 5.2;
         public static final double kMaxAccelerationMetersPerSecondSquared = 8;
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
@@ -293,9 +293,10 @@ public final class Constants {
         public static final double kPYController = 1;
         public static final double kPThetaController = 1;
     
-        /* Constraint for the motion profilied robot angle controller */
+        // Constraint for the motion profilied robot angle controller
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
+    */
 }

@@ -4,13 +4,16 @@
   "holonomicMode": true,
   "pathFolders": [
     "5 Note Auto",
-    "Long Side 4.5 Note",
-    "Center Auto",
-    "Short Side 4 Note"
+    "Center",
+    "Long Side V1",
+    "Center 6",
+    "Short Side V1",
+    "Short Side V2&3",
+    "Short Side V4"
   ],
   "autoFolders": [],
-  "defaultMaxVel": 5.2,
-  "defaultMaxAccel": 8.0,
+  "defaultMaxVel": 5.0,
+  "defaultMaxAccel": 6.0,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "maxModuleSpeed": 5.2

@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.Shooter.ShooterPose;
 import frc.robot.auto.AutoZero;
-import frc.robot.auto.AutonomousSelector;
 import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
 import frc.robot.commands.Intake.IntakeCommandGroup;
@@ -44,15 +44,13 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
     /* Autonomous Selector */
-    //private final AutonomousSelector autonomousSelector = new AutonomousSelector();
+    private SendableChooser<Command> autoChooser = new SendableChooser<>();
     
     /* Controllers */
     private final Joystick driver = new Joystick(0);
     private final Joystick operator = new Joystick(1);
     private final CommandXboxController DriverController = new CommandXboxController(0);
     private final CommandXboxController OperatorController = new CommandXboxController(1);
-
-
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -72,11 +70,11 @@ public class RobotContainer {
     private final JoystickButton shootButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     /* Operator Buttons */
-    private final JoystickButton subwooferShotButton = new JoystickButton(operator, XboxController.Button.kX.value);
-    private final JoystickButton podiumShotButton = new JoystickButton(operator, XboxController.Button.kB.value);
+    private final JoystickButton subwooferShotButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
+    private final JoystickButton podiumShotButton = new JoystickButton(operator, XboxController.Button.kX.value);
     private final JoystickButton ampShotButton = new JoystickButton(operator, XboxController.Button.kY.value);
     private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kA.value);
-    private final JoystickButton tallShotSubwooferButton = new JoystickButton(operator, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton tallShotSubwooferButton = new JoystickButton(operator, XboxController.Button.kB.value);
     private final JoystickButton trapShotButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
     private final JoystickButton manualIntakeButton = new JoystickButton(operator, XboxController.Button.kStart.value);
 
@@ -92,19 +90,22 @@ public class RobotContainer {
     public static RearLimelight rearLimelight = new RearLimelight();
     public static CANdleSubsystem candleSubsystem = new CANdleSubsystem();
 
-    /* Auto */
-    private SendableChooser<Command> m_autoChooser = new SendableChooser<>();
-
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        /* Auto (we'll see if this is faster!)*/
-        ShuffleboardTab autoTab = Shuffleboard.getTab("Auto settings");
-        m_autoChooser.addOption("5 Note Auto", new PathPlannerAuto("5 Note Auto"));
-        m_autoChooser.addOption("Long Side Auto", new PathPlannerAuto("Long Side Auto"));
-        m_autoChooser.addOption("Short Side Auto", new PathPlannerAuto("Short Side Auto"));
-        m_autoChooser.addOption("Center Auto", new PathPlannerAuto("Center Auto"));
-        autoTab.add("Mode", m_autoChooser);
         
+        registerNamedCommands();
+
+        ShuffleboardTab autoTab = Shuffleboard.getTab("Auto settings");
+        autoChooser.addOption("5 Note Auto", new PathPlannerAuto("5 Note Auto"));
+        autoChooser.addOption("6 Note Auto", new PathPlannerAuto("6 Note Auto"));
+        autoChooser.addOption("Long Side Auto", new PathPlannerAuto("Long Side Auto"));
+        autoChooser.addOption("Short Side Auto V1", new PathPlannerAuto("Short Side Auto V1"));
+        autoChooser.addOption("Short Side Auto V2", new PathPlannerAuto("Short Side Auto V2"));
+        autoChooser.addOption("Short Side Auto V3", new PathPlannerAuto("Short Side Auto V3"));
+        autoChooser.addOption("Short Side Auto V4", new PathPlannerAuto("Short Side Auto V4"));
+        autoChooser.addOption("Center Auto", new PathPlannerAuto("Center Auto"));
+        autoTab.add("Mode", autoChooser);
+
         swerve.setDefaultCommand(
             new TeleopSwerve(
                 swerve, 
@@ -125,24 +126,6 @@ public class RobotContainer {
         // Sets Default Commands for intake and feeder motors
         intake.setDefaultCommand(new StopIntake());
         feeder.setDefaultCommand(new StopFeeder());
-
-        /* Command registration for PathPlanner */     
-        NamedCommands.registerCommand("IntakeCommandGroup", new IntakeCommandGroup(swerve));
-        NamedCommands.registerCommand("ManualIntakeCommandGroup", new ManualIntakeCommandGroup());
-        NamedCommands.registerCommand("RunIntake", new RunIntake());
-        NamedCommands.registerCommand("StopIntakeCommandGroup", new StopIntakeCommandGroup());
-        NamedCommands.registerCommand("RunFeeder", new RunFeeder());
-        NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.5));
-        NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
-        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(.75));
-        NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
-        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));   
-        NamedCommands.registerCommand("CenterAutoShotPose", new ShootFrom(ShooterPose.CenterAutoShotPose)); 
-        NamedCommands.registerCommand("ShortAutoShotPose", new ShootFrom(ShooterPose.ShortAutoShotPose));        
-        NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
-        NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.Home));
-        NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
-        NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.5));
  
         /* Configure the button bindings */
         configureButtonBindings();
@@ -213,7 +196,7 @@ public class RobotContainer {
         subwooferShotButton.onTrue(new ShootFrom(ShooterPose.Subwoofer));
         podiumShotButton.onTrue(new ShootFrom(ShooterPose.Podium));
         ampShotButton.onTrue(new ShootFrom(ShooterPose.Amp));
-        shooterDownButton.onTrue(new ShootFrom(ShooterPose.Home).alongWith(new ReverseFeeder()).withTimeout(1.5));    // Brings shooter back to start position and slows
+        shooterDownButton.onTrue(new ShootFrom(ShooterPose.Home));//.alongWith(new ReverseFeeder()).withTimeout(1.5));    // Brings shooter back to start position and slows
         trapShotButton.onTrue(new ShootFrom(ShooterPose.TrapShot));
         tallShotSubwooferButton.onTrue(new ShootFrom(ShooterPose.SubwooferTall));
         OperatorController.leftTrigger().onTrue(new ShootFrom(ShooterPose.ClimbReady));
@@ -247,7 +230,27 @@ public class RobotContainer {
 
     /* Runs the Autonomous Selector*/
     public Command getAutonomousCommand() {
-        return m_autoChooser.getSelected();
+        return autoChooser.getSelected();
         //return autonomousSelector.getCommand(swerve);
+    }
+
+    public void registerNamedCommands() {
+        /* Command registration for PathPlanner */     
+        NamedCommands.registerCommand("IntakeCommandGroup", new IntakeCommandGroup(swerve));
+        NamedCommands.registerCommand("ManualIntakeCommandGroup", new ManualIntakeCommandGroup());
+        NamedCommands.registerCommand("RunIntake", new RunIntake());
+        NamedCommands.registerCommand("StopIntakeCommandGroup", new StopIntakeCommandGroup());
+        NamedCommands.registerCommand("RunFeeder", new RunFeeder());
+        NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.5));
+        NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
+        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(.75));
+        NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
+        NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));   
+        NamedCommands.registerCommand("CenterAutoShotPose", new ShootFrom(ShooterPose.CenterAutoShotPose)); 
+        NamedCommands.registerCommand("ShortAutoShotPose", new ShootFrom(ShooterPose.ShortAutoShotPose));        
+        NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
+        NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.Home));
+        NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
+        NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.5));
     }
 }

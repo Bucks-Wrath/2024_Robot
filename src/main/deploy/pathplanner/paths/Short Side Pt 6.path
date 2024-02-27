@@ -3,41 +3,57 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.27,
-        "y": 7.2
+        "x": 4.32,
+        "y": 6.95
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.212384948986423,
-        "y": 7.57781207870108
+        "x": 5.32,
+        "y": 6.95
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.0600613508919325,
-        "y": 7.519341306488881
+        "x": 6.9382192610539075,
+        "y": 6.078036771458159
       },
       "prevControl": {
-        "x": 5.190162780729463,
-        "y": 7.520593096558616
+        "x": 6.374153115902387,
+        "y": 6.690378982801235
       },
       "nextControl": {
-        "x": 6.931282335790042,
-        "y": 7.5180876134551795
+        "x": 7.502285406205428,
+        "y": 5.465694560115082
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.78479933598044,
-        "y": 7.519341306488881
+        "x": 8.467595396729255,
+        "y": 3.877708524647819
       },
       "prevControl": {
-        "x": 7.7847993359804395,
-        "y": 7.519341306488881
+        "x": 7.849294269357769,
+        "y": 4.379373937594028
+      },
+      "nextControl": {
+        "x": 9.085896524100738,
+        "y": 3.3760431117016094
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.694535081377856,
+        "y": 5.288681346593463
+      },
+      "prevControl": {
+        "x": 9.582559934350638,
+        "y": 4.588128407026045
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,8 +62,8 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.25,
-      "rotationDegrees": 180.0,
+      "waypointRelativePos": 2,
+      "rotationDegrees": 137.48955292199895,
       "rotateFast": false
     }
   ],
@@ -61,13 +77,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": -179.3772443127937,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Center",
+  "folder": "Short Side V2&3",
   "previewStartingState": {
-    "rotation": -152.0,
+    "rotation": 165.0,
     "velocity": 2.0
   },
   "useDefaultConstraints": true

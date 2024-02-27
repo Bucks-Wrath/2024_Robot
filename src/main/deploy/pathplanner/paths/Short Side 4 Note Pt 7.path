@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 6.302443306641,
-        "y": 6.589352476950569
+        "x": 6.431655202825382,
+        "y": 6.862550215827963
       },
       "prevControl": {
-        "x": 6.889870599563565,
-        "y": 6.369067242104607
+        "x": 7.019082495747948,
+        "y": 6.642264980982001
       },
       "nextControl": {
-        "x": 5.693676839524139,
-        "y": 6.817639902119391
+        "x": 5.8228887357085215,
+        "y": 7.090837640996786
       },
       "isLocked": false,
       "linkedName": null
@@ -54,8 +54,8 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.2,
-    "maxAcceleration": 8.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 6.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
@@ -65,7 +65,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Short Side 4 Note",
+  "folder": "Short Side V1",
   "previewStartingState": {
     "rotation": 125.0,
     "velocity": 0

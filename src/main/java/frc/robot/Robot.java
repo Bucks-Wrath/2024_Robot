@@ -1,10 +1,5 @@
 package frc.robot;
 
-import com.pathplanner.lib.commands.PathPlannerAuto;
-
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.AxisCamera;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -18,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
   private Command m_autonomousCommand;
+  public static Command Short_Side_V1;
   public static RobotContainer robotContainer;
 
   /**
@@ -28,21 +24,10 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     ctreConfigs = new CTREConfigs();
 
-    //frontLimelight = CameraServer.addAxisCamera("limelight-shooter", "10.63.29.11");
-    //RobotContainer.frontLimelight.cameraMode();
-    //NetworkTableInstance.getDefault().getTable("limelight-shooter").getEntry("stream").setNumber(2);
-    //frontLimelight.setFPS(10);
-    //frontLimelight.setResolution(160,120);
-
-    //rearLimelight = CameraServer.addAxisCamera("limelight-intake", "10.63.29.12");
-    //RobotContainer.rearLimelight.cameraMode();
-    //NetworkTableInstance.getDefault().getTable("limelight-intake").getEntry("stream").setNumber(2);
-    //rearLimelight.setFPS(10);
-    //rearLimelight.setResolution(160,120);
-
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
+    
   }
 
   /**

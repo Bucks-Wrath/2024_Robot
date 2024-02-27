@@ -42,7 +42,6 @@ public class Swerve extends SubsystemBase {
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
 
-        //added for auto
         // Configure AutoBuilder
         AutoBuilder.configureHolonomic(
             this::getPose, 

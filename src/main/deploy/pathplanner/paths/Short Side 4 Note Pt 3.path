@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 6.1848896506379765,
-        "y": 6.9756991034619125
+        "x": 6.712715279924141,
+        "y": 7.155321129472502
       },
       "prevControl": {
-        "x": 6.745349573594942,
-        "y": 7.161772858518636
+        "x": 7.1977867542788045,
+        "y": 7.30401409364214
       },
       "nextControl": {
-        "x": 5.624429727681011,
-        "y": 6.789625348405189
+        "x": 5.846951360262304,
+        "y": 6.889931366743394
       },
       "isLocked": false,
       "linkedName": null
@@ -36,8 +36,8 @@
         "y": 6.25
       },
       "prevControl": {
-        "x": 4.701635736008502,
-        "y": 6.520442951446925
+        "x": 4.38225880731362,
+        "y": 6.382405917450922
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,15 +47,15 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": -160.36115002535254,
+      "rotationDegrees": -165.0,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.2,
-    "maxAcceleration": 8.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 6.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
@@ -65,7 +65,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Short Side 4 Note",
+  "folder": "Short Side V1",
   "previewStartingState": {
     "rotation": 180.0,
     "velocity": 0

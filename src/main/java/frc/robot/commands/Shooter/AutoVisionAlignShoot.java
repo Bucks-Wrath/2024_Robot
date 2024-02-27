@@ -52,8 +52,8 @@ public class AutoVisionAlignShoot extends Command {
     @Override
     public void execute() {
         // Get y translation value
-        ySpeed = s_Swerve.ySpeed()*7;
-        xSpeed = s_Swerve.xSpeed();  // does this need to be larger
+        ySpeed = s_Swerve.ySpeed()*9;
+        xSpeed = s_Swerve.xSpeed()*1.75;  // does this need to be larger
 
         // adjust target x based on translation
         targetAngle = 0 + ySpeed;  // needs to be tuned
@@ -68,11 +68,11 @@ public class AutoVisionAlignShoot extends Command {
 
         // Uses ta to set shooter angle
         // Eggo (-17.3601*ta*ta) + (41.5424*ta) - (4); // - 2.82088
-        aShooterAngle = (-10.3868*ta*ta) + (34.2588*ta) - (0.8); // - 1.22507
+        aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - (0.5); // - 1.38093
 
         // use ty to calculate shooter angle
         // Eggo (-0.009811884*ty*ty) + (0.740631*ty) + (17);  // 18.3463
-        yShooterAngle = (-0.0024887*ty*ty) + (0.785214*ty) + (20.2);  // 19.4856
+        yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (22.5);  // 21.3444
 
         // average data from both equations
         shooterAngle = ((aShooterAngle + yShooterAngle) / 2) - xSpeed;  // is this going the right way and is it the right value

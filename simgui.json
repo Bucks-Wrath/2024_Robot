@@ -3,9 +3,15 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/Shuffleboard/Auto settings/Mode": "String Chooser",
+      "/SmartDashboard/Auto Mode": "String Chooser",
       "/SmartDashboard/Field": "Field2d"
     },
     "windows": {
+      "/Shuffleboard/Auto settings/Mode": {
+        "window": {
+          "visible": true
+        }
+      },
       "/SmartDashboard/Field": {
         "bottom": 1476,
         "height": 8.210550308227539,
@@ -24,6 +30,12 @@
       "open": false
     },
     "transitory": {
+      "LiveWindow": {
+        ".status": {
+          "open": true
+        },
+        "open": true
+      },
       "PathPlanner": {
         "open": true
       },
@@ -36,8 +48,14 @@
             }
           },
           "open": true
-        },
-        "open": true
+        }
+      },
+      "SmartDashboard": {
+        "Auto Mode": {
+          "string[]##v_/SmartDashboard/Auto Mode/options": {
+            "open": true
+          }
+        }
       }
     }
   },
