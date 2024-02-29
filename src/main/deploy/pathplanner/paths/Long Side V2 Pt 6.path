@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.11,
-        "y": 6.95
+        "x": 4.0,
+        "y": 4.91
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.3332905103626445,
-        "y": 6.770682485097365
+        "x": 5.002933144240039,
+        "y": 4.543804579763226
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.224809988081516,
-        "y": 6.137238428323012
+        "x": 7.110883722480711,
+        "y": 3.4664076175513263
       },
       "prevControl": {
-        "x": 5.209298970809481,
-        "y": 6.469176855180635
+        "x": 6.456350526865364,
+        "y": 3.746921844243619
       },
       "nextControl": {
-        "x": 3.2403210053535503,
-        "y": 5.805300001465389
+        "x": 7.520763001583063,
+        "y": 3.290745069364603
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.8992008753248286,
-        "y": 7.1535335378363065
+        "x": 8.106304828872139,
+        "y": 0.8431802312962678
       },
       "prevControl": {
-        "x": 2.8992008753248286,
-        "y": 7.1535335378363065
+        "x": 7.567606347766189,
+        "y": 1.7332038087756616
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,23 +47,11 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": -168.0,
+      "rotationDegrees": 118.88658176691065,
       "rotateFast": false
     }
   ],
-  "constraintZones": [
-    {
-      "name": "Shot Zone",
-      "minWaypointRelativePos": 0.85,
-      "maxWaypointRelativePos": 1.05,
-      "constraints": {
-        "maxVelocity": 1.25,
-        "maxAcceleration": 1.25,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.0,
@@ -72,15 +60,15 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 3.0,
-    "rotation": 140.0,
+    "velocity": 0,
+    "rotation": 122.47119229084849,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Short Side V4",
+  "folder": "Long Side V2",
   "previewStartingState": {
-    "rotation": -165.0,
-    "velocity": 2.0
+    "rotation": 165.0,
+    "velocity": 0
   },
   "useDefaultConstraints": true
 }

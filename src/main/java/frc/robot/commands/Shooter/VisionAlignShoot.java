@@ -23,6 +23,8 @@ public class VisionAlignShoot extends Command {
     private double tx;
     private double ty;
     private double ta;
+    private double tl;
+    private double ts;
     private double ySpeed;
     private double xSpeed;
     private double rotationVal;
@@ -30,7 +32,7 @@ public class VisionAlignShoot extends Command {
     private double slowSpeed = 0.5;
     private double shooterHeight = 0;
 
-    private final PIDController angleController = new PIDController(0.005, 0, 0);  //0.012
+    private final PIDController angleController = new PIDController(0.0075, 0, 0);  //0.005
     private double targetAngle = 0;
     private double yShooterAngle = 0;
     private double aShooterAngle = 0;
@@ -54,6 +56,8 @@ public class VisionAlignShoot extends Command {
         tx = RobotContainer.frontLimelight.getX();
         ty = RobotContainer.frontLimelight.getY();
         ta = RobotContainer.frontLimelight.getArea();
+        tl = RobotContainer.frontLimelight.getLong();
+        ts = RobotContainer.frontLimelight.getShort();
         angleController.setTolerance(0.05);  // needs to be tuned
     }
     
@@ -70,6 +74,11 @@ public class VisionAlignShoot extends Command {
         tx = RobotContainer.frontLimelight.getX();
         ty = RobotContainer.frontLimelight.getY();
         ta = RobotContainer.frontLimelight.getArea();
+        tl = RobotContainer.frontLimelight.getLong();
+        ts = RobotContainer.frontLimelight.getShort();
+
+        // Do math
+        double diff = tl - ts;
 
         /* Get Values, Deadband*/
         double translationVal = -MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
@@ -89,6 +98,14 @@ public class VisionAlignShoot extends Command {
         // average data from both equations
         shooterAngle = ((aShooterAngle + yShooterAngle) / 2) + xSpeed;  // is this going the right way and is it the right value
 
+        if (diff > 10) {
+            shooterAngle = shooterAngle + 1;
+        }
+
+        else {
+
+        }
+        
         // disallow any negative values
         if (shooterAngle <= 0) {
             shooterAngle = 0;

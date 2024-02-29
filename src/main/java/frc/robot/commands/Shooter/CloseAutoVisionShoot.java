@@ -6,7 +6,7 @@ import frc.robot.Constants.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 
 
-public class AutoVisionShoot extends Command {    
+public class CloseAutoVisionShoot extends Command {    
     private double ty;
     private double ta;
     private double ySpeed;
@@ -19,7 +19,7 @@ public class AutoVisionShoot extends Command {
     private double shooterAngle = 0;
 
 
-    public AutoVisionShoot(Swerve s_Swerve) {
+    public CloseAutoVisionShoot(Swerve s_Swerve) {
         this.s_Swerve = s_Swerve;
 
         addRequirements(RobotContainer.frontLimelight);
@@ -39,7 +39,7 @@ public class AutoVisionShoot extends Command {
         ty = RobotContainer.frontLimelight.getY();
         ta = RobotContainer.frontLimelight.getArea();
 
-        xSpeed = s_Swerve.xSpeed()*0.85;  // does this need to be larger
+        xSpeed = s_Swerve.xSpeed()*1.25;  // does this need to be larger
 
         // Uses ta to set shooter angle
         // Eggo (-17.3601*ta*ta) + (41.5424*ta) - (4); // - 2.82088

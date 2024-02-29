@@ -27,8 +27,8 @@ public class Feeder extends SubsystemBase {
 
         /* Current Limiting */
         FeederFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        FeederFXConfig.CurrentLimits.SupplyCurrentLimit = 20;
-        FeederFXConfig.CurrentLimits.SupplyCurrentThreshold = 30;
+        FeederFXConfig.CurrentLimits.SupplyCurrentLimit = 10;
+        FeederFXConfig.CurrentLimits.SupplyCurrentThreshold = 20;
         FeederFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
 
         /* PID Config */

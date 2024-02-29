@@ -12,10 +12,14 @@ public class FrontLimelight extends SubsystemBase {
    private double ta;
    private double tx;
    private double ty;
+   private double tl;
+   private double ts;
 
    NetworkTableEntry prelimtx;
    NetworkTableEntry prelimty;
    NetworkTableEntry prelimta;
+   NetworkTableEntry prelimtl;
+   NetworkTableEntry prelimts;
    NetworkTableEntry prelimCamtran;
    NetworkTable table;
    NetworkTableInstance Inst;
@@ -26,27 +30,41 @@ public class FrontLimelight extends SubsystemBase {
       prelimta = table.getEntry("ta");
       prelimtx = table.getEntry("tx");
       prelimty = table.getEntry("ty");
+      prelimtl = table.getEntry("tlong");
+      prelimts = table.getEntry("tshort");
    }
 
    public void updateGameState(){
-      ta = prelimta.getDouble(0);
+      ta = prelimta.getDouble(ta);
       tx = prelimtx.getDouble(0);
-      ty = prelimty.getDouble(0);
+      ty = prelimty.getDouble(ty);
+      tl = prelimtl.getDouble(tl);
+      ts = prelimts.getDouble(ts);
    }
 
    public double getArea(){
-      ta = prelimta.getDouble(0);
+      ta = prelimta.getDouble(ta);
       return ta;
    }
 
    public double getX(){
-      tx = prelimtx.getDouble(0);
+      tx = prelimtx.getDouble(tx);
       return tx;
    }
 
    public double getY(){
-      ty = prelimty.getDouble(0);
+      ty = prelimty.getDouble(ty);
       return ty;
+   }
+
+   public double getShort() {
+      ts = prelimts.getDouble(ts);
+      return ts;
+   }
+
+   public double getLong() {
+      tl = prelimtl.getDouble(tl);
+      return tl;
    }
 
    public void visionMode(){
@@ -63,5 +81,9 @@ public class FrontLimelight extends SubsystemBase {
 	   SmartDashboard.putNumber("front ta", getArea());
       SmartDashboard.putNumber("front tx", getX());
       SmartDashboard.putNumber("front ty", getY());
+      SmartDashboard.putNumber("front tl", getLong());
+      SmartDashboard.putNumber("front ts", getShort());
+
+
 	}
 }

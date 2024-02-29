@@ -95,7 +95,9 @@ public final class Constants {
                 {
                     VelocityLeft = TrapShotVelocity.VelocityLeft;
                     VelocityRight = TrapShotVelocity.VelocityRight;
-                    Position = 61.1;
+                    Position = 59.1;
+                    //Position = 61.1;
+
                 }
             };
             public static final ShooterPose SubwooferTall = new ShooterPose() {
@@ -185,7 +187,7 @@ public final class Constants {
         public static final SensorDirectionValue cancoderInvert = chosenModule.cancoderInvert;
 
         /* Swerve Current Limiting */
-        public static final int angleCurrentLimit = 25;
+        public static final int angleCurrentLimit = 30;
         public static final int angleCurrentThreshold = 40;
         public static final double angleCurrentThresholdTime = 0.1;
         public static final boolean angleEnableCurrentLimit = true;

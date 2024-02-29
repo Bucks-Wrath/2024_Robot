@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.55,
-      "y": 7.0
+      "x": 1.38,
+      "y": 4.15
     },
     "rotation": 180.0
   },
@@ -18,96 +18,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side Pt 1"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AutoShoot"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 1.5
-                      }
-                    },
-                    {
-                      "type": "parallel",
-                      "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "RunIntake"
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "RunFeeder"
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Short Side Pt 2"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "StopFeeder"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "AutoHomeState"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ManualIntakeCommandGroup"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Short Side Pt 3"
+                  "pathName": "Long Side V2 Pt 1"
                 }
               },
               {
@@ -134,21 +45,28 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
-                      "data": {
-                        "name": "StopFeeder"
-                      }
-                    },
-                    {
                       "type": "wait",
                       "data": {
                         "waitTime": 1.25
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "parallel",
                       "data": {
-                        "name": "RunFeeder"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "RunFeeder"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "RunIntake"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -164,7 +82,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side Pt 4"
+                  "pathName": "Long Side V2 Pt 2"
                 }
               },
               {
@@ -202,7 +120,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side Pt 5 Alt"
+                  "pathName": "Long Side V2 Pt 3"
                 }
               },
               {
@@ -215,52 +133,31 @@
           }
         },
         {
-          "type": "race",
+          "type": "named",
+          "data": {
+            "name": "AutoVisionAlignShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side Pt 6 Alt"
+                  "pathName": "Long Side V2 Pt 4"
                 }
               },
               {
-                "type": "parallel",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "sequential",
-                      "data": {
-                        "commands": [
-                          {
-                            "type": "wait",
-                            "data": {
-                              "waitTime": 1.2
-                            }
-                          },
-                          {
-                            "type": "parallel",
-                            "data": {
-                              "commands": [
-                                {
-                                  "type": "named",
-                                  "data": {
-                                    "name": "RunIntake"
-                                  }
-                                },
-                                {
-                                  "type": "named",
-                                  "data": {
-                                    "name": "RunFeeder"
-                                  }
-                                }
-                              ]
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
+                  "name": "AutoHomeState"
                 }
               },
               {
@@ -268,18 +165,68 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "wait",
+                      "type": "named",
                       "data": {
-                        "waitTime": 0.75
+                        "name": "StopFeeder"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "CloseAutoShoot"
+                        "name": "ManualIntakeCommandGroup"
                       }
                     }
                   ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Long Side V2 Pt 5"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StopFeeder"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoVisionAlignShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Long Side V2 Pt 6"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ManualIntakeCommandGroup"
                 }
               }
             ]

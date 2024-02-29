@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.07,
-        "y": 6.67
+        "x": 1.3793507657600232,
+        "y": 4.145636137206654
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.07,
-        "y": 6.67
+        "x": 1.6495673205044024,
+        "y": 4.758161072675118
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.145874445595046,
-        "y": 6.44311365545808
+        "x": 2.695898344721082,
+        "y": 4.145636137206654
       },
       "prevControl": {
-        "x": 4.9253629276489335,
-        "y": 6.571383911998593
-      },
-      "nextControl": {
-        "x": 3.3009979204724536,
-        "y": 6.3040833411974
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 4.333346359000412,
-        "y": 7.084464938160646
-      },
-      "prevControl": {
-        "x": 3.701553752387882,
-        "y": 7.084464938160646
+        "x": 1.8469270463968472,
+        "y": 4.541517955169036
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,19 +30,19 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1,
-      "rotationDegrees": -161.38995137082932,
+      "waypointRelativePos": 0.25,
+      "rotationDegrees": 155.0,
       "rotateFast": false
     }
   ],
   "constraintZones": [
     {
       "name": "New Constraints Zone",
-      "minWaypointRelativePos": 0.85,
-      "maxWaypointRelativePos": 1.15,
+      "minWaypointRelativePos": 0.6,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 1.0,
-        "maxAcceleration": 6.0,
+        "maxAcceleration": 1.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0
       }
@@ -72,15 +56,15 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 3.0,
-    "rotation": 165.0,
+    "velocity": 0.0,
+    "rotation": 155.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Center 6",
+  "folder": "Long Side V2",
   "previewStartingState": {
-    "rotation": -165.0,
-    "velocity": 3.0
+    "rotation": 180.0,
+    "velocity": 0.0
   },
   "useDefaultConstraints": true
 }
