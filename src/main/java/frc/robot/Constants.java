@@ -87,15 +87,14 @@ public final class Constants {
                 {
                     VelocityLeft = SlowShotVelocity.VelocityLeft;
                     VelocityRight = SlowShotVelocity.VelocityRight;
-                    Position = 75.5;
+                    Position = 77;
                 }
             };
             public static final ShooterPose TrapShot = new ShooterPose() {
                 {
                     VelocityLeft = TrapShotVelocity.VelocityLeft;
                     VelocityRight = TrapShotVelocity.VelocityRight;
-                    Position = 59.1;
-                    //Position = 61.1;
+                    Position = 61.1;
 
                 }
             };
@@ -103,7 +102,7 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 73.6;
+                    Position = 72.6;
                 }
             };
             public static final ShooterPose Climb  = new ShooterPose() {

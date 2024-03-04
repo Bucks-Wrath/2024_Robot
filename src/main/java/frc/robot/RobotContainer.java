@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.Shooter.ShooterPose;
+import frc.robot.auto.AutoFlipZero;
 import frc.robot.auto.AutoZero;
 import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
@@ -63,6 +64,7 @@ public class RobotContainer {
 
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kBack.value);
+    private final JoystickButton zeroFlipGyro = new JoystickButton(driver, XboxController.Button.kStart.value);
     private final JoystickButton faceLeftButton = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton faceRightButton = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton faceSourceButton = new JoystickButton(driver, XboxController.Button.kY.value);
@@ -99,12 +101,16 @@ public class RobotContainer {
         ShuffleboardTab autoTab = Shuffleboard.getTab("Auto settings");
         autoChooser.addOption("5 Note Auto", new PathPlannerAuto("5 Note Auto"));
         autoChooser.addOption("6 Note Auto", new PathPlannerAuto("6 Note Auto"));
+        autoChooser.addOption("6 Note Auto B", new PathPlannerAuto("6 Note Auto B"));
         autoChooser.addOption("Long Side Auto V1", new PathPlannerAuto("Long Side Auto V1"));
         autoChooser.addOption("Long Side Auto V2", new PathPlannerAuto("Long Side Auto V2"));
         autoChooser.addOption("Short Side Auto V1", new PathPlannerAuto("Short Side Auto V1"));
         autoChooser.addOption("Short Side Auto V2", new PathPlannerAuto("Short Side Auto V2"));
+        autoChooser.addOption("Short Side Auto V2B", new PathPlannerAuto("Short Side Auto V2B"));
         autoChooser.addOption("Short Side Auto V3", new PathPlannerAuto("Short Side Auto V3"));
+        autoChooser.addOption("Short Side Auto V3B", new PathPlannerAuto("Short Side Auto V3B"));
         autoChooser.addOption("Short Side Auto V4", new PathPlannerAuto("Short Side Auto V4"));
+        autoChooser.addOption("Short Side Auto V4B", new PathPlannerAuto("Short Side Auto V4B"));
         autoChooser.addOption("Center Auto", new PathPlannerAuto("Center Auto"));
         autoTab.add("Mode", autoChooser);
 
@@ -143,6 +149,7 @@ public class RobotContainer {
         
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> swerve.zeroHeading()));    // Resets gyro
+        zeroFlipGyro.onTrue(new InstantCommand(() -> swerve.autoFlipZeroGyro()));    // Resets gyro
         intakeButton.whileTrue(new IntakeCommandGroup(swerve));             // Runs intake w/ vision
         intakeButton.whileFalse(new StopIntakeCommandGroup());              // Stop intake w/ vision
         shootButton.whileTrue(new RunFeeder());  
@@ -254,6 +261,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
         NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.Home));
         NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
+        NamedCommands.registerCommand("FlipGyro", new AutoFlipZero(swerve).withTimeout(0.1));
         NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.5));
     }
 }

@@ -9,7 +9,7 @@ public class IntakeCommandGroup extends SequentialCommandGroup {
     
     public IntakeCommandGroup(Swerve s_Swerve) {
         this.s_Swerve = s_Swerve;
-        addCommands(new ManualIntakeCommandGroup().alongWith(new VisionAlignIntake(s_Swerve, true)));  
+        addCommands(new ManualIntakeCommandGroup().deadlineWith(new VisionAlignIntake(s_Swerve, true)));  
     }
 
 }

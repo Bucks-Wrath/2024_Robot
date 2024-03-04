@@ -43,11 +43,11 @@ public class AutoVisionShoot extends Command {
 
         // Uses ta to set shooter angle
         // Eggo (-17.3601*ta*ta) + (41.5424*ta) - (4); // - 2.82088
-        aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 1; // - 1.38093  was -0.5
+        aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 0.25; // - 1.38093  was -0.5
 
         // use ty to calculate shooter angle
         // Eggo (-0.009811884*ty*ty) + (0.740631*ty) + (17);  // 18.3463
-        yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (22);  // 21.3444 was 22.5
+        yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (22.5);  // 21.3444 was 22.5
 
         // average data from both equations
         shooterAngle = ((aShooterAngle + yShooterAngle) / 2) + xSpeed;
@@ -69,13 +69,10 @@ public class AutoVisionShoot extends Command {
         // Controls shooter speed and angle
         RobotContainer.leftShooter.velocityControl();
         RobotContainer.rightShooter.velocityControl();
-        if (ta > 0){
-            RobotContainer.shooterWrist.setTargetPosition(shooterAngle);
-            RobotContainer.shooterWrist.motionMagicControl();
-        }
-        else{
+        
+        RobotContainer.shooterWrist.setTargetPosition(shooterAngle);
+        RobotContainer.shooterWrist.motionMagicControl();
             
-        }
 
     }
 }
