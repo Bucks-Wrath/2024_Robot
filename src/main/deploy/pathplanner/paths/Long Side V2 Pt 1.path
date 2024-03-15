@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3793507657600232,
-        "y": 4.145636137206654
+        "x": 0.7629357369627093,
+        "y": 4.391019014596169
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6495673205044024,
-        "y": 4.758161072675118
+        "x": 1.6147053117004277,
+        "y": 4.132551005710241
       },
       "isLocked": false,
       "linkedName": null
@@ -38,11 +38,11 @@
   "constraintZones": [
     {
       "name": "New Constraints Zone",
-      "minWaypointRelativePos": 0.6,
+      "minWaypointRelativePos": 0.85,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 1.0,
-        "maxAcceleration": 1.0,
+        "maxVelocity": 0.75,
+        "maxAcceleration": 6.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0
       }
@@ -63,7 +63,7 @@
   "reversed": false,
   "folder": "Long Side V2",
   "previewStartingState": {
-    "rotation": 180.0,
+    "rotation": 120.0,
     "velocity": 0.0
   },
   "useDefaultConstraints": true

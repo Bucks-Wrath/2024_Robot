@@ -24,8 +24,10 @@ public final class Constants {
         public static final double Right = 90;
         public static final double Front = 180;
         public static final double Rear = 360;
-        public static final double SourceRed = 60;
-        public static final double SourceBlue = 300;
+        public static final double SourceRed = 25;
+        public static final double SourceBlue = -205;
+        public static final double PodiumRed = 205;
+        public static final double PodiumBlue = -25;
 
         public static final double getSourceAngle() {
             var allianceColor = DriverStation.getAlliance();
@@ -33,6 +35,34 @@ public final class Constants {
                 allianceColor.get()==Alliance.Red ?
                     Constants.FieldAngle.SourceRed
                     : Constants.FieldAngle.SourceBlue
+                :0.0;
+        }
+
+        public static final double getPodiumAngle() {
+            var allianceColor = DriverStation.getAlliance();
+            return allianceColor.isPresent() ? 
+                allianceColor.get()==Alliance.Red ?
+                    Constants.FieldAngle.PodiumRed
+                    : Constants.FieldAngle.PodiumBlue
+                :0.0;
+        }
+
+
+        public static final double getRightAngle() {
+            var allianceColor = DriverStation.getAlliance();
+            return allianceColor.isPresent() ? 
+                allianceColor.get()==Alliance.Red ?
+                    Constants.FieldAngle.Right
+                    : Constants.FieldAngle.Left
+                :0.0;
+        }
+
+        public static final double getLeftAngle() {
+            var allianceColor = DriverStation.getAlliance();
+            return allianceColor.isPresent() ? 
+                allianceColor.get()==Alliance.Red ?
+                    Constants.FieldAngle.Left
+                    : Constants.FieldAngle.Right
                 :0.0;
         }
     }
@@ -47,8 +77,8 @@ public final class Constants {
         }
 
         public static final class TrapShotVelocity {
-            public static final double VelocityLeft = 25;
-            public static final double VelocityRight = 25; 
+            public static final double VelocityLeft = 45;
+            public static final double VelocityRight = 35; 
         }
 
         public static final class SlowShotVelocity {
@@ -73,23 +103,26 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 19.6;
+                    Position = 20.4;
                 }
             };
+
             public static final ShooterPose Podium = new ShooterPose() {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 76.2;
+                    Position = 75.2;
                 }
             };
+
             public static final ShooterPose Amp = new ShooterPose() {
                 {
                     VelocityLeft = SlowShotVelocity.VelocityLeft;
                     VelocityRight = SlowShotVelocity.VelocityRight;
-                    Position = 77;
+                    Position = 74.7;  // 77
                 }
             };
+
             public static final ShooterPose TrapShot = new ShooterPose() {
                 {
                     VelocityLeft = TrapShotVelocity.VelocityLeft;
@@ -98,6 +131,7 @@ public final class Constants {
 
                 }
             };
+
             public static final ShooterPose SubwooferTall = new ShooterPose() {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
@@ -105,13 +139,15 @@ public final class Constants {
                     Position = 72.6;
                 }
             };
+
             public static final ShooterPose Climb  = new ShooterPose() {
                 {
                     VelocityLeft = StopShotVelocity.VelocityLeft;
                     VelocityRight = StopShotVelocity.VelocityRight;
-                    Position = 25;  // needs to be found
+                    Position = 25;
                 }
             };
+
             public static final ShooterPose ClimbReady  = new ShooterPose() {
                 {
                     VelocityLeft = StopShotVelocity.VelocityLeft;
@@ -128,19 +164,84 @@ public final class Constants {
                 }
             };
 
-            public static final ShooterPose ShortAutoShotPose  = new ShooterPose() {
+            public static final ShooterPose AutoHome = new ShooterPose() {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 4.2;
+                    Position = 0.0;
                 }
             };
 
-            public static final ShooterPose CenterAutoShotPose  = new ShooterPose() {
+            public static final ShooterPose PodiumAutoShotPose  = new ShooterPose() {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 3.8;
+                    Position = 8.93;
+                }
+            };
+
+            public static final ShooterPose LongAutoShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 2.5;
+                }
+            };
+
+            public static final ShooterPose ShortSideAutoShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 3.1;
+                }
+            };
+
+            public static final ShooterPose ShortSideAuto2ShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 2.8;
+                }
+            };
+
+            public static final ShooterPose BlueShortSideAutoShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 2.8;
+                }
+            };
+
+            public static final ShooterPose BlueShortSideAuto2ShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 2.5;
+                }
+            };
+
+            public static final ShooterPose BlueShortSideAuto3ShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 2.4;
+                }
+            };
+
+            public static final ShooterPose BlueShortSideAuto4ShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
+                    VelocityRight = DefaultShotVelocity.VelocityRight;
+                    Position = 2.1;
+                }
+            };
+
+            
+            public static final ShooterPose PassShotPose  = new ShooterPose() {
+                {
+                    VelocityLeft = TrapShotVelocity.VelocityLeft;
+                    VelocityRight = TrapShotVelocity.VelocityRight;
+                    Position = 11.8;
                 }
             };
         };
@@ -187,7 +288,7 @@ public final class Constants {
         /* Swerve Current Limiting */
         public static final int angleCurrentLimit = 30;
         public static final int angleCurrentThreshold = 40;
-        public static final double angleCurrentThresholdTime = 0.1;
+        public static final double angleCurrentThresholdTime = 0.01;
         public static final boolean angleEnableCurrentLimit = true;
 
         public static final int driveCurrentLimit = 40;
@@ -195,9 +296,9 @@ public final class Constants {
         public static final double driveCurrentThresholdTime = 0.01;
         public static final boolean driveEnableCurrentLimit = true;
 
-        /* These values are used by the drive falcon to ramp in open loop and closed loop driving.
+        /* These values are used by the drive kraken to ramp in open loop and closed loop driving.
          * We found a small open loop ramp (0.25) helps with tread wear, tipping, etc */
-        public static final double openLoopRamp = 0.35;
+        public static final double openLoopRamp = 0.25;
         public static final double closedLoopRamp = 0.0;
 
         /* Angle Motor PID Values */
@@ -206,13 +307,13 @@ public final class Constants {
         public static final double angleKD = chosenModule.angleKD;
 
         /* Drive Motor PID Values */
-        public static final double driveKP = 0.12; //TODO: This must be tuned to specific robot last year was 0.05
+        public static final double driveKP = 0.12;
         public static final double driveKI = 0.0;
         public static final double driveKD = 0.0;
         public static final double driveKF = 0.0;
 
         /* Drive Motor Characterization Values From SYSID */
-        public static final double driveKS = 0.32; //TODO: This must be tuned to specific robot
+        public static final double driveKS = 0.32;
         public static final double driveKV = 1.51;
         public static final double driveKA = 0.27;
 

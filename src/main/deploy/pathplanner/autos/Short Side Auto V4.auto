@@ -12,7 +12,7 @@
     "data": {
       "commands": [
         {
-          "type": "race",
+          "type": "deadline",
           "data": {
             "commands": [
               {
@@ -69,7 +69,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side Pt 2 Alt"
+                  "pathName": "Short Side V4 Pt 2"
                 }
               },
               {
@@ -83,15 +83,34 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "AutoHomeState"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "ManualIntakeCommandGroup"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "AutoHomeState"
+                            }
+                          }
+                        ]
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "ManualIntakeCommandGroup"
+                        "name": "StopFeeder"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ShortSideAutoShotPose"
                       }
                     }
                   ]
@@ -101,32 +120,26 @@
           }
         },
         {
-          "type": "race",
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shoot"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "deadline",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side Pt 3 Alt"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.75
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "AutoShoot"
-                      }
-                    }
-                  ]
+                  "pathName": "Short Side V4 Pt 3"
                 }
               },
               {
@@ -140,15 +153,28 @@
                       }
                     },
                     {
-                      "type": "wait",
+                      "type": "deadline",
                       "data": {
-                        "waitTime": 1.25
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "ManualIntakeCommandGroup"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "AutoHomeState"
+                            }
+                          }
+                        ]
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "RunFeeder"
+                        "name": "StopFeeder"
                       }
                     }
                   ]
@@ -164,45 +190,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side Pt 4 Alt"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "StopFeeder"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "AutoHomeState"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ManualIntakeCommandGroup"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Short Side Pt 5 Alt Alt"
+                  "pathName": "Short Side V4 Pt 4"
                 }
               },
               {
@@ -214,9 +202,22 @@
                       "data": {
                         "commands": [
                           {
+                            "type": "named",
+                            "data": {
+                              "name": "CloseAutoShoot"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "sequential",
+                      "data": {
+                        "commands": [
+                          {
                             "type": "wait",
                             "data": {
-                              "waitTime": 2.5
+                              "waitTime": 0.75
                             }
                           },
                           {
@@ -249,25 +250,6 @@
                                   }
                                 }
                               ]
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "type": "sequential",
-                      "data": {
-                        "commands": [
-                          {
-                            "type": "wait",
-                            "data": {
-                              "waitTime": 1.5
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "AutoShoot"
                             }
                           }
                         ]

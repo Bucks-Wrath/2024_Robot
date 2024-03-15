@@ -28,6 +28,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 	private double targetPosition = 0;
     private MotionMagicDutyCycle targetPositionDutyCycle = new MotionMagicDutyCycle(0);
 	private double feedForward = 0.0;
+	public double shooterAddValue;
 
 	private final static double onTargetThreshold = 0.1;
 		
@@ -56,20 +57,20 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
         shooterWristFXConfig.CurrentLimits.SupplyTimeThreshold = 0.05;
 
         /* PID Config */
-        shooterWristFXConfig.Slot0.kP = 0.4;
+        shooterWristFXConfig.Slot0.kP = 0.2;
         shooterWristFXConfig.Slot0.kI = 0;
-        shooterWristFXConfig.Slot0.kD = 0;
+        shooterWristFXConfig.Slot0.kD = 0.01;
 
         /* Open and Closed Loop Ramping */
         shooterWristFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.25;
         shooterWristFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 0.25;
 
-        shooterWristFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.25;
-        shooterWristFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.25;
+        shooterWristFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0;
+        shooterWristFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0;
 
         //Config Acceleration and Velocity
-        shooterWristFXConfig.MotionMagic.withMotionMagicAcceleration(100);
-        shooterWristFXConfig.MotionMagic.withMotionMagicCruiseVelocity(100);
+        shooterWristFXConfig.MotionMagic.withMotionMagicAcceleration(300);
+        shooterWristFXConfig.MotionMagic.withMotionMagicCruiseVelocity(300);
 
         // Config Motor
         shooterWristFalcon.getConfigurator().apply(shooterWristFXConfig);
@@ -143,6 +144,11 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 		return this.feedForward;
 	}
 
+	public double getCValue() {
+		shooterAddValue = SmartDashboard.getNumber("Shooter Adjustment", 0);
+		return shooterAddValue;
+	}
+
 	public void resetWristEncoder() {
         try {
 			shooterWristFalcon.getConfigurator().setPosition(0.0);
@@ -186,6 +192,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 		SmartDashboard.putNumber("Shooter Wrist Position Error", this.getPositionError());
 		SmartDashboard.putNumber("ShooterWrist Velocity", this.getCurrentVelocity());
 		SmartDashboard.putNumber("Shooter Wrist Current", this.getCurrentDraw());
+		SmartDashboard.putNumber("Shooter Adjustment", getCValue());
 	}
 
 	@Override

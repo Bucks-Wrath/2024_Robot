@@ -166,7 +166,6 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), new Rotation2d()));
     }
 
-    // added these two lines!
     public void autoZeroGyro() {
         gyro.setYaw(180);
     }
@@ -175,6 +174,11 @@ public class Swerve extends SubsystemBase {
         double heading = getHeading().getDegrees();
         heading = heading + 180;
         gyro.setYaw(heading);
+    }
+
+    public void autoSetGyro(double value) {
+        double gValue = value;
+        gyro.setYaw(gValue);
     }
 
     public void zeroGyro() {
@@ -200,6 +204,7 @@ public class Swerve extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond); 
+            SmartDashboard.putNumber("Angle", gyro.getAngle());
             SmartDashboard.putNumber("YSPEED", ySpeed());
             SmartDashboard.putNumber("XSPEED", xSpeed());
         }

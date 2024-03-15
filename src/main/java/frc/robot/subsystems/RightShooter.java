@@ -45,8 +45,8 @@ public class RightShooter extends SubsystemBase implements IVelocityControlledSu
 
         /* Current Limiting */
         RightShooterFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        RightShooterFXConfig.CurrentLimits.SupplyCurrentLimit = 20;
-        RightShooterFXConfig.CurrentLimits.SupplyCurrentThreshold = 25;
+        RightShooterFXConfig.CurrentLimits.SupplyCurrentLimit = 30;
+        RightShooterFXConfig.CurrentLimits.SupplyCurrentThreshold = 30;
         RightShooterFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
 
         /* PID Config */
@@ -55,11 +55,11 @@ public class RightShooter extends SubsystemBase implements IVelocityControlledSu
         RightShooterFXConfig.Slot0.kD = 0;
 
         /* Open and Closed Loop Ramping */
-        RightShooterFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 1;
-        RightShooterFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 1;
+        RightShooterFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.5;
+        RightShooterFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 0.5;
 
-        RightShooterFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 1;
-        RightShooterFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 1;
+        RightShooterFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.5;
+        RightShooterFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.5;
 
         //Config Acceleration and Velocity
         RightShooterFXConfig.MotionMagic.withMotionMagicAcceleration(10000);

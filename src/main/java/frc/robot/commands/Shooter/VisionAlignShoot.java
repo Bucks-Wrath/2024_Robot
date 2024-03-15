@@ -29,14 +29,14 @@ public class VisionAlignShoot extends Command {
     private double xSpeed;
     private double rotationVal;
 
-    private double slowSpeed = 0.5;
     private double shooterHeight = 0;
 
-    private final PIDController angleController = new PIDController(0.0075, 0, 0);  //0.005
+    private final PIDController angleController = new PIDController(0.0065, 0, 0.0001);  //0.005
     private double targetAngle = 0;
     private double yShooterAngle = 0;
     private double aShooterAngle = 0;
     private double shooterAngle = 0;
+    private double shooterAddValue = 0;
 
 
     public VisionAlignShoot(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, Boolean robotCentricSup) {
@@ -59,6 +59,7 @@ public class VisionAlignShoot extends Command {
         tl = RobotContainer.frontLimelight.getLong();
         ts = RobotContainer.frontLimelight.getShort();
         angleController.setTolerance(0.05);  // needs to be tuned
+        shooterAddValue = RobotContainer.shooterWrist.getCValue();
     }
     
     @Override
@@ -89,11 +90,11 @@ public class VisionAlignShoot extends Command {
 
         // Uses ta to set shooter angle
         // Eggo (-17.3601*ta*ta) + (41.5424*ta) - (4); // - 2.82088
-        aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 0.25; // - 1.38093  was -0.5
+        aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 1.25 + shooterAddValue; // - 1.38093  was -0.5
 
         // use ty to calculate shooter angle
         // Eggo (-0.009811884*ty*ty) + (0.740631*ty) + (17);  // 18.3463
-        yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (22.5);  // 21.3444 was 22.5
+        yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (21.25) + shooterAddValue;  // 21.3444 was 22.5
 
         // average data from both equations
         shooterAngle = ((aShooterAngle + yShooterAngle) / 2) + xSpeed;  // is this going the right way and is it the right value

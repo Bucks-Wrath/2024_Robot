@@ -1,0 +1,107 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.39,
+        "y": 6.17
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.208065493054065,
+        "y": 6.975928567241751
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.87236951575871,
+        "y": 5.492445188825977
+      },
+      "prevControl": {
+        "x": 8.709824038262779,
+        "y": 5.136876956803629
+      },
+      "nextControl": {
+        "x": 9.030240600731648,
+        "y": 5.83778818720428
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.11,
+        "y": 6.75
+      },
+      "prevControl": {
+        "x": 8.779979954243329,
+        "y": 6.755182751403334
+      },
+      "nextControl": {
+        "x": 7.520763001583063,
+        "y": 6.745441850370149
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.39,
+        "y": 6.17
+      },
+      "prevControl": {
+        "x": 5.073198163514728,
+        "y": 6.300430061630451
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 160.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 2,
+      "rotationDegrees": 180.0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 2.7,
+      "maxWaypointRelativePos": 3.0,
+      "constraints": {
+        "maxVelocity": 2.0,
+        "maxAcceleration": 2.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 6.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0.0,
+    "rotation": -170.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Center 6",
+  "previewStartingState": {
+    "rotation": -170.0,
+    "velocity": 0.0
+  },
+  "useDefaultConstraints": true
+}

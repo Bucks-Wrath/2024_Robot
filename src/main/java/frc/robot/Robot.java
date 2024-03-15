@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
     RobotContainer.leftShooter.updateDashboard();
     RobotContainer.rightShooter.updateDashboard();
     RobotContainer.shooterWrist.updateDashboard();
+    RobotContainer.shooterWrist.getCValue();
     RobotContainer.frontLimelight.updateDashboard();
     RobotContainer.rearLimelight.updateDashboard();
     RobotContainer.feeder.updateDashboard();

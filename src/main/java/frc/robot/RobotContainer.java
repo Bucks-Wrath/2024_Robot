@@ -9,13 +9,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.Shooter.ShooterPose;
-import frc.robot.auto.AutoFlipZero;
+import frc.robot.auto.AutoSetGyro;
 import frc.robot.auto.AutoZero;
 import frc.robot.commands.Drivetrain.PIDTurnToAngle;
 import frc.robot.commands.Drivetrain.TeleopSwerve;
@@ -29,9 +28,7 @@ import frc.robot.commands.Shooter.AutoRunFeeder;
 import frc.robot.commands.Shooter.AutoVisionAlignShoot;
 import frc.robot.commands.Shooter.AutoVisionShoot;
 import frc.robot.commands.Shooter.CloseAutoVisionShoot;
-import frc.robot.commands.Shooter.JoystickShooter;
 import frc.robot.commands.Shooter.JoystickShooterWrist;
-import frc.robot.commands.Shooter.ReverseFeeder;
 import frc.robot.commands.Shooter.RunFeeder;
 import frc.robot.commands.Shooter.StopFeeder;
 import frc.robot.commands.Shooter.VisionAlignShoot;
@@ -68,7 +65,7 @@ public class RobotContainer {
     private final JoystickButton faceLeftButton = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton faceRightButton = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton faceSourceButton = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton faceFrontButton = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton facePodiumButton = new JoystickButton(driver, XboxController.Button.kA.value);
     private final JoystickButton intakeButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton shootButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
@@ -79,7 +76,7 @@ public class RobotContainer {
     private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kA.value);
     private final JoystickButton tallShotSubwooferButton = new JoystickButton(operator, XboxController.Button.kB.value);
     private final JoystickButton trapShotButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
-    private final JoystickButton manualIntakeButton = new JoystickButton(operator, XboxController.Button.kStart.value);
+    private final JoystickButton PassButton = new JoystickButton(operator, XboxController.Button.kStart.value);
 
 
     /* Subsystems */
@@ -99,19 +96,22 @@ public class RobotContainer {
         registerNamedCommands();
 
         ShuffleboardTab autoTab = Shuffleboard.getTab("Auto settings");
-        autoChooser.addOption("5 Note Auto", new PathPlannerAuto("5 Note Auto"));
-        autoChooser.addOption("6 Note Auto", new PathPlannerAuto("6 Note Auto"));
-        autoChooser.addOption("6 Note Auto B", new PathPlannerAuto("6 Note Auto B"));
+        autoChooser.addOption("6 Note Auto V1", new PathPlannerAuto("6 Note Auto V1"));
+        autoChooser.addOption("6 Note Auto V1B", new PathPlannerAuto("6 Note Auto V1B"));
+        autoChooser.addOption("6 Note Auto V2", new PathPlannerAuto("6 Note Auto V2"));
+        autoChooser.addOption("6 Note Auto V2B", new PathPlannerAuto("6 Note Auto V2B"));
+        autoChooser.addOption("Long Side Skip Auto", new PathPlannerAuto("Long Side Skip Auto"));
+        autoChooser.addOption("Long Side Skip AutoB", new PathPlannerAuto("Long Side Skip AutoB"));
         autoChooser.addOption("Long Side Auto V1", new PathPlannerAuto("Long Side Auto V1"));
+        autoChooser.addOption("Long Side Auto V1B", new PathPlannerAuto("Long Side Auto V1B"));
         autoChooser.addOption("Long Side Auto V2", new PathPlannerAuto("Long Side Auto V2"));
-        autoChooser.addOption("Short Side Auto V1", new PathPlannerAuto("Short Side Auto V1"));
+        autoChooser.addOption("Long Side Auto V2B", new PathPlannerAuto("Long Side Auto V2B"));
         autoChooser.addOption("Short Side Auto V2", new PathPlannerAuto("Short Side Auto V2"));
         autoChooser.addOption("Short Side Auto V2B", new PathPlannerAuto("Short Side Auto V2B"));
         autoChooser.addOption("Short Side Auto V3", new PathPlannerAuto("Short Side Auto V3"));
         autoChooser.addOption("Short Side Auto V3B", new PathPlannerAuto("Short Side Auto V3B"));
         autoChooser.addOption("Short Side Auto V4", new PathPlannerAuto("Short Side Auto V4"));
         autoChooser.addOption("Short Side Auto V4B", new PathPlannerAuto("Short Side Auto V4B"));
-        autoChooser.addOption("Center Auto", new PathPlannerAuto("Center Auto"));
         autoTab.add("Mode", autoChooser);
 
         swerve.setDefaultCommand(
@@ -163,7 +163,7 @@ public class RobotContainer {
             () -> -driver.getRawAxis(strafeAxis), 
             () -> -driver.getRawAxis(rotationAxis), 
             robotCentric,
-            Constants.FieldAngle.Left));
+            Constants.FieldAngle.getLeftAngle()));
 
         faceRightButton.whileTrue(new PIDTurnToAngle(
             swerve, 
@@ -171,10 +171,10 @@ public class RobotContainer {
             () -> -driver.getRawAxis(strafeAxis), 
             () -> -driver.getRawAxis(rotationAxis), 
             robotCentric,
-            Constants.FieldAngle.Right));
+            Constants.FieldAngle.getRightAngle()));
 
         
-        faceFrontButton.whileTrue(new PIDTurnToAngle(
+        facePodiumButton.whileTrue(new PIDTurnToAngle(
             swerve, 
             () -> -driver.getRawAxis(translationAxis), 
             () -> -driver.getRawAxis(strafeAxis), 
@@ -182,7 +182,7 @@ public class RobotContainer {
             robotCentric,
             //This is a temporary direction for testing out aliging with the source (as oriented from the Red Alliance)
             //We probably want to tie the source angle to a different button
-            Constants.FieldAngle.Front));
+            Constants.FieldAngle.getPodiumAngle()));
 
         DriverController.leftTrigger().whileTrue(new VisionAlignShoot(
             swerve, 
@@ -210,8 +210,7 @@ public class RobotContainer {
         tallShotSubwooferButton.onTrue(new ShootFrom(ShooterPose.SubwooferTall));
         OperatorController.leftTrigger().onTrue(new ShootFrom(ShooterPose.ClimbReady));
         OperatorController.rightTrigger().onTrue(new ShootFrom(ShooterPose.Climb));
-        manualIntakeButton.whileTrue(new ManualIntakeCommandGroup());
-        manualIntakeButton.onFalse(new StopIntakeCommandGroup());
+        PassButton.onTrue(new ShootFrom(ShooterPose.PassShotPose));
     }
 
     /* Public access to joystick values */
@@ -250,18 +249,23 @@ public class RobotContainer {
         NamedCommands.registerCommand("RunIntake", new RunIntake());
         NamedCommands.registerCommand("StopIntakeCommandGroup", new StopIntakeCommandGroup());
         NamedCommands.registerCommand("RunFeeder", new RunFeeder());
-        NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.5));
+        NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.4));
         NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
-        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(1.1));
-        NamedCommands.registerCommand("PodiumShot", new ShootFrom(ShooterPose.Podium));
+        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(0.5));
         NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));
         NamedCommands.registerCommand("CloseAutoShoot", new CloseAutoVisionShoot(swerve));      
-        NamedCommands.registerCommand("CenterAutoShotPose", new ShootFrom(ShooterPose.CenterAutoShotPose)); 
-        NamedCommands.registerCommand("ShortAutoShotPose", new ShootFrom(ShooterPose.ShortAutoShotPose));        
+        NamedCommands.registerCommand("LongAutoShotPose", new ShootFrom(ShooterPose.LongAutoShotPose));
+        NamedCommands.registerCommand("ShortSideAutoShotPose", new ShootFrom(ShooterPose.ShortSideAutoShotPose)); 
+        NamedCommands.registerCommand("ShortSideAuto2ShotPose", new ShootFrom(ShooterPose.ShortSideAuto2ShotPose));
+        NamedCommands.registerCommand("BlueShortSideAutoShotPose", new ShootFrom(ShooterPose.BlueShortSideAutoShotPose));
+        NamedCommands.registerCommand("BlueShortSideAuto2ShotPose", new ShootFrom(ShooterPose.BlueShortSideAuto2ShotPose));   
+        NamedCommands.registerCommand("BlueShortSideAuto3ShotPose", new ShootFrom(ShooterPose.BlueShortSideAuto3ShotPose));
+        NamedCommands.registerCommand("BlueShortSideAuto4ShotPose", new ShootFrom(ShooterPose.BlueShortSideAuto4ShotPose)); 
+        NamedCommands.registerCommand("PodiumAutoShotPose", new ShootFrom(ShooterPose.PodiumAutoShotPose));        
         NamedCommands.registerCommand("AutoZero", new AutoZero(swerve).withTimeout(0.1)); 
-        NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.Home));
+        NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.AutoHome));
         NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
-        NamedCommands.registerCommand("FlipGyro", new AutoFlipZero(swerve).withTimeout(0.1));
+        NamedCommands.registerCommand("LSSZeroGyro", new AutoSetGyro(swerve, 120).withTimeout(0.1));
         NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.5));
     }
 }
