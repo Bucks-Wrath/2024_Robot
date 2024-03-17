@@ -44,7 +44,7 @@ public class AutoVisionShoot extends Command {
 
         // Uses ta to set shooter angle
         // Eggo (-17.3601*ta*ta) + (41.5424*ta) - (4); // - 2.82088
-        aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 1.15 + shooterAddValue; // - 1.38093  was -0.25 for GSD
+        aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 0.55 + shooterAddValue; // - 1.38093  was -1.15 
 
 
         // use ty to calculate shooter angle

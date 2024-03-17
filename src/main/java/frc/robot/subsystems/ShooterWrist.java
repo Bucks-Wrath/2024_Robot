@@ -145,7 +145,7 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 	}
 
 	public double getCValue() {
-		shooterAddValue = SmartDashboard.getNumber("Shooter Adjustment", 0);
+		shooterAddValue = SmartDashboard.getNumber("Shooter Adjustment", 0); // + 0.6; ?
 		return shooterAddValue;
 	}
 
