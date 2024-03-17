@@ -119,7 +119,7 @@ public final class Constants {
                 {
                     VelocityLeft = SlowShotVelocity.VelocityLeft;
                     VelocityRight = SlowShotVelocity.VelocityRight;
-                    Position = 74.7;  // 77
+                    Position = 77;  // 74.7
                 }
             };
 
@@ -184,7 +184,7 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 2.5;
+                    Position = 2.3;
                 }
             };
 
@@ -192,7 +192,7 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 3.1;
+                    Position = 3.8;  // was 3.1
                 }
             };
 
@@ -200,7 +200,7 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 2.8;
+                    Position = 3.3;
                 }
             };
 
@@ -208,7 +208,7 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 2.8;
+                    Position = 3.3;
                 }
             };
 
@@ -216,7 +216,7 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 2.5;
+                    Position = 3.1;
                 }
             };
 

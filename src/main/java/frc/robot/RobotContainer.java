@@ -266,6 +266,6 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutoHomeState", new ShootFrom(ShooterPose.AutoHome));
         NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
         NamedCommands.registerCommand("LSSZeroGyro", new AutoSetGyro(swerve, 120).withTimeout(0.1));
-        NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.5));
+        NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.7));
     }
 }
