@@ -31,7 +31,7 @@ public class VisionAlignShoot extends Command {
 
     private double shooterHeight = 0;
 
-    private final PIDController angleController = new PIDController(0.0065, 0, 0.0001);  //0.005
+    private final PIDController angleController = new PIDController(0.0065, 0, 0.0001);  //0.0065
     private double targetAngle = 0;
     private double yShooterAngle = 0;
     private double aShooterAngle = 0;
@@ -89,15 +89,18 @@ public class VisionAlignShoot extends Command {
         rotationVal = angleController.calculate(tx,targetAngle);
 
         // Uses ta to set shooter angle
-        // Eggo (-17.3601*ta*ta) + (41.5424*ta) - (4); // - 2.82088
-        aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 0.15 + shooterAddValue; // - 1.38093  was -0.75
+        //aShooterAngle = (-17.3601*ta*ta) + (41.5424*ta) - (4) + shooterAddValue; // eggo
+        //aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 0.15 + shooterAddValue; // - 1.38093  was -0.75
 
         // use ty to calculate shooter angle
-        // Eggo (-0.009811884*ty*ty) + (0.740631*ty) + (17);  // 18.3463
-        yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (21.6) + shooterAddValue;  // 21.3444 was 21
+        //yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (17) + shooterAddValue;  // eggo
+        //yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (21.6) + shooterAddValue;  // 21.3444 was 21 old dial shooter
+        //yShooterAngle = (-0.00846863*ty*ty) + (0.783455*ty) + (17.7994) + shooterAddValue;  // v1
+        yShooterAngle = (-0.0104986*ty*ty) + (0.80866*ty) + (18.8348) + shooterAddValue;  // v2
+
 
         // average data from both equations
-        shooterAngle = ((aShooterAngle + yShooterAngle) / 2) + xSpeed;  // is this going the right way and is it the right value
+        shooterAngle = ((yShooterAngle + yShooterAngle) / 2) + xSpeed;  // is this going the right way and is it the right value
 
         if (diff > 10) {
             shooterAngle = shooterAngle + 0.5;

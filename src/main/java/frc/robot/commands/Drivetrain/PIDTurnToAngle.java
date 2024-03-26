@@ -50,7 +50,7 @@ public class PIDTurnToAngle extends Command {
         // Get Shooter Height
         shooterHeight = RobotContainer.shooterWrist.getCurrentPosition();
 
-        currentAngle = s_Swerve.getGyroYaw().getDegrees() + 180;
+        currentAngle = s_Swerve.getGyroYaw().getDegrees();
         rotationVal = angleController.calculate(currentAngle, targetAngle);
         
         /* Get Values, Deadband*/

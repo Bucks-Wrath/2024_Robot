@@ -24,24 +24,29 @@ public final class Constants {
         public static final double Right = 90;
         public static final double Front = 180;
         public static final double Rear = 360;
-        public static final double SourceRed = 25;
+        public static final double SourceRed = 205;  // 
         public static final double SourceBlue = -205;
-        public static final double PodiumRed = 205;
+        public static final double PodiumRed = 25; // 
         public static final double PodiumBlue = -25;
+        public static Alliance AllianceColor = null;
+
+        public static final void latchAllianceColor(){
+            if(DriverStation.getAlliance().isPresent()){
+                AllianceColor = DriverStation.getAlliance().get();
+            }
+        }
 
         public static final double getSourceAngle() {
-            var allianceColor = DriverStation.getAlliance();
-            return allianceColor.isPresent() ? 
-                allianceColor.get()==Alliance.Red ?
+            return AllianceColor!=null ? 
+                AllianceColor==Alliance.Red ?
                     Constants.FieldAngle.SourceRed
                     : Constants.FieldAngle.SourceBlue
                 :0.0;
         }
 
         public static final double getPodiumAngle() {
-            var allianceColor = DriverStation.getAlliance();
-            return allianceColor.isPresent() ? 
-                allianceColor.get()==Alliance.Red ?
+            return AllianceColor!=null  ? 
+                AllianceColor==Alliance.Red ?
                     Constants.FieldAngle.PodiumRed
                     : Constants.FieldAngle.PodiumBlue
                 :0.0;
@@ -49,19 +54,17 @@ public final class Constants {
 
 
         public static final double getRightAngle() {
-            var allianceColor = DriverStation.getAlliance();
-            return allianceColor.isPresent() ? 
-                allianceColor.get()==Alliance.Red ?
-                    Constants.FieldAngle.Right
+            return AllianceColor!=null  ? 
+                AllianceColor==Alliance.Red ?
+                    Constants.FieldAngle.Left
                     : Constants.FieldAngle.Left
                 :0.0;
         }
 
         public static final double getLeftAngle() {
-            var allianceColor = DriverStation.getAlliance();
-            return allianceColor.isPresent() ? 
-                allianceColor.get()==Alliance.Red ?
-                    Constants.FieldAngle.Left
+            return AllianceColor!=null ? 
+                AllianceColor==Alliance.Red ?
+                    Constants.FieldAngle.Right
                     : Constants.FieldAngle.Right
                 :0.0;
         }
@@ -111,7 +114,7 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 75.2;
+                    Position = 76.86;
                 }
             };
 
@@ -119,7 +122,7 @@ public final class Constants {
                 {
                     VelocityLeft = SlowShotVelocity.VelocityLeft;
                     VelocityRight = SlowShotVelocity.VelocityRight;
-                    Position = 77;  // 74.7
+                    Position = 74.1;  // 74.7  // 77
                 }
             };
 
@@ -258,8 +261,9 @@ public final class Constants {
         public static final int pigeonID = 12;
 
         public static final COTSTalonFXSwerveConstants chosenModule = 
-        COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);    // eggo
-        //COTSTalonFXSwerveConstants.SDS.MK4i.KrakenX60(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);      // dial
+        //COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);    // eggo
+        COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(5.357);                                    // eggo
+        //COTSTalonFXSwerveConstants.SDS.MK4i.KrakenX60(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);    // dial
 
         /* Drivetrain Constants */
         public static final double trackWidth = Units.inchesToMeters(20.75);

@@ -45,14 +45,15 @@ public class CloseAutoVisionShoot extends Command {
 
         // Uses ta to set shooter angle
         // Eggo (-17.3601*ta*ta) + (41.5424*ta) - (4); // - 2.82088
-        aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 1.85 + shooterAddValue; // - 1.38093  was -2.45
+        //aShooterAngle = (-7.3996*ta*ta) + (34.3482*ta) - 1.85 + shooterAddValue; // - 1.38093  was -2.45
 
         // use ty to calculate shooter angle
         // Eggo (-0.009811884*ty*ty) + (0.740631*ty) + (17);  // 18.3463
         //yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (22.5) + shooterAddValue;  // 21.3444 was 22.5
+        yShooterAngle = (-0.0104986*ty*ty) + (0.80866*ty) + (18.8348) + shooterAddValue;
 
         // average data from both equations
-        shooterAngle = ((aShooterAngle + aShooterAngle) / 2) + xSpeed;
+        shooterAngle = ((yShooterAngle + yShooterAngle) / 2) + xSpeed;
         
         // is this going the right way and is it the right value
         // disallow any negative values
