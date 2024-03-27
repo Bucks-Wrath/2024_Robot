@@ -4,9 +4,10 @@
   "holonomicMode": true,
   "pathFolders": [
     "Center 6",
-    "Long Side V1",
     "Long Side Skip",
+    "Long Side V1",
     "Long Side V2",
+    "Short Side Skip",
     "Short Side V2&3",
     "Short Side V4"
   ],

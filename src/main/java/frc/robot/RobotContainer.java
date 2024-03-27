@@ -112,6 +112,11 @@ public class RobotContainer {
         autoChooser.addOption("Short Side Auto V3B", new PathPlannerAuto("Short Side Auto V3B"));
         autoChooser.addOption("Short Side Auto V4", new PathPlannerAuto("Short Side Auto V4"));
         autoChooser.addOption("Short Side Auto V4B", new PathPlannerAuto("Short Side Auto V4B"));
+        autoChooser.addOption("Short Side Skip Auto V1", new PathPlannerAuto("Short Side Skip Auto V1"));
+        autoChooser.addOption("Short Side Skip Auto V1B", new PathPlannerAuto("Short Side Skip Auto V1B"));
+        autoChooser.addOption("Short Side Skip Auto V2", new PathPlannerAuto("Short Side Skip Auto V2"));
+        autoChooser.addOption("Short Side Skip Auto V2B", new PathPlannerAuto("Short Side Skip Auto V2B"));
+
         autoTab.add("Mode", autoChooser);
 
         swerve.setDefaultCommand(
@@ -255,8 +260,9 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));
         NamedCommands.registerCommand("CloseAutoShoot", new CloseAutoVisionShoot(swerve));      
         NamedCommands.registerCommand("LongAutoShotPose", new ShootFrom(ShooterPose.LongAutoShotPose));
-        NamedCommands.registerCommand("ShortSideAutoShotPose", new ShootFrom(ShooterPose.ShortSideAutoShotPose)); 
+        NamedCommands.registerCommand("ShortSideAutoShotPose", new ShootFrom(ShooterPose.ShortSideAutoShotPose).withTimeout(1.75)); 
         NamedCommands.registerCommand("ShortSideAuto2ShotPose", new ShootFrom(ShooterPose.ShortSideAuto2ShotPose));
+        NamedCommands.registerCommand("ShortSideAuto3ShotPose", new ShootFrom(ShooterPose.ShortSideAuto3ShotPose));
         NamedCommands.registerCommand("BlueShortSideAutoShotPose", new ShootFrom(ShooterPose.BlueShortSideAutoShotPose));
         NamedCommands.registerCommand("BlueShortSideAuto2ShotPose", new ShootFrom(ShooterPose.BlueShortSideAuto2ShotPose));   
         NamedCommands.registerCommand("BlueShortSideAuto3ShotPose", new ShootFrom(ShooterPose.BlueShortSideAuto3ShotPose));
