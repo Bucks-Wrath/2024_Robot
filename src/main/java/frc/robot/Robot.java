@@ -46,7 +46,6 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    Constants.FieldAngle.latchAllianceColor();
     RobotContainer.leftShooter.updateDashboard();
     RobotContainer.rightShooter.updateDashboard();
     RobotContainer.shooterWrist.updateDashboard();
@@ -55,7 +54,6 @@ public class Robot extends TimedRobot {
     RobotContainer.rearLimelight.updateDashboard();
     RobotContainer.feeder.updateDashboard();
     RobotContainer.intake.updateDashboard();
-    SmartDashboard.putString("Alliance Color", Constants.FieldAngle.AllianceColor.toString());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
