@@ -28,25 +28,28 @@ public final class Constants {
         public static final double SourceBlue = -205;
         public static final double PodiumRed = 25; // 
         public static final double PodiumBlue = -25;
-        public static Alliance AllianceColor = null;
+        private static Alliance AllianceColor = null;
 
-        public static final void latchAllianceColor(){
-            if(DriverStation.getAlliance().isPresent()){
+        public static final Alliance getAllianceColor(){
+            if(AllianceColor == null && DriverStation.getAlliance().isPresent()){
                 AllianceColor = DriverStation.getAlliance().get();
             }
+            return AllianceColor;
         }
 
         public static final double getSourceAngle() {
-            return AllianceColor!=null ? 
-                AllianceColor==Alliance.Red ?
+            Alliance allianceColor = getAllianceColor();
+            return allianceColor!=null ? 
+                allianceColor==Alliance.Red ?
                     Constants.FieldAngle.SourceRed
                     : Constants.FieldAngle.SourceBlue
                 :0.0;
         }
 
         public static final double getPodiumAngle() {
-            return AllianceColor!=null  ? 
-                AllianceColor==Alliance.Red ?
+            Alliance allianceColor = getAllianceColor();
+            return allianceColor!=null  ? 
+                allianceColor==Alliance.Red ?
                     Constants.FieldAngle.PodiumRed
                     : Constants.FieldAngle.PodiumBlue
                 :0.0;
@@ -54,16 +57,18 @@ public final class Constants {
 
 
         public static final double getRightAngle() {
-            return AllianceColor!=null  ? 
-                AllianceColor==Alliance.Red ?
+            Alliance allianceColor = getAllianceColor();
+            return allianceColor!=null  ? 
+                allianceColor==Alliance.Red ?
                     Constants.FieldAngle.Left
                     : Constants.FieldAngle.Left
                 :0.0;
         }
 
         public static final double getLeftAngle() {
-            return AllianceColor!=null ? 
-                AllianceColor==Alliance.Red ?
+            Alliance allianceColor = getAllianceColor();
+            return allianceColor!=null ? 
+                allianceColor==Alliance.Red ?
                     Constants.FieldAngle.Right
                     : Constants.FieldAngle.Right
                 :0.0;
