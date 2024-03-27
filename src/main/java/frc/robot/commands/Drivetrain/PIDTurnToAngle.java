@@ -18,18 +18,18 @@ public class PIDTurnToAngle extends Command {
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private Boolean robotCentricSup;
+    private DoubleSupplier targetAngleSup;
 
     private double slowSpeed = 0.5;
     private double shooterHeight = 0;
 
     public double rotationVal = 0;
-    public double targetAngle = 0;
     public double currentAngle = 0;
     public double acceptableError = 0;
 
     private final PIDController angleController = new PIDController(0.012, 0, 0);
 
-    public PIDTurnToAngle(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, Boolean robotCentricSup, double targetAngle) {
+    public PIDTurnToAngle(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, Boolean robotCentricSup, DoubleSupplier targetAngleSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
@@ -37,7 +37,7 @@ public class PIDTurnToAngle extends Command {
         this.strafeSup = strafeSup;
         this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
-        this.targetAngle = targetAngle;
+        this.targetAngleSup = targetAngleSup;
         angleController.enableContinuousInput(0, 360);
     }
 
@@ -50,8 +50,8 @@ public class PIDTurnToAngle extends Command {
         // Get Shooter Height
         shooterHeight = RobotContainer.shooterWrist.getCurrentPosition();
 
-        currentAngle = s_Swerve.getGyroYaw().getDegrees();
-        rotationVal = angleController.calculate(currentAngle, targetAngle);
+        currentAngle = s_Swerve.getGyroYaw().getDegrees() + 180;
+        rotationVal = angleController.calculate(currentAngle, targetAngleSup.getAsDouble());
         
         /* Get Values, Deadband*/
         double translationVal = -MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
