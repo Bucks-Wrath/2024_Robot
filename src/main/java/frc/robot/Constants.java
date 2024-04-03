@@ -85,8 +85,8 @@ public final class Constants {
         }
 
         public static final class TrapShotVelocity {
-            public static final double VelocityLeft = 45;
-            public static final double VelocityRight = 35; 
+            public static final double VelocityLeft = 20;  // 45
+            public static final double VelocityRight = 20;  //35
         }
 
         public static final class SlowShotVelocity {
