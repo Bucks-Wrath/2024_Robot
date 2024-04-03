@@ -119,7 +119,7 @@ public final class Constants {
                 {
                     VelocityLeft = DefaultShotVelocity.VelocityLeft;
                     VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 76.86;
+                    Position = 76.5;  // 76.86
                 }
             };
 
@@ -127,7 +127,7 @@ public final class Constants {
                 {
                     VelocityLeft = SlowShotVelocity.VelocityLeft;
                     VelocityRight = SlowShotVelocity.VelocityRight;
-                    Position = 74.1;  // 74.7  // 77
+                    Position = 77;  // 74.1  // 77  
                 }
             };
 
