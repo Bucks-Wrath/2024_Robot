@@ -27,6 +27,7 @@ import frc.robot.commands.LEDs.SetNeedNote;
 import frc.robot.commands.Shooter.AutoRunFeeder;
 import frc.robot.commands.Shooter.AutoVisionAlignShoot;
 import frc.robot.commands.Shooter.AutoVisionShoot;
+import frc.robot.commands.Shooter.AutoVisionShootBlue;
 import frc.robot.commands.Shooter.CloseAutoVisionShoot;
 import frc.robot.commands.Shooter.JoystickShooterWrist;
 import frc.robot.commands.Shooter.RunFeeder;
@@ -258,6 +259,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
         NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(0.5));
         NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));
+        NamedCommands.registerCommand("AutoShootBlue", new AutoVisionShootBlue(swerve));
         NamedCommands.registerCommand("CloseAutoShoot", new CloseAutoVisionShoot(swerve));      
         NamedCommands.registerCommand("LongAutoShotPose", new ShootFrom(ShooterPose.LongAutoShotPose));
         NamedCommands.registerCommand("ShortSideAutoShotPose", new ShootFrom(ShooterPose.ShortSideAutoShotPose).withTimeout(1.75)); 
