@@ -85,8 +85,8 @@ public final class Constants {
         }
 
         public static final class TrapShotVelocity {
-            public static final double VelocityLeft = 20;  // 45
-            public static final double VelocityRight = 20;  //35
+            public static final double VelocityLeft = 45;  
+            public static final double VelocityRight = 35;  
         }
 
         public static final class SlowShotVelocity {
@@ -274,8 +274,8 @@ public final class Constants {
         public static final int pigeonID = 12;
 
         public static final COTSTalonFXSwerveConstants chosenModule = 
-        //COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);    // eggo
-        COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(5.357);                                    // eggo
+        COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);    // eggo
+        //COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(5.357);                                    // eggo
         //COTSTalonFXSwerveConstants.SDS.MK4i.KrakenX60(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);    // dial
 
         /* Drivetrain Constants */
