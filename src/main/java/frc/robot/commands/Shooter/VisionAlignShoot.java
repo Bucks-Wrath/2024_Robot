@@ -95,7 +95,7 @@ public class VisionAlignShoot extends Command {
         // use ty to calculate shooter angle
         //yShooterAngle = (-0.009811884*ty*ty) + (0.740631*ty) + (17) + shooterAddValue;  // eggo
         //yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (21.6) + shooterAddValue;  // 21.3444 was 21 old dial shooter
-        yShooterAngle = (-0.0104986*ty*ty) + (0.80866*ty) + (18.8348) + shooterAddValue;  // v2
+        yShooterAngle = (-0.0104986*ty*ty) + (0.80866*ty) + (18.2) + shooterAddValue;  // v2
 
 
         // average data from both equations
