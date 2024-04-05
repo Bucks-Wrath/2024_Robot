@@ -84,6 +84,11 @@ public final class Constants {
             public static final double VelocityRight = 60; 
         }
 
+        public static final class LongAutoShotVelocity {
+            public static final double VelocityLeft = 75;
+            public static final double VelocityRight = 50;
+        }
+
         public static final class TrapShotVelocity {
             public static final double VelocityLeft = 42;  
             public static final double VelocityRight = 32;  
@@ -190,9 +195,9 @@ public final class Constants {
 
             public static final ShooterPose LongAutoShotPose  = new ShooterPose() {
                 {
-                    VelocityLeft = DefaultShotVelocity.VelocityLeft;
-                    VelocityRight = DefaultShotVelocity.VelocityRight;
-                    Position = 1;
+                    VelocityLeft = LongAutoShotVelocity.VelocityLeft;
+                    VelocityRight = LongAutoShotVelocity.VelocityRight;
+                    Position = 0;
                 }
             };
 
