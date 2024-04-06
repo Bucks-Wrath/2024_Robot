@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.37,
-      "y": 6.25
+      "x": 1.38,
+      "y": 6.49
     },
     "rotation": 180.0
   },
@@ -163,7 +163,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side Skip V1 Pt 3"
+                  "pathName": "Copy of Short Side Pt 4"
                 }
               },
               {

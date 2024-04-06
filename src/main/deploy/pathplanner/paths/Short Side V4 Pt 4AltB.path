@@ -1,0 +1,68 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.39,
+        "y": 6.17
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.155174019335199,
+        "y": 6.593200975274989
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.566264824837344,
+        "y": 7.666614563998359
+      },
+      "prevControl": {
+        "x": 8.532302735771939,
+        "y": 8.028515854726766
+      },
+      "nextControl": {
+        "x": 8.600226913902748,
+        "y": 7.304713273269957
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.39,
+        "y": 6.17
+      },
+      "prevControl": {
+        "x": 5.174626048567361,
+        "y": 6.486192586736101
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 6.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -168.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Short Side V4",
+  "previewStartingState": {
+    "rotation": -168.0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

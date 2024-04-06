@@ -113,6 +113,8 @@ public class RobotContainer {
         autoChooser.addOption("Short Side Auto V3B", new PathPlannerAuto("Short Side Auto V3B"));
         autoChooser.addOption("Short Side Auto V4", new PathPlannerAuto("Short Side Auto V4"));
         autoChooser.addOption("Short Side Auto V4B", new PathPlannerAuto("Short Side Auto V4B"));
+        autoChooser.addOption("Short Side Auto V5", new PathPlannerAuto("Short Side Auto V5"));
+        autoChooser.addOption("Short Side Auto V5B", new PathPlannerAuto("Short Side Auto V5B"));
         autoChooser.addOption("Short Side Skip Auto V1", new PathPlannerAuto("Short Side Skip Auto V1"));
         autoChooser.addOption("Short Side Skip Auto V1B", new PathPlannerAuto("Short Side Skip Auto V1B"));
         autoChooser.addOption("Short Side Skip Auto V2", new PathPlannerAuto("Short Side Skip Auto V2"));
