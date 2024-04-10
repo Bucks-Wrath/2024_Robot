@@ -28,10 +28,13 @@ public class Intake extends SubsystemBase {
 		IntakeFalconFollower.setControl(new Follower(IntakeFalcon.getDeviceID(), true));
 
         /* Current Limiting */
-        IntakeFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        IntakeFXConfig.CurrentLimits.SupplyCurrentLimit = 20;
-        IntakeFXConfig.CurrentLimits.SupplyCurrentThreshold = 30;
-        IntakeFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
+        //IntakeFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
+        //IntakeFXConfig.CurrentLimits.SupplyCurrentLimit = 20;
+        //IntakeFXConfig.CurrentLimits.SupplyCurrentThreshold = 30;
+        //IntakeFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
+
+        IntakeFXConfig.CurrentLimits.StatorCurrentLimitEnable = true;
+        IntakeFXConfig.CurrentLimits.StatorCurrentLimit = 25;
 
         /* PID Config */
         IntakeFXConfig.Slot0.kP = 0.2;

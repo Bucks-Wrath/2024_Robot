@@ -51,10 +51,13 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
         shooterWristFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         /* Current Limiting */
-        shooterWristFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        shooterWristFXConfig.CurrentLimits.SupplyCurrentLimit = 35;
-        shooterWristFXConfig.CurrentLimits.SupplyCurrentThreshold = 60;
-        shooterWristFXConfig.CurrentLimits.SupplyTimeThreshold = 0.05;
+        //shooterWristFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
+        //shooterWristFXConfig.CurrentLimits.SupplyCurrentLimit = 35;
+        //shooterWristFXConfig.CurrentLimits.SupplyCurrentThreshold = 60;
+        //shooterWristFXConfig.CurrentLimits.SupplyTimeThreshold = 0.05;
+
+		shooterWristFXConfig.CurrentLimits.StatorCurrentLimitEnable = true;
+        shooterWristFXConfig.CurrentLimits.StatorCurrentLimit = 35;
 
         /* PID Config */
         shooterWristFXConfig.Slot0.kP = 0.2;
@@ -147,6 +150,10 @@ public class ShooterWrist extends SubsystemBase implements IPositionControlledSu
 	public double getCValue() {
 		shooterAddValue = SmartDashboard.getNumber("Shooter Adjustment", 0); // + 0.6; ?
 		return shooterAddValue;
+	}
+
+	public void addToShooterAdjustment(double adjustmentValue){
+		SmartDashboard.putNumber("Shooter Adjustment", getCValue() + adjustmentValue);
 	}
 
 	public void resetWristEncoder() {

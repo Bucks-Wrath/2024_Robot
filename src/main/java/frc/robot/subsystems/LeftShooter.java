@@ -43,14 +43,17 @@ public class LeftShooter extends SubsystemBase implements IVelocityControlledSub
         leftShooterFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         /* Current Limiting */
-        leftShooterFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        leftShooterFXConfig.CurrentLimits.SupplyCurrentLimit = 30;
-        leftShooterFXConfig.CurrentLimits.SupplyCurrentThreshold = 30;
-        leftShooterFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
+        //leftShooterFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
+        //leftShooterFXConfig.CurrentLimits.SupplyCurrentLimit = 30;
+        //leftShooterFXConfig.CurrentLimits.SupplyCurrentThreshold = 30;
+        //leftShooterFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
+
+		leftShooterFXConfig.CurrentLimits.StatorCurrentLimitEnable = true;
+        leftShooterFXConfig.CurrentLimits.StatorCurrentLimit = 60;
 
         /* PID Config */
-        leftShooterFXConfig.Slot0.kP = 1.25;
-        leftShooterFXConfig.Slot0.kI = 0;
+        leftShooterFXConfig.Slot0.kP = 0.01; //0.01
+        leftShooterFXConfig.Slot0.kI = 0.000;
         leftShooterFXConfig.Slot0.kD = 0;
 
         /* Open and Closed Loop Ramping */
@@ -60,9 +63,11 @@ public class LeftShooter extends SubsystemBase implements IVelocityControlledSub
         leftShooterFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.5;
         leftShooterFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.5;
 
+		leftShooterFXConfig.Slot0.kV = 0.01;
+
         //Config Acceleration and Velocity
         leftShooterFXConfig.MotionMagic.withMotionMagicAcceleration(10000);
-        leftShooterFXConfig.MotionMagic.withMotionMagicCruiseVelocity(20000);
+        leftShooterFXConfig.MotionMagic.withMotionMagicCruiseVelocity(30000);
 
         // Config Motor
         LeftShooterFalcon.getConfigurator().apply(leftShooterFXConfig);

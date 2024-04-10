@@ -76,8 +76,9 @@ public class RobotContainer {
     private final JoystickButton ampShotButton = new JoystickButton(operator, XboxController.Button.kY.value);
     private final JoystickButton shooterDownButton = new JoystickButton(operator, XboxController.Button.kA.value);
     private final JoystickButton tallShotSubwooferButton = new JoystickButton(operator, XboxController.Button.kB.value);
-    private final JoystickButton trapShotButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
-    private final JoystickButton PassButton = new JoystickButton(operator, XboxController.Button.kStart.value);
+    private final JoystickButton PassButton = new JoystickButton(operator, XboxController.Button.kRightBumper.value);
+    private final JoystickButton ShotAdjustUpButton = new JoystickButton(operator, XboxController.Button.kStart.value);
+    private final JoystickButton ShotAdjustDownButton = new JoystickButton(operator, XboxController.Button.kBack.value);
 
 
     /* Subsystems */
@@ -88,7 +89,6 @@ public class RobotContainer {
     public static Intake intake = new Intake();
     public static Feeder feeder = new Feeder();
     public static FrontLimelight frontLimelight = new FrontLimelight();
-    public static RearLimelight rearLimelight = new RearLimelight();
     public static CANdleSubsystem candleSubsystem = new CANdleSubsystem();
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -214,11 +214,13 @@ public class RobotContainer {
         podiumShotButton.onTrue(new ShootFrom(ShooterPose.Podium));
         ampShotButton.onTrue(new ShootFrom(ShooterPose.Amp));
         shooterDownButton.onTrue(new ShootFrom(ShooterPose.Home));//.alongWith(new ReverseFeeder()).withTimeout(1.5));    // Brings shooter back to start position and slows
-        trapShotButton.onTrue(new ShootFrom(ShooterPose.TrapShot));
         tallShotSubwooferButton.onTrue(new ShootFrom(ShooterPose.SubwooferTall));
         OperatorController.leftTrigger().onTrue(new ShootFrom(ShooterPose.ClimbReady));
         OperatorController.rightTrigger().onTrue(new ShootFrom(ShooterPose.Climb));
         PassButton.onTrue(new ShootFrom(ShooterPose.PassShotPose));
+        ShotAdjustUpButton.onTrue(new InstantCommand( () -> shooterWrist.addToShooterAdjustment(0.1) ));
+        ShotAdjustDownButton.onTrue(new InstantCommand(() -> shooterWrist.addToShooterAdjustment(-0.1) ));
+
     }
 
     /* Public access to joystick values */

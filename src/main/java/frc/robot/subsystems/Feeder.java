@@ -26,10 +26,12 @@ public class Feeder extends SubsystemBase {
         FeederFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         /* Current Limiting */
-        FeederFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        FeederFXConfig.CurrentLimits.SupplyCurrentLimit = 10;
-        FeederFXConfig.CurrentLimits.SupplyCurrentThreshold = 20;
-        FeederFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
+        //FeederFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
+        //FeederFXConfig.CurrentLimits.SupplyCurrentLimit = 10;
+        //FeederFXConfig.CurrentLimits.SupplyCurrentThreshold = 20;
+        //FeederFXConfig.CurrentLimits.SupplyTimeThreshold = 0.01;
+        FeederFXConfig.CurrentLimits.StatorCurrentLimitEnable = true;
+        FeederFXConfig.CurrentLimits.StatorCurrentLimit = 30;
 
         /* PID Config */
         FeederFXConfig.Slot0.kP = 0.2;

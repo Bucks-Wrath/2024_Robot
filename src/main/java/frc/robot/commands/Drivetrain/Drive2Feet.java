@@ -1,7 +1,6 @@
 package frc.robot.commands.Drivetrain;
 
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.Swerve;
 
 import edu.wpi.first.math.geometry.Translation2d;
@@ -15,7 +14,6 @@ public class Drive2Feet extends Command {
     public Drive2Feet(Swerve s_Swerve, Boolean robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
-        addRequirements(RobotContainer.rearLimelight);
 
         this.robotCentricSup = robotCentricSup;
     }

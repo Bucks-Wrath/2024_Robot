@@ -27,14 +27,10 @@ public class VisionAlignIntake extends Command {
     public VisionAlignIntake(Swerve s_Swerve, Boolean robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
-        addRequirements(RobotContainer.rearLimelight);
         this.robotCentricSup = robotCentricSup;
     }
 
     public void initialize() {
-        tx = RobotContainer.rearLimelight.getX();
-        ta = RobotContainer.rearLimelight.getArea();
-        ty = RobotContainer.rearLimelight.getY();
 
         angleController.setTolerance(0.05);  // needs to be checked
         slideController.setTolerance(0.05);
@@ -44,10 +40,6 @@ public class VisionAlignIntake extends Command {
     @Override
     public void execute() {
         // Find target location
-        tx = RobotContainer.rearLimelight.getX();
-        ta = RobotContainer.rearLimelight.getArea();
-        ty = RobotContainer.rearLimelight.getY();
-
 
         if (ta > 0 && ta < 20) {
             double rotationVal = angleController.calculate(tx,targetAngle);
