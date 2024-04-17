@@ -52,9 +52,9 @@ public class LeftShooter extends SubsystemBase implements IVelocityControlledSub
         leftShooterFXConfig.CurrentLimits.StatorCurrentLimit = 60;
 
         /* PID Config */
-        leftShooterFXConfig.Slot0.kP = 0.22; //0.01 adjust this second if needed
-        leftShooterFXConfig.Slot0.kI = 0.01; //fourth
-        leftShooterFXConfig.Slot0.kD = 0.00449; //third
+        leftShooterFXConfig.Slot0.kP = 0.22; //0.01
+        leftShooterFXConfig.Slot0.kI = 0.01;
+        leftShooterFXConfig.Slot0.kD = 0.00449;
 
         /* Open and Closed Loop Ramping */
         leftShooterFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.5;
@@ -63,15 +63,16 @@ public class LeftShooter extends SubsystemBase implements IVelocityControlledSub
         leftShooterFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.5;
         leftShooterFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.5;
 
-		leftShooterFXConfig.Slot0.kV = 0.005; //may need adjusting, set kP, kI, kD to 0 before adjusting, goal is to get it to settle right below target rps (90)
+		leftShooterFXConfig.Slot0.kV = 0.005;
 
 		targetVelocityDutyCycle.withEnableFOC(true);
 
         //Config Acceleration and Velocity
-        //leftShooterFXConfig.MotionMagic.withMotionMagicAcceleration(10000); removed for champs
+        //leftShooterFXConfig.MotionMagic.withMotionMagicAcceleration(10000);
         //leftShooterFXConfig.MotionMagic.withMotionMagicCruiseVelocity(30000);
-		leftShooterFXConfig.TorqueCurrent.PeakForwardTorqueCurrent = 60;
-		leftShooterFXConfig.TorqueCurrent.PeakReverseTorqueCurrent = 60;
+		
+		leftShooterFXConfig.TorqueCurrent.PeakForwardTorqueCurrent = 40;
+		leftShooterFXConfig.TorqueCurrent.PeakReverseTorqueCurrent = 40;
 
         // Config Motor
         LeftShooterFalcon.getConfigurator().apply(leftShooterFXConfig);
