@@ -52,9 +52,9 @@ public class LeftShooter extends SubsystemBase implements IVelocityControlledSub
         leftShooterFXConfig.CurrentLimits.StatorCurrentLimit = 60;
 
         /* PID Config */
-        leftShooterFXConfig.Slot0.kP = 0.22; //0.01
+        leftShooterFXConfig.Slot0.kP = 0.38; //0.01
         leftShooterFXConfig.Slot0.kI = 0.01;
-        leftShooterFXConfig.Slot0.kD = 0.00449;
+        leftShooterFXConfig.Slot0.kD = 0.18;
 
         /* Open and Closed Loop Ramping */
         leftShooterFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.5;
@@ -63,7 +63,7 @@ public class LeftShooter extends SubsystemBase implements IVelocityControlledSub
         leftShooterFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.5;
         leftShooterFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.5;
 
-		leftShooterFXConfig.Slot0.kV = 0.005;
+		leftShooterFXConfig.Slot0.kV = 0.0102;
 
 		targetVelocityDutyCycle.withEnableFOC(true);
 

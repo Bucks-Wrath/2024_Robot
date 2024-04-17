@@ -53,9 +53,9 @@ public class RightShooter extends SubsystemBase implements IVelocityControlledSu
         RightShooterFXConfig.CurrentLimits.StatorCurrentLimit = 40;
 
         /* PID Config */
-        RightShooterFXConfig.Slot0.kP = 0.22; // 1.25
-        RightShooterFXConfig.Slot0.kI = 0.01;
-        RightShooterFXConfig.Slot0.kD = 0.00449;
+        RightShooterFXConfig.Slot0.kP = 0.38; // 1.25
+        RightShooterFXConfig.Slot0.kI = 0.0;
+        RightShooterFXConfig.Slot0.kD = 0.18; //0.1 worked
 
         /* Open and Closed Loop Ramping */
         RightShooterFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.5;
@@ -64,7 +64,7 @@ public class RightShooter extends SubsystemBase implements IVelocityControlledSu
         RightShooterFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.5;
         RightShooterFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.5;
 
-		RightShooterFXConfig.Slot0.kV = 0.005; //0.0102 changes for champs
+		RightShooterFXConfig.Slot0.kV = 0.0102; //0.0102 changes for champs
 
 		targetVelocityDutyCycle.withEnableFOC(true);
 
