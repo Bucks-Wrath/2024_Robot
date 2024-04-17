@@ -66,9 +66,14 @@ public class RightShooter extends SubsystemBase implements IVelocityControlledSu
 
 		RightShooterFXConfig.Slot0.kV = 0.005; //0.0102 changes for champs
 
+		targetVelocityDutyCycle.withEnableFOC(true);
+
         //Config Acceleration and Velocity
         //RightShooterFXConfig.MotionMagic.withMotionMagicAcceleration(10000);
         //RightShooterFXConfig.MotionMagic.withMotionMagicCruiseVelocity(20000);
+
+		RightShooterFXConfig.TorqueCurrent.PeakForwardTorqueCurrent = 40;
+		RightShooterFXConfig.TorqueCurrent.PeakReverseTorqueCurrent = 40;
 
         // Config Motor
         RightShooterFalcon.getConfigurator().apply(RightShooterFXConfig);
