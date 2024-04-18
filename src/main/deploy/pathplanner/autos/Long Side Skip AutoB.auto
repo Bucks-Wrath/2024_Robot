@@ -147,7 +147,7 @@
         {
           "type": "named",
           "data": {
-            "name": "AutoVisionAlignShoot"
+            "name": "AutoVisionAlignShootBlue"
           }
         },
         {
@@ -210,7 +210,7 @@
         {
           "type": "named",
           "data": {
-            "name": "AutoVisionAlignShoot"
+            "name": "AutoVisionAlignShootBlue"
           }
         },
         {
