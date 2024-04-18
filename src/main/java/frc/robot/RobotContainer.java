@@ -261,7 +261,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("RunFeeder", new RunFeeder());
         NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.4));
         NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
-        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(0.5));
+        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(1));
         NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));
         NamedCommands.registerCommand("AutoShootBlue", new AutoVisionShootBlue(swerve));
         NamedCommands.registerCommand("CloseAutoShoot", new CloseAutoVisionShoot(swerve));      
