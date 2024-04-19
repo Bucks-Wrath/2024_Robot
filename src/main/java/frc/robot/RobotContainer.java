@@ -26,6 +26,7 @@ import frc.robot.commands.Intake.StopIntakeCommandGroup;
 import frc.robot.commands.LEDs.SetNeedNote;
 import frc.robot.commands.Shooter.AutoRunFeeder;
 import frc.robot.commands.Shooter.AutoVisionAlignShoot;
+import frc.robot.commands.Shooter.AutoVisionAlignShootBlue;
 import frc.robot.commands.Shooter.AutoVisionShoot;
 import frc.robot.commands.Shooter.AutoVisionShootBlue;
 import frc.robot.commands.Shooter.CloseAutoVisionShoot;
@@ -261,7 +262,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("RunFeeder", new RunFeeder());
         NamedCommands.registerCommand("Shoot", new RunFeeder().withTimeout(0.4));
         NamedCommands.registerCommand("StopFeeder", new StopFeeder().withTimeout(0.1));
-        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(0.5));
+        NamedCommands.registerCommand("SubwooferShot", new ShootFrom(ShooterPose.Subwoofer).withTimeout(1));
         NamedCommands.registerCommand("AutoShoot", new AutoVisionShoot(swerve));
         NamedCommands.registerCommand("AutoShootBlue", new AutoVisionShootBlue(swerve));
         NamedCommands.registerCommand("CloseAutoShoot", new CloseAutoVisionShoot(swerve));      
@@ -279,5 +280,6 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutoRunFeeder", new AutoRunFeeder());
         NamedCommands.registerCommand("LSSZeroGyro", new AutoSetGyro(swerve, 120).withTimeout(0.1));
         NamedCommands.registerCommand("AutoVisionAlignShoot", new AutoVisionAlignShoot(swerve, true).withTimeout(0.7));
+        NamedCommands.registerCommand("AutoVisionAlignShootBlue", new AutoVisionAlignShootBlue(swerve, true).withTimeout(0.7));
     }
 }

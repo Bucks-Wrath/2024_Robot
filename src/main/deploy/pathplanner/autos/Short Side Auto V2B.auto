@@ -18,13 +18,26 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Short Side Pt 1"
+                  "pathName": "Short Side Pt 1B"
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "AutoShootBlue"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoShootBlue"
+                      }
+                    }
+                  ]
                 }
               },
               {
@@ -126,7 +139,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AutoVisionAlignShoot"
+                  "name": "AutoVisionAlignShootBlue"
                 }
               },
               {
@@ -202,7 +215,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AutoVisionAlignShoot"
+                  "name": "AutoVisionAlignShootBlue"
                 }
               },
               {
@@ -255,7 +268,7 @@
         {
           "type": "named",
           "data": {
-            "name": "AutoVisionAlignShoot"
+            "name": "AutoVisionAlignShootBlue"
           }
         },
         {

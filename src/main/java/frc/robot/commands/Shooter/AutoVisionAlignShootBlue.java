@@ -12,7 +12,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 
 
-public class AutoVisionAlignShoot extends Command {    
+public class AutoVisionAlignShootBlue extends Command {    
     private Swerve s_Swerve;    
     private DoubleSupplier rotationSup;
     private Boolean robotCentricSup;
@@ -32,7 +32,7 @@ public class AutoVisionAlignShoot extends Command {
     private double shooterAddValue = 0;
 
 
-    public AutoVisionAlignShoot(Swerve s_Swerve, Boolean robotCentricSup) {
+    public AutoVisionAlignShootBlue(Swerve s_Swerve, Boolean robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
         addRequirements(RobotContainer.frontLimelight);
@@ -75,7 +75,7 @@ public class AutoVisionAlignShoot extends Command {
         // use ty to calculate shooter angle
         // Eggo (-0.009811884*ty*ty) + (0.740631*ty) + (17);  // 18.3463
         //yShooterAngle = (-0.00280493*ty*ty) + (0.986053*ty) + (22.5) + shooterAddValue;  // 21.3444 was 22.5 now 18.2
-        yShooterAngle = (-0.0104986*ty*ty) + (0.80866*ty) + (18.9) + shooterAddValue;
+        yShooterAngle = (-0.0104986*ty*ty) + (0.80866*ty) + (19.2) + shooterAddValue;
 
         // average data from both equations
         shooterAngle = ((yShooterAngle + yShooterAngle) / 2) - xSpeed;  // is this going the right way and is it the right value
